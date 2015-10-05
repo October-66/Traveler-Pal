@@ -1,0 +1,11 @@
+#Windows
+Thumbs.db
+Desktop.ini
+*.bak
+
+#Python
+*.py[cod]
+
+#Ubuntu
+*~
+
