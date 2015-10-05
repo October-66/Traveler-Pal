@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+	<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+	<!--[if lt IE 9]>
+		<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="section-wrap section-header">
+
+	</div>
+	<div class="section-wrap section-content">
+		<!-- main content-->
+		{% block content %}{% endblock %}
+		<!-- end content -->
+	</div>
+	<div class="section-wrap section-footer">
+
+	</div>
+</body>
+</html>
