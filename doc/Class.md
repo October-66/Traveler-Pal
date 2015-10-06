@@ -7,7 +7,7 @@
 id             ---      int      ---      primary auto     ---  唯一ID
 username       ---      string                             ---  用户名
 email          ---      email                              ---  邮箱
-sex            ---      string                             ---  性别
+gender            ---      string                             ---  性别
 password       ---      string   ---      md5              ---  密码（md5加密）
 interest       ---      string                             ---  爱好兴趣
 ```
