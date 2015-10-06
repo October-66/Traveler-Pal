@@ -10,3 +10,5 @@ Desktop.ini
 *~
 
 .idea/
+
+db.sqlite3
