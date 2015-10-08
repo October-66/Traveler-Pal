@@ -17,12 +17,23 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from . import views
+
 urlpatterns = [
-	url(r'^$', views.index, name="index"),
-	url(r'^u/(?P<user_id>[0-9]+)/$', views.getUserProfile, name="user-profile"),
-	url(r'^activity/$', views.getAllActivities, name="all-activities"),
-	url(r'^activity/(?P<activity_id>[0-9]+)/$', views.getActivityInfo, name="activity-info"),
+    url(r'^$', views.index, name="index"),
+    url(r'^u/(?P<user_id>[0-9]+)/$', views.getUserProfile, name="user-profile"),
+    url(r'^activity/$', views.getAllActivities, name="all-activities"),
+    url(r'^activity/(?P<activity_id>[0-9]+)/$', views.getActivityInfo, name="activity-info"),
     url(r'^scenery/$', views.getAllScenery, name="all-scenery"),
     url(r'^scenery/(?P<scenery_id>[0-9]+)/$', views.getSceneryInfo, name="scenery-info"),
+
+    url(r'^reg/$', views.regizster, name="register"),
+    url(r'^login/$', views.login, name="login"),
+    url(r'^logout/$', views.logout, name="logout"),
+    url(r'^reset-password/$', views.resetPassword, name="reset-password"),
+
+    url(r'^u/(?P<user_id>[0-9]+)/update/$', views.updateProfile, name="update profile"),
+    url(r'^u/(?P<user_id>[0-9]+)/comment/$', views.getUserComments, name="user comments"),
+
+    url(r'^scenery/(?P<scenery_id>[0-9]+)/comment/$', views.getSceneryComments, name="scenery comments"),
 
 ]

@@ -29,3 +29,30 @@ def getAllScenery(request):
 def getSceneryInfo(request, scenery_id):
     return HttpResponse("scenery info")
 
+
+def regizster(request):
+    return None
+
+
+def login(request):
+    return None
+
+
+def logout(request):
+    return None
+
+
+def resetPassword(request):
+    return None
+
+
+def updateProfile(request):
+    return None
+
+
+def getUserComments(request, user_id):
+    return None
+
+
+def getSceneryComments(request, scenery_id):
+    return None

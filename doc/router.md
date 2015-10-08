@@ -27,12 +27,6 @@
 /scenery/:id/
 ```
 
-### 日志
-```
-/journal/
-/journal/:id/
-journal/page/:id
-```
 
 ## AJAX 请求URL
 
