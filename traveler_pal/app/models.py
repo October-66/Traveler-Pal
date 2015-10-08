@@ -71,7 +71,7 @@ class Activity(models.Model):
     """
     """
     name = models.CharField(max_length=nameFieldMaxSize)
-    launchedDate = models.DateField(default=currentDateTime, null=True)
+    launchedDateTime = models.DateTimeField(default=currentDateTime, null=True)
     startDateTime = models.DateTimeField(default=currentDateTime, null=True)
     endDateTime = models.DateTimeField(default=currentDateTime, null=True)
 
@@ -86,7 +86,7 @@ class ActivityUser(models.Model):
     """
     user = models.ForeignKey(User, null=True)
     activity = models.ForeignKey(Activity, null=True)
-    joinedDate = models.DateField(default=currentDateTime, null=True)
+    # joinedDateTime = models.DateTimeField(default=currentDateTime, null=True) #current no usage
     # more user info
 
 
