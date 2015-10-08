@@ -6,19 +6,24 @@ nameFieldMaxSize = 128
 
 
 # Create your models here.
-class Comment(models.Model):
-    """
-    made by user, apply to scenery
-    """
-    content = models.TextField(null=True)
+class Scenery(models.Model):
+    name = models.CharField(max_length=nameFieldMaxSize, null=True)
+    price = models.IntegerField(null=True)
 
 
-class Journal(models.Model):
+class Activity(models.Model):
     """
-    only
     """
-    title = models.CharField(max_length=nameFieldMaxSize, null=True)
-    content = models.TextField(null=True)
+    name = models.CharField(max_length=nameFieldMaxSize)
+    launchedDateTime = models.DateTimeField(default=currentDateTime, null=True)
+    startDateTime = models.DateTimeField(default=currentDateTime, null=True)
+    endDateTime = models.DateTimeField(default=currentDateTime, null=True)
+    scenerys = models.ManyToManyField(Scenery, through="ActivityScenery")
+
+
+class ActivityScenery(models.Model):
+    activity = models.ForeignKey(Activity, null=True)
+    scenery = models.ForeignKey(Scenery, null=True)
 
 
 class User(models.Model):
@@ -34,52 +39,14 @@ class User(models.Model):
         ('F', 'FEMALE'),
     )
 
-    # keys
-    comments = models.ManyToManyField(Comment, through="UserComment")
-    journals = models.ManyToManyField(Journal, through="UserJournal")
+    activitys = models.ManyToManyField(Activity, through="UserActivity")
+    scenerys = models.ManyToManyField(Scenery, through="UserScenery")
 
     def __str__(self):
         return "user named %s with all stuff" % self.username
 
 
-class UserComment(models.Model):
-    """
-    an intermediary between user and comment
-    """
-    user = models.ForeignKey(User, null=True)
-    Comment = models.ForeignKey(Comment, null=True)
-
-
-class UserJournal(models.Model):
-    user = models.ForeignKey(User, null=True)
-    journal = models.ForeignKey(Journal, null=True)
-
-
-class Scenery(models.Model):
-    name = models.CharField(max_length=nameFieldMaxSize, null=True)
-    price = models.IntegerField(null=True)
-
-    comments = models.ManyToManyField(Comment, through="SceneryComment")
-
-
-class SceneryComment(models.Model):
-    scenery = models.ForeignKey(Scenery, null=True)
-    comment = models.ForeignKey(Comment, null=True)
-
-
-class Activity(models.Model):
-    """
-    """
-    name = models.CharField(max_length=nameFieldMaxSize)
-    launchedDateTime = models.DateTimeField(default=currentDateTime, null=True)
-    startDateTime = models.DateTimeField(default=currentDateTime, null=True)
-    endDateTime = models.DateTimeField(default=currentDateTime, null=True)
-
-    users = models.ManyToManyField(User, through="ActivityUser")
-    scenerys = models.ManyToManyField(Scenery, through="ActivityScenery")
-
-
-class ActivityUser(models.Model):
+class UserActivity(models.Model):
     """
     a membership between act and user
     user can get activity joined by `activity_set` in shell
@@ -90,6 +57,30 @@ class ActivityUser(models.Model):
     # more user info
 
 
-class ActivityScenery(models.Model):
-    activity = models.ForeignKey(Activity, null=True)
+class UserScenery(models.Model):
+    user = models.ForeignKey(User, null=True)
     scenery = models.ForeignKey(Scenery, null=True)
+
+
+class Postable(models.Model):
+    user = models.ForeignKey(User)
+    title = models.CharField(max_length=nameFieldMaxSize)
+    content = models.TextField(null=True)
+    postDateTime = models.DateTimeField(default=currentDateTime, null=True)
+
+    class meta:
+        abstract = True
+
+
+class Comment(Postable):
+    """
+    made by user, apply to scenery
+    """
+    scenery = models.ForeignKey(Scenery, null=True)
+
+
+class Journal(Postable):
+    """
+    only
+    """
+    activity = models.ForeignKey(Activity, null=True)
