@@ -7,11 +7,15 @@ nameFieldMaxSize = 128
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(
+    username = forms.CharField(
         required=True,
+        error_messages={'require': "shouldn't be null"},
     )
+
     password = forms.CharField(
         required=True,
+        widget=forms.PasswordInput(
+        )
     )
 
     def clean(self):
@@ -31,4 +35,7 @@ class RegForm(forms.Form):
     )
     password = forms.CharField(
         required=True,
+        widget=forms.PasswordInput(
+
+        )
     )

@@ -1,4 +1,5 @@
 from django.contrib import auth
+from django.contrib.auth.decorators import *
 from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
@@ -49,7 +50,7 @@ def register(request):
                 email=email,
                 password=password,
             )
-        return render_to_response('after reg')
+        return HttpResponseRedirect('/')
 
 
 def login(request):
@@ -59,24 +60,28 @@ def login(request):
     else:
         form = LoginForm(request.POST)
         if form.is_valid():
-            email = request.POST.get('email', '')
+            username = request.POST.get('username', '')
             password = request.POST.get('password', '')
-            user = auth.authenticate(email=email, password=password)
+            user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
-                return render_to_response('after login page', RequestContext(request))
+                return HttpResponse("auth succeed")
             else:
-                pass  # auth failed
+                # auth failed
+                return HttpResponse("auth failed")
 
 
+@login_required
 def logout(request):
-    return None
+    auth.logout(request)
+    return HttpResponseRedirect("/")
 
 
 def resetPassword(request):
     return None
 
 
+@login_required
 def updateProfile(request):
     return None
 
