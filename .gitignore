@@ -12,3 +12,5 @@ Desktop.ini
 .idea/
 
 db.sqlite3
+
+staticTemplate/node_modules/*
