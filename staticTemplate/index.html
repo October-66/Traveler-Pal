@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link rel="stylesheet" href="./assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./dist/css/app.min.css">
 </head>
 
 <body>
@@ -66,7 +66,23 @@
             </div>
         </div>
     </header>
-    <!--在这里编写你的代码-->
+    <!-- Slider main container -->
+    <div class="swiper-container" id="swiper-item">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/1)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/2)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/3)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/4)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/5)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/6)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/7)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/8)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/9)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/10)"></div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
     <!--[if (gte IE 9)|!(IE)]><!-->
     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
     <!--<![endif]-->
@@ -76,7 +92,7 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
     <script src="./assets/js/amazeui.min.js"></script>
-    <script src="./js/all.min.js"></script>
+    <script src="./dist/js/all.min.js"></script>
 </body>
 
 </html>
