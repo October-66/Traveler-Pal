@@ -3,6 +3,13 @@
   padding-top: 50px;
   padding-bottom: 50px; }
   #swiper-item .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #efefef;
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-position: center;
     background-size: cover;
     width: 300px;

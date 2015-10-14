@@ -1,5 +1,4 @@
-$(function() {
-
+$(function($) {
     $('#swiper-item').swiper({
     pagination: '#swiper-item .swiper-pagination',
     effect: 'coverflow',
