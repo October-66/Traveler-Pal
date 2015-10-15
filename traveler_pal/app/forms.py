@@ -1,6 +1,6 @@
 """
 created on 2015/10/8 at 21:36
-"""
+
 from django import forms
 
 nameFieldMaxSize = 128
@@ -39,3 +39,4 @@ class RegForm(forms.Form):
 
         )
     )
+"""

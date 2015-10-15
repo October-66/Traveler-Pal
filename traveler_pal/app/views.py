@@ -5,14 +5,13 @@ from django.shortcuts import *
 from django.http import *
 from .forms import *
 
+import json
 
 # Create your views here.
 
 
 def index(request):
-    return render(request, 'index.html', {
-        'test': '123test'
-    })
+    return render(request, 'index.html')
 
 
 def getUserProfile(request, user_id):
@@ -58,17 +57,19 @@ def login(request):
         form = LoginForm()
         return render_to_response('login.html', RequestContext(request, {'form': form}))
     else:
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = request.POST.get('username', '')
-            password = request.POST.get('password', '')
-            user = auth.authenticate(username=username, password=password)
-            if user is not None and user.is_active:
-                auth.login(request, user)
-                return HttpResponse("auth succeed")
-            else:
-                # auth failed
-                return HttpResponse("auth failed")
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        print username
+        user = auth.authenticate(username=username, password=password)
+        if user is not None and user.is_active:
+            auth.login(request, user)
+            data = {"status": 1}
+            return HttpResponse(json.dumps(data, ensure_ascii=False))
+        else:
+            print 111333
+            data = {"status": 0}
+            return HttpResponse(json.dumps(data, ensure_ascii=False))
+
 
 
 @login_required
