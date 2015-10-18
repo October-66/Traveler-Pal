@@ -91,6 +91,16 @@ body {
 .journal-list p {
   text-indent: 2em; }
 
+.admin .admin-nav ul li {
+  list-style: none;
+  padding: 10px 10px; }
+
+.admin .admin-form {
+  padding: 40px; }
+  .admin .admin-form img {
+    border-radius: 100px;
+    width: 100px; }
+
 .page-nav {
   margin: 20px;
   float: right; }

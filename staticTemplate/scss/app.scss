@@ -117,6 +117,24 @@ body {
         text-indent: 2em;
     }
 }
+
+.admin {
+    .admin-nav {
+        ul {
+            li{
+                list-style: none;
+                padding: 10px 10px;
+            }
+        }
+    }
+    .admin-form {
+        padding: 40px;
+        img {
+            border-radius: 100px;
+            width: 100px;
+        }
+    }
+}
 .page-nav {
     margin: 20px;
     float: right;
