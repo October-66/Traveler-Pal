@@ -88,3 +88,36 @@ body {
     }
   }
 }
+
+.activity-list {
+    max-height: 300px;
+    img {
+        max-height: 300px;
+        max-width: 300px;
+
+    }
+    .intro {
+        font-size: 0.8em;
+    }
+    .join-activity {
+        margin-top: 20px;
+    }
+}
+.scenery-list {
+    .intro {
+        font-size: 0.8em;
+    }
+}
+.journal-list {
+    img {
+        float: right;
+        width: 200px
+    }
+    p {
+        text-indent: 2em;
+    }
+}
+.page-nav {
+    margin: 20px;
+    float: right;
+}

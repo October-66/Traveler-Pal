@@ -70,3 +70,27 @@ body {
     font-size: 0.96em;
     font-weight: normal;
     color: #888; }
+
+.activity-list {
+  max-height: 300px; }
+  .activity-list img {
+    max-height: 300px;
+    max-width: 300px; }
+  .activity-list .intro {
+    font-size: 0.8em; }
+  .activity-list .join-activity {
+    margin-top: 20px; }
+
+.scenery-list .intro {
+  font-size: 0.8em; }
+
+.journal-list img {
+  float: right;
+  width: 200px; }
+
+.journal-list p {
+  text-indent: 2em; }
+
+.page-nav {
+  margin: 20px;
+  float: right; }
