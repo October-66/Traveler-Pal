@@ -1,30 +1,92 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="zh-cn">
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{% block title %}{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-	<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
-	<!--[if lt IE 9]>
-		<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="{% static "i/favicon.png" %}">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="{% static "i/app-icon72x72@2x.png" %}">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="apple-touch-icon-precomposed" href="{% static "i/app-icon72x72@2x.png" %}">
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="{% static "i/app-icon72x72@2x.png" %}">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/amazeui.min.css" %}">
+    {% block style %}{% endblock %}
+    <link rel="stylesheet" href="{% static "css/app.min.css" %}">
 </head>
+
 <body>
-	<div class="section-wrap section-header">
+    <header class="am-topbar am-topbar-fixed-top">
+        <div class="am-container">
+            <h1 class="am-topbar-brand"><a href="#">Traveler-Pal</a></h1>
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+            <div class="am-collapse am-topbar-collapse" id="collapse-head">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li class="am-active"><a href="#">首页</a></li>
+                    <li><a href="#">活动</a></li>
+                    <li><a href="#">景点</a></li>
+                    <li><a href="#">攻略</a></li>
+                </ul>
+                <!--
+                <div class="am-topbar-right">
+                    <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
+                </div>
+                <div class="am-topbar-right">
+                    <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+                </div>
+            -->
+                <div class="am-topbar-right">
+                    <ul class="am-nav am-nav-pills am-topbar-nav">
+                        <li class="am-dropdown" data-am-dropdown>
+                            <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">rccoder
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                            <ul class="am-dropdown-content">
+                                <li class="am-dropdown-header">个人中心</li>
+                                <li><a href="#">个人资料</a></li>
+                                <li><a href="#">修改密码</a></li>
+                                <li><a href="#">注销</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="am-g am-container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer class="am-footer">
+        <div class="am-footer-miscs ">
+            <p>由 <a href="https://github.com/October-66/Traveler-Pal" title="October-66" target="_blank" class="">October-66</a> 提供技术支持
+            </p>
+        </div>
+    </footer>
+    <!--[if lte IE 8 ]>
+	<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+	<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+	<![endif]-->
+    <script src="{% static "js/amazeui.min.js" %}"></script>
+    {% block script %}{% endblock %}
+    <script src="{% static "js/all.min.js" %}"></script>
 
-	</div>
-	<div class="section-wrap section-content">
-		<!-- main content-->
-		{% block content %}{% endblock %}
-		<!-- end content -->
-	</div>
-	<div class="section-wrap section-footer">
-
-	</div>
-	{% block script %}{% endblock %}
 </body>
+
 </html>
