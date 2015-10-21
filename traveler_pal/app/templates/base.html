@@ -43,14 +43,7 @@
                     <li><a href="#">景点</a></li>
                     <li><a href="#">攻略</a></li>
                 </ul>
-                <!--
-                <div class="am-topbar-right">
-                    <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
-                </div>
-                <div class="am-topbar-right">
-                    <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
-                </div>
-            -->
+                {% if user.is_authenticated %}
                 <div class="am-topbar-right">
                     <ul class="am-nav am-nav-pills am-topbar-nav">
                         <li class="am-dropdown" data-am-dropdown>
@@ -66,9 +59,36 @@
                         </li>
                     </ul>
                 </div>
+                {% else %}
+                <div class="am-topbar-right">
+                    <button type="button" class="am-btn am-btn-primary am-btn-secondary am-topbar-btn am-btn-sm" data-am-modal="{target: '#reg-model', closeViaDimmer: 0, width: 400, height: 400}"><span class="am-icon-pencil"></span> 注册
+                     </button>
+                </div>
+                <div class="am-topbar-right">
+                    <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+                </div>
+                {% endif %}
             </div>
         </div>
     </header>
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="reg-model">
+        <div class="am-modal-dialog reg-dialog">
+            <div class="am-modal-hd">注册
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <form action="" class="am-form" id="reg-form" onsubmit="return false">
+                    {% csrf_token %}
+                    <input type="text" id="reg-username" name="username" placeholder="请输入用户名" required>
+                    <input type="password" id="reg-passowrd" name="password" placeholder="请输入密码" required>
+                    <input type="password" id="reg-repassword" name="re-password" placeholder="请重新输入密码" required>
+                    <input type="email" id="reg-email" name="email" placeholder="请输入你的邮件" required>
+                    <div class="warning"></div>
+                    <button type="submit" class="am-btn am-btn-primary am-radius" id="reg-submit">注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="am-g am-container">
         {% block content %}{% endblock %}
     </div>
@@ -85,6 +105,64 @@
 	<![endif]-->
     <script src="{% static "js/amazeui.min.js" %}"></script>
     {% block script %}{% endblock %}
+    <script type="text/javascript">
+        $(function() {
+
+            $reg_warning = $("#reg-form .warning");
+
+            $("#reg-submit").click(function() {
+                $reg_warning.html("");
+                if($("#reg-passowrd").val() !== $("#reg-repassword").val()) {
+                    $reg_warning.html("两次输入密码不一致")
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "./reg/",
+                        data: $("#reg-form").serialize(),
+                        dataType: "json"
+                    }).done(function(data, textStatus, jqXHR) {
+                        if (jqXHR.status == 200) {
+                            if (data.status == -1) {
+                                $reg_warning.html("该用户名已经被注册");
+                            } else if (data.status == -2) {
+                                $reg_warning.html("该邮箱已经被注册");
+                            } else if(data.status == 0) {
+                                $reg_warning.html("注册成功，即将为你跳转到你的个人中心");
+                                location.href = "./u/" + $("#reg-username").val();
+                            }
+                        } else {
+                            $reg_warning.html("未知名错误")
+                        }
+                    }).fail(function(jqXHR) {
+                         $reg_warning.html("未知名错误,即将为你跳转到首页");
+                         location.href = "./";
+                    })
+                }
+            });
+
+            $("#submit-login").click(function() {
+
+                $.ajax({
+                    type: "POST",
+                    url: "./login/",
+                    data: $("#form-login").serialize(),
+                    dataType: "json"
+                }).done(function(data, textStatus, jqXHR) {
+                    if (jqXHR.status == 200) {
+                        if (data.status == 0) {
+                            alert("密码错误");
+                        } else if (data.status == 1) {
+                            alert("登录成功");
+                        }
+
+                    }
+
+                }).done(function(jqXHR) {
+                    location.href = "./";
+                });
+            })
+        })
+</script>
     <script src="{% static "js/all.min.js" %}"></script>
 
 </body>

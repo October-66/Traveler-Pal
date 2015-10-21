@@ -139,3 +139,20 @@ body {
     margin: 20px;
     float: right;
 }
+
+.reg-dialog {
+    input {
+        margin-top: 20px;
+    }
+    button {
+        margin-top: 50px;
+        float: right;
+    }
+}
+
+#reg-form .warning {
+    margin-top: 20px;
+    float: left;
+    color: #0e90d2;
+    font-size: 16px;
+}
