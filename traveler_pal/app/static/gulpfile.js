@@ -36,7 +36,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('clean', function(callback) {
-    del(['./dist/css/app.min.css', './js/all.min.js'], callback)
+    del(['./css/app.min.css', './js/all.min.js'], callback)
 });
 
 // 默认任务
