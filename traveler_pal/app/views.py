@@ -39,17 +39,22 @@ def register(request):
         form = RegForm()
         return render_to_response('register.html', RequestContext(request, {'form': form}))
     else:
-        form = RegForm(request.POST)
-        if form.is_valid():
-            username = request.POST.get('username', '')
-            email = request.POST.get('email', '')
-            password = request.POST.get('password', '')
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        repassword = request.POST.get('repassword', '')
+        email = request.POST.get('email', '')
+
+        if password == repassword:
             user = User.objects.create_user(
                 username=username,
                 email=email,
                 password=password,
-            )
-        return HttpResponseRedirect('/')
+                )
+            data = {"status": 1}
+            return HttpResponse(json.dumps(data, ensure_ascii=False))
+        else:
+            data = {"status": -3}
+            return HttpResponse(json.dumps(data, ensure_ascii=False))
 
 
 def login(request):
@@ -59,14 +64,12 @@ def login(request):
     else:
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
-        print username
         user = auth.authenticate(username=username, password=password)
         if user is not None and user.is_active:
             auth.login(request, user)
             data = {"status": 1}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
         else:
-            print 111333
             data = {"status": 0}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
 

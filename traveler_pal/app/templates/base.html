@@ -81,7 +81,7 @@
                     {% csrf_token %}
                     <input type="text" id="reg-username" name="username" placeholder="请输入用户名" required>
                     <input type="password" id="reg-passowrd" name="password" placeholder="请输入密码" required>
-                    <input type="password" id="reg-repassword" name="re-password" placeholder="请重新输入密码" required>
+                    <input type="password" id="reg-repassword" name="repassword" placeholder="请重新输入密码" required>
                     <input type="email" id="reg-email" name="email" placeholder="请输入你的邮件" required>
                     <div class="warning"></div>
                     <button type="submit" class="am-btn am-btn-primary am-radius" id="reg-submit">注册</button>
@@ -126,7 +126,9 @@
                                 $reg_warning.html("该用户名已经被注册");
                             } else if (data.status == -2) {
                                 $reg_warning.html("该邮箱已经被注册");
-                            } else if(data.status == 0) {
+                            } else if (data.status == -3) {
+                                $reg_warning.html("你好像不是一个人");
+                            } else if(data.status == 1) {
                                 $reg_warning.html("注册成功，即将为你跳转到你的个人中心");
                                 location.href = "./u/" + $("#reg-username").val();
                             }
