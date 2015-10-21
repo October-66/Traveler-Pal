@@ -1,0 +1,141 @@
+body {
+    background-color: #f7f7f7;
+}
+
+.right {
+  float: right;
+}
+.am-container {
+    max-width: 1360px;
+}
+
+#swiper-show {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #efefef;
+        /* Center slide text vertically */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 300px;
+    }
+}
+
+.box {
+    margin-top: 20px;
+    border-sizing: border-box;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 2px #ccc;
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 40px;
+    .box-head {
+        border-bottom: 2px solid #f7f7f7;
+        height: 50px;
+        line-height: 50px;
+    }
+    .box-content {
+        margin-left: -20px;
+        color: #888;
+        ul li,
+        ol li {
+            margin-top: 8px
+        }
+    }
+}
+
+.activity, .scenery, .journal {
+    height: 300px;
+    button {
+        display: block;
+        margin: 80px auto;
+        width: 80%;
+    }
+}
+
+#swiper-activity, #swiper-scenery {
+    height: 200px;
+    width: 100%;
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background-color: #efefef;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+    }
+}
+
+.journal {
+  ul {
+    li {
+      height: 20px;
+      line-height: 20px;
+      a {
+        font-size: 0.96em;
+        font-weight: normal;
+        color: #888
+      }
+    }
+  }
+}
+
+.activity-list {
+    max-height: 300px;
+    img {
+        max-height: 300px;
+        max-width: 300px;
+
+    }
+    .intro {
+        font-size: 0.8em;
+    }
+    .join-activity {
+        margin-top: 20px;
+    }
+}
+.scenery-list {
+    .intro {
+        font-size: 0.8em;
+    }
+}
+.journal-list {
+    img {
+        float: right;
+        width: 200px
+    }
+    p {
+        text-indent: 2em;
+    }
+}
+
+.admin {
+    .admin-nav {
+        ul {
+            li{
+                list-style: none;
+                padding: 10px 10px;
+            }
+        }
+    }
+    .admin-form {
+        padding: 40px;
+        img {
+            border-radius: 100px;
+            width: 100px;
+        }
+    }
+}
+.page-nav {
+    margin: 20px;
+    float: right;
+}
