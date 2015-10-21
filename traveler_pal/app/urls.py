@@ -20,7 +20,9 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name="index"),
-    url(r'^u/(?P<user_id>[0-9]+)/$', views.getUserProfile, name="user-profile"),
+
+    url(r'^u/(?P<username>\w+)/$', views.getUserProfile, name="user-profile"),
+
     url(r'^activity/$', views.getAllActivities, name="all-activities"),
     url(r'^activity/(?P<activity_id>[0-9]+)/$', views.getActivityInfo, name="activity-info"),
     url(r'^scenery/$', views.getAllScenery, name="all-scenery"),

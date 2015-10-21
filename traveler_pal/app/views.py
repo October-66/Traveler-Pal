@@ -11,11 +11,13 @@ import json
 
 
 def index(request):
-    return render(request, 'index.html')
+    if request.method == 'GET':
+        return render(request, 'index.html')
 
 
-def getUserProfile(request, user_id):
-    return HttpResponse("User id: %s" % user_id)
+def getUserProfile(request, username):
+
+    return HttpResponse("User id: %s" % username)
 
 
 def getActivityInfo(request, activity_id):
@@ -32,7 +34,6 @@ def getAllScenery(request):
 
 def getSceneryInfo(request, scenery_id):
     return HttpResponse("scenery info")
-
 
 def register(request):
     if request.method == 'GET':
@@ -58,10 +59,7 @@ def register(request):
 
 
 def login(request):
-    if request.method == 'GET':
-        form = LoginForm()
-        return render_to_response('login.html', RequestContext(request, {'form': form}))
-    else:
+    if request.method == 'POST':
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         user = auth.authenticate(username=username, password=password)

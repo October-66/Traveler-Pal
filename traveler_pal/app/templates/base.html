@@ -65,7 +65,8 @@
                      </button>
                 </div>
                 <div class="am-topbar-right">
-                    <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+                    <button type="button" class="am-btn am-btn-primary am-btn-secondary am-topbar-btn am-btn-sm" data-am-modal="{target: '#login-model', closeViaDimmer: 0, width: 400, height: 400}"><span class="am-icon-user"></span> 登录
+                     </button>
                 </div>
                 {% endif %}
             </div>
@@ -85,6 +86,22 @@
                     <input type="email" id="reg-email" name="email" placeholder="请输入你的邮件" required>
                     <div class="warning"></div>
                     <button type="submit" class="am-btn am-btn-primary am-radius" id="reg-submit">注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="login-model">
+        <div class="am-modal-dialog login-dialog">
+            <div class="am-modal-hd">登录
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <form action="" class="am-form" id="login-form" onsubmit="return false">
+                    {% csrf_token %}
+                    <input type="text" id="login-username" name="username" placeholder="请输入用户名或者电子邮件地址" required>
+                    <input type="password" id="login-passowrd" name="password" placeholder="请输入密码" required>
+                    <div class="warning"></div>
+                    <button type="submit" class="am-btn am-btn-primary am-radius" id="login-submit">注册</button>
                 </form>
             </div>
         </div>
@@ -142,26 +159,34 @@
                 }
             });
 
-            $("#submit-login").click(function() {
+            $login_username = $("#login-username");
+            $login_password = $("#login-passowrd");
+            $login_warning = $("#login-form .warning");
 
-                $.ajax({
+            $("#login-submit").click(function() {
+                $login_warning.html("")
+                if ($login_username.val() == "" || $login_password.val() == "") {
+                    $login_warning.html("你输入的用户名或者密码是空");
+                } else {
+                    $.ajax({
                     type: "POST",
                     url: "./login/",
-                    data: $("#form-login").serialize(),
+                    data: $("#login-form").serialize(),
                     dataType: "json"
                 }).done(function(data, textStatus, jqXHR) {
                     if (jqXHR.status == 200) {
                         if (data.status == 0) {
-                            alert("密码错误");
+                            $login_warning.html("密码错误");
                         } else if (data.status == 1) {
-                            alert("登录成功");
+                            $login_warning.html("登录成功");
+                            location.href = "./";
                         }
-
                     }
-
-                }).done(function(jqXHR) {
+                }).fail(function(jqXHR) {
+                    $login_warning.html("未知名错误，即将为你跳转到首页");
                     location.href = "./";
                 });
+                }
             })
         })
 </script>
