@@ -15,4 +15,5 @@ db.sqlite3
 
 staticTemplate/node_modules/*
 
+traveler_pal/app/migrations/*
 traveler_pal/app/static/node_modules/*
