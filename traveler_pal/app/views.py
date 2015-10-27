@@ -37,8 +37,7 @@ def getSceneryInfo(request, scenery_id):
 
 def register(request):
     if request.method == 'GET':
-        form = RegForm()
-        return render_to_response('register.html', RequestContext(request, {'form': form}))
+        pass
     else:
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
