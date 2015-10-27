@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
@@ -26,10 +27,11 @@ class ActivityScenery(models.Model):
     scenery = models.ForeignKey(Scenery, null=True)
 
 
-class User(models.Model):
+class Person(models.Model):
     """
     """
     # info
+    user = models.ForeignKey(User, null=False)
     username = models.CharField(max_length=nameFieldMaxSize, null=True)
     email = models.EmailField(max_length=nameFieldMaxSize, null=True)
     password = models.CharField(max_length=nameFieldMaxSize, null=True)
@@ -51,19 +53,19 @@ class UserActivity(models.Model):
     a membership between act and user
     user can get activity joined by `activity_set` in shell
     """
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(Person, null=True)
     activity = models.ForeignKey(Activity, null=True)
     # joinedDateTime = models.DateTimeField(default=currentDateTime, null=True) #current no usage
     # more user info
 
 
 class UserScenery(models.Model):
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(Person, null=True)
     scenery = models.ForeignKey(Scenery, null=True)
 
 
 class Postable(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(Person)
     title = models.CharField(max_length=nameFieldMaxSize)
     content = models.TextField(null=True)
     postDateTime = models.DateTimeField(default=currentDateTime, null=True)

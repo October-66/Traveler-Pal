@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import *
 from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
-from .forms import *
-
+from .models import *
 import json
+
 
 # Create your views here.
 
@@ -16,24 +16,51 @@ def index(request):
 
 
 def getUserProfile(request, username):
-
+    if request.method == 'GET':
+        user = Person.objects.get(username=username)
+        context = RequestContext(request, {
+            "username": user.username,
+            "email": user.email,
+            "interest": user.interest,
+            "gender": user.gender,
+            "activitys": user.activitys,
+            "scenerys": user.scenerys,
+        })
     return HttpResponse("User id: %s" % username)
 
 
 def getActivityInfo(request, activity_id):
+    activity = Activity.objects.get(pk=activity_id)
+    context = RequestContext(request, {
+        "activity": activity,
+
+    })
     return HttpResponse("act info")
 
 
 def getAllActivities(request):
+    activities = Activity.objects.all()
+    context = RequestContext(request, {
+        "activities": activities,
+    })
     return HttpResponse("all act")
 
 
 def getAllScenery(request):
+    allScenery = Scenery.objects.all()
+    context = RequestContext(request, {
+        "allScenery": allScenery,
+    })
     return HttpResponse("all scenery")
 
 
 def getSceneryInfo(request, scenery_id):
+    scenery = Scenery.objects.get(pk=scenery_id)
+    RequestContext(request, {
+        "scenery": scenery,
+    })
     return HttpResponse("scenery info")
+
 
 def register(request):
     if request.method == 'GET':
@@ -49,7 +76,7 @@ def register(request):
                 username=username,
                 email=email,
                 password=password,
-                )
+            )
             data = {"status": 1}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
         else:
@@ -69,7 +96,6 @@ def login(request):
         else:
             data = {"status": 0}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
-
 
 
 @login_required
