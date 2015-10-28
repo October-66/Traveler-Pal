@@ -31,7 +31,7 @@ class Person(models.Model):
     """
     """
     # info
-    user = models.ForeignKey(User, null=False)
+    user = models.ForeignKey(User, null=True)
     username = models.CharField(max_length=nameFieldMaxSize, null=True)
     email = models.EmailField(max_length=nameFieldMaxSize, null=True)
     password = models.CharField(max_length=nameFieldMaxSize, null=True)
@@ -41,31 +41,31 @@ class Person(models.Model):
         ('F', 'FEMALE'),
     )
 
-    activitys = models.ManyToManyField(Activity, through="UserActivity")
-    scenerys = models.ManyToManyField(Scenery, through="UserScenery")
+    activitys = models.ManyToManyField(Activity, through="PersonActivity")
+    scenerys = models.ManyToManyField(Scenery, through="PersonScenery")
 
     def __str__(self):
         return "user named %s with all stuff" % self.username
 
 
-class UserActivity(models.Model):
+class PersonActivity(models.Model):
     """
     a membership between act and user
     user can get activity joined by `activity_set` in shell
     """
-    user = models.ForeignKey(Person, null=True)
+    person = models.ForeignKey(Person, null=True)
     activity = models.ForeignKey(Activity, null=True)
     # joinedDateTime = models.DateTimeField(default=currentDateTime, null=True) #current no usage
     # more user info
 
 
-class UserScenery(models.Model):
-    user = models.ForeignKey(Person, null=True)
+class PersonScenery(models.Model):
+    person = models.ForeignKey(Person, null=True)
     scenery = models.ForeignKey(Scenery, null=True)
 
 
 class Postable(models.Model):
-    user = models.ForeignKey(Person)
+    person = models.ForeignKey(Person)
     title = models.CharField(max_length=nameFieldMaxSize)
     content = models.TextField(null=True)
     postDateTime = models.DateTimeField(default=currentDateTime, null=True)

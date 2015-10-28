@@ -112,6 +112,9 @@ def resetPassword(request):
 def updateProfile(request):
     return None
 
+def getPersonActivities(request, person_id):
+
+
 
 def getUserComments(request, user_id):
     return None
