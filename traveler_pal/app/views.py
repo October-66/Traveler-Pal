@@ -113,7 +113,7 @@ def updateProfile(request):
     return None
 
 def getPersonActivities(request, person_id):
-
+    pass
 
 
 def getUserComments(request, user_id):
