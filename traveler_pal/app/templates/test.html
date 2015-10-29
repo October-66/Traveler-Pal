@@ -1,0 +1,19 @@
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<form action="" onsubmit="return false">
+	{% csrf_token %}
+	<input type="text" name="a">
+	<input type="text" name="a">
+	<input type="text" name="b">	
+	<button type="submit">test</button>
+</form>
+
+<script>
+	
+	$("button").click(function() {
+		$.ajax({
+			type: "POST",
+			url: "/test/",
+			data: $("form").serialize()
+		})
+	})
+</script>

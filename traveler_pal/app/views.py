@@ -1,3 +1,4 @@
+# encoding: utf-8
 from django.contrib import auth
 from django.contrib.auth.decorators import *
 from django.contrib.auth.models import User
@@ -165,3 +166,14 @@ def getUserComments(request, user_id):
 
 def getSceneryComments(request, scenery_id):
     return None
+
+"""
+测试交互数据使用
+"""
+def test(request):
+    if request.method == "GET":
+        return render(request, 'test.html')
+
+    else:
+        print request.POST
+        return render(request, 'test.html')

@@ -40,4 +40,7 @@ urlpatterns = [
 
     url(r'^scenery/(?P<scenery_id>[0-9]+)/comment/$', views.getSceneryComments, name="scenery comments"),
 
+
+    url(r'^test/', views.test, name="test")
+
 ]
