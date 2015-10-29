@@ -14,7 +14,7 @@ def index(request):
     if request.method == 'GET':
         return render(request, 'index.html')
 
-
+@login_required
 def getUserProfile(request, username):
     if request.method == 'GET':
         user = Person.objects.get(username=username)
@@ -45,7 +45,17 @@ def getAllActivities(request):
     })
     return HttpResponse("all act")
 
+def getPersonActivities(request, person_id):
+    """
+    find all personal activities according to person_id
+    """
+    reqPerson = Person.objects.get(pk=person_id)
+    context = RequestContext(request, {
+        "reqPerson": reqPerson,
+    })
+    return HttpResponse("")
 
+@login_required
 def addActivity(request):
     """
     """
@@ -59,7 +69,7 @@ def addActivity(request):
         )
         newActivity.save()
 
-
+@login_required
 def delActivity(request, activity_id):
     toDelActivity = Activity.objects.get(pk=activity_id)
     toDelActivity.delete()
