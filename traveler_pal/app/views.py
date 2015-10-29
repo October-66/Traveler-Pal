@@ -55,7 +55,7 @@ def getPersonActivities(request, person_id):
     })
     return HttpResponse("")
 
-@login_required
+#@login_required
 def addActivity(request):
     """
     """
@@ -68,6 +68,10 @@ def addActivity(request):
             scenerys=request.POST.get('scenerys', '')
         )
         newActivity.save()
+
+        data = {"status": 1}
+        return HttpResponse(json.dumps(data, ensure_ascii=False))
+
 
 @login_required
 def delActivity(request, activity_id):

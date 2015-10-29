@@ -24,7 +24,9 @@ urlpatterns = [
     url(r'^u/(?P<username>\w+)/$', views.getUserProfile, name="user-profile"),
 
     url(r'^activity/$', views.getAllActivities, name="all-activities"),
+    url(r'^activity/add/$', views.addActivity, name="addActivity"),
     url(r'^activity/(?P<activity_id>[0-9]+)/$', views.getActivityInfo, name="activity-info"),
+
     url(r'^scenery/$', views.getAllScenery, name="all-scenery"),
     url(r'^scenery/(?P<scenery_id>[0-9]+)/$', views.getSceneryInfo, name="scenery-info"),
 
