@@ -46,6 +46,25 @@ def getAllActivities(request):
     return HttpResponse("all act")
 
 
+def addActivity(request):
+    """
+    """
+    if request.method == "POST":
+        newActivity = Activity.objects.create(
+            name=request.POST.get('name', ''),
+            launchedDateTime=request.POST.get('launchedDateTime', ''),
+            startDateTime=request.POST.get('startDateTime', ''),
+            endDateTime=request.POST.get('endDateTime', ''),
+            scenerys=request.POST.get('scenerys', '')
+        )
+        newActivity.save()
+
+
+def delActivity(request, activity_id):
+    toDelActivity = Activity.objects.get(pk=activity_id)
+    toDelActivity.delete()
+
+
 def getAllScenery(request):
     allScenery = Scenery.objects.all()
     context = RequestContext(request, {
@@ -56,7 +75,7 @@ def getAllScenery(request):
 
 def getSceneryInfo(request, scenery_id):
     scenery = Scenery.objects.get(pk=scenery_id)
-    RequestContext(request, {
+    context = RequestContext(request, {
         "scenery": scenery,
     })
     return HttpResponse("scenery info")
@@ -112,8 +131,18 @@ def resetPassword(request):
 def updateProfile(request):
     return None
 
+
 def getPersonActivities(request, person_id):
-    pass
+    """
+    refer to ManyToManyField doc
+    """
+    if request.method == "GET":
+        reqPerson = Person.objects.get(pk=person_id)
+        activities = Activity.objects.all()
+        context = RequestContext(request, {
+            "activities": activities,
+        })
+        return HttpResponse("activities")
 
 
 def getUserComments(request, user_id):
