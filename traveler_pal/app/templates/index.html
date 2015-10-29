@@ -37,10 +37,13 @@
                                 <label for="activity-name">活动名称</label>
                                 {% csrf_token %}
                                 <input type="text" id="activity-name" placeholder="请输入活动名称" name="activity_name"required>
-                                <label for="activity-scenery">要去的景点</label>
-                                <input type="text" placeholder="景点1" name="scenery-1">
-                                <input type="text" placeholder="景点2" name="scenery-1">
-                                <input type="text" placeholder="景点3" name="scenery-1">
+                                <div class="scenery-n">
+                                    <label for="activity-scenery">要去的景点</label>
+                                    <input type="text" placeholder="景点1" name="scenery">
+                                </div>
+                                <div class="add-one">
+                                    +1
+                                </div>
                                 <label for="startDateTime">开始时间</label>
                                 <input type="text" value="2015-02-15" id="startDateTime" class="am-form-field">
                                 <label for="endDateTime">结束时间</label>
@@ -152,7 +155,14 @@
 
 {% block script %}
 <script src="{% static "js/amazeui.datetimepicker.min.js" %}"></script>
-<script>    
+<script>
+
+$(".add-one").click(function() {
+    $(".scenery-n").append('<input type="text" placeholder="请输入景点名称" name="scenery">');
+    var tep = $(".activity .am-modal-dialog").height()+40+"px";
+    $(".activity .am-modal-dialog").css("height", tep)
+})
+
 $('#startDateTime').datetimepicker({
   format: 'yyyy-mm-dd'
 });
