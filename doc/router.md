@@ -9,7 +9,7 @@
 + method: get
 
 ## 注册
-+ url: /reg
++ url: /reg/
 + method: post
 + response:
   * -1  用户名已经被注册
@@ -18,14 +18,27 @@
   * 1   登录成功
 
 ## 登录
-+ url: /login
-+ method: /post
++ url: /login/
++ method: post
 + reponse:
   * 0  密码错误
   * 1  成功登录
 
+## 登出
++ url: /logout/
++ method: get
 
-
+## 发出活动
++ url: /activity/add/
++ method: post
++ request:
+  * name
+  * scenery []
+  * startDateTime
+  * endDateTime
+  * introduction
++ response:
+  * 1 发起成功
 
 
 

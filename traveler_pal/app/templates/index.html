@@ -36,18 +36,20 @@
                             <form  class="am-form" id="add-activity-form" onsubmit="return false">
                                 <label for="activity-name">活动名称</label>
                                 {% csrf_token %}
-                                <input type="text" id="activity-name" placeholder="请输入活动名称" name="activity_name"required>
+                                <input type="text" id="activity-name" placeholder="请输入活动名称" name="name" required>
                                 <div class="scenery-n">
                                     <label for="activity-scenery">要去的景点</label>
-                                    <input type="text" placeholder="景点1" name="scenery">
+                                    <input type="text" id="activity-scenery" placeholder="景点1" name="scenery">
                                 </div>
                                 <div class="add-one">
                                     +1
                                 </div>
-                                <label for="startDateTime">开始时间</label>
-                                <input type="text" value="2015-02-15" id="startDateTime" class="am-form-field">
-                                <label for="endDateTime">结束时间</label>
-                                <input type="text" value="2015-02-15" id="endDateTime" class="am-form-field">
+                                <label for="activity-startDateTime">开始时间</label>
+                                <input type="text" value="2015-02-15" id="activity-startDateTime" class="am-form-field" name="startDateTime">
+                                <label for="activity-endDateTime">结束时间</label>
+                                <input type="text" value="2015-02-15" id="activity-endDateTime" class="am-form-field" name="endDateTime">
+                                <label for="activity-introduction"></label>
+                                <input type="text" placeholder="请输入活动介绍" id="activity-introduction" name="scenery">
                                 <div class="warning"></div>
                                 <button type="submit" class="am-btn am-btn-primary am-radius" id="submit-add-activity">发起
                                 </button>
@@ -157,12 +159,14 @@
 <script src="{% static "js/amazeui.datetimepicker.min.js" %}"></script>
 <script>
 
+//增加活动景点+1效果
 $(".add-one").click(function() {
     $(".scenery-n").append('<input type="text" placeholder="请输入景点名称" name="scenery">');
     var tep = $(".activity .am-modal-dialog").height()+40+"px";
     $(".activity .am-modal-dialog").css("height", tep)
 })
 
+//增加活动日期格式化
 $('#startDateTime').datetimepicker({
   format: 'yyyy-mm-dd'
 });
@@ -170,9 +174,12 @@ $('#endDateTime').datetimepicker({
   format: 'yyyy-mm-dd',
   pickerPosition: 'top-right'
 });
+
 </script>
+
 <script>
     $(function() {
+        //增加活动AJAX提交
         $("#submit-add-activity").click(function() {
             $.ajax({
                 type: "POST",
@@ -193,6 +200,12 @@ $('#endDateTime').datetimepicker({
                 location.href = "/";
             })
         })
+
+        // 增加景点Ajax提交
+
+        // 获得最新活动AJAX拉取
+
+        // 获得热门景点AJAX拉取
     })
 </script>
 <script src="{% static "js/amazeui.swiper.min.js" %}"></script>
