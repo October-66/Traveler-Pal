@@ -38,10 +38,10 @@
             <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
             <div class="am-collapse am-topbar-collapse" id="collapse-head">
                 <ul class="am-nav am-nav-pills am-topbar-nav">
-                    <li class="am-active"><a href="#">首页</a></li>
-                    <li><a href="#">活动</a></li>
-                    <li><a href="#">景点</a></li>
-                    <li><a href="#">攻略</a></li>
+                    <li {% if active == "index" %} class="am-active" {% endif %}><a href="/">首页</a></li>
+                    <li {% if active == "activity" %} class="am-active" {% endif %}><a href="/activity">活动</a></li>
+                    <li {% if active == "scenery" %} class="am-active" {% endif %}><a href="/scenery">景点</a></li>
+                    <li {% if active == "journal" %} class="am-active" {% endif %}><a href="/journal">攻略</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <div class="am-topbar-right">

@@ -13,7 +13,10 @@ import json
 
 def index(request):
     if request.method == 'GET':
-        return render(request, 'index.html')
+       content = {
+        "active": "index"
+        }
+    return render_to_response("index.html", content)
 
 @login_required
 def getUserProfile(request, username):
@@ -38,13 +41,16 @@ def getActivityInfo(request, activity_id):
     })
     return HttpResponse("act info")
 
-
+"""
+所有活动
+"""
 def getAllActivities(request):
     activities = Activity.objects.all()
-    context = RequestContext(request, {
-        "activities": activities,
-    })
-    return HttpResponse("all act")
+    content = {
+        "active": "activity",
+        "activities": activities
+        }
+    return render_to_response("activities.html", content)
 
 def getPersonActivities(request, person_id):
     """
@@ -56,7 +62,10 @@ def getPersonActivities(request, person_id):
     })
     return HttpResponse("")
 
-#@login_required
+"""
+发起活动
+"""
+@login_required
 def addActivity(request):
     """
     """
@@ -80,12 +89,16 @@ def delActivity(request, activity_id):
     toDelActivity.delete()
 
 
+"""
+所有景点
+"""
 def getAllScenery(request):
     allScenery = Scenery.objects.all()
-    context = RequestContext(request, {
-        "allScenery": allScenery,
-    })
-    return HttpResponse("all scenery")
+    content = {
+        "active": "scenery",
+        "activities": allScenery
+        }
+    return render_to_response("scenery.html", content)
 
 
 def getSceneryInfo(request, scenery_id):
@@ -94,6 +107,18 @@ def getSceneryInfo(request, scenery_id):
         "scenery": scenery,
     })
     return HttpResponse("scenery info")
+
+
+"""
+所有攻略
+"""
+def getAllJournal(request):
+    allScenery = Journal.objects.all()
+    content = {
+        "active": "journal",
+        "activities": allScenery
+        }
+    return render_to_response("journal.html", content)
 
 
 def register(request):

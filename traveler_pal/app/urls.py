@@ -30,6 +30,9 @@ urlpatterns = [
     url(r'^scenery/$', views.getAllScenery, name="all-scenery"),
     url(r'^scenery/(?P<scenery_id>[0-9]+)/$', views.getSceneryInfo, name="scenery-info"),
 
+    url(r'^journal/$', views.getAllJournal, name="all-journal"),
+
+
     url(r'^reg/$', views.register, name="register"),
     url(r'^login/$', views.login, name="login"),
     url(r'^logout/$', views.logout, name="logout"),
