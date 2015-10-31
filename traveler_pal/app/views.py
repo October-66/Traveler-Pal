@@ -13,10 +13,11 @@ import json
 
 def index(request):
     if request.method == 'GET':
-       content = {
-        "active": "index"
+        content = {
+            "active": "index"
         }
     return render_to_response("index.html", content)
+
 
 @login_required
 def getUserProfile(request, username):
@@ -41,16 +42,26 @@ def getActivityInfo(request, activity_id):
     })
     return HttpResponse("act info")
 
-"""
-所有活动
-"""
+
 def getAllActivities(request):
+    """
+    所有活动
+    """
     activities = Activity.objects.all()
     content = {
         "active": "activity",
         "activities": activities
-        }
+    }
     return render_to_response("activities.html", content)
+
+
+def getRecentActivities(request):
+    rcntActivitiesSize = 5
+    rcntActivities = Activity.objects.order_by("launchedDateTime").all()[:rcntActivitiesSize]
+    content = {
+        "rcntActivities": rcntActivities,
+    }
+    return render_to_response("", content)
 
 def getPersonActivities(request, person_id):
     """
@@ -62,9 +73,12 @@ def getPersonActivities(request, person_id):
     })
     return HttpResponse("")
 
+
 """
 发起活动
 """
+
+
 @login_required
 def addActivity(request):
     """
@@ -92,12 +106,14 @@ def delActivity(request, activity_id):
 """
 所有景点
 """
+
+
 def getAllScenery(request):
     allScenery = Scenery.objects.all()
     content = {
         "active": "scenery",
         "activities": allScenery
-        }
+    }
     return render_to_response("scenery.html", content)
 
 
@@ -112,12 +128,14 @@ def getSceneryInfo(request, scenery_id):
 """
 所有攻略
 """
+
+
 def getAllJournal(request):
     allScenery = Journal.objects.all()
     content = {
         "active": "journal",
         "activities": allScenery
-        }
+    }
     return render_to_response("journal.html", content)
 
 
@@ -166,6 +184,7 @@ def logout(request):
 def resetPassword(request):
     return None
 
+
 @login_required
 def getProfile(request, user_id):
     user = User.objects.all()
@@ -173,6 +192,7 @@ def getProfile(request, user_id):
         "user": user
     }
     return render_to_response("profile.html", content)
+
 
 @login_required
 def updateProfile(request):
@@ -199,13 +219,15 @@ def getUserComments(request, user_id):
 def getSceneryComments(request, scenery_id):
     return None
 
+
 """
 测试交互数据使用
 """
+
+
 def test(request):
     if request.method == "GET":
         return render(request, 'test.html')
 
     else:
-        print request.POST
         return render(request, 'test.html')
