@@ -166,6 +166,13 @@ def logout(request):
 def resetPassword(request):
     return None
 
+@login_required
+def getProfile(request, user_id):
+    user = User.objects.all()
+    content = {
+        "user": user
+    }
+    return render_to_response("profile.html", content)
 
 @login_required
 def updateProfile(request):

@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %}攻略{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static " css/amazeui.swiper.min.css " %}">
+<link rel="stylesheet" href="{% static " css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
+<div class="am-u-md-3">
+    <div class="box admin-nav">
+        <div class="box-head">
+            个人中心
+        </div>
+        <div class="box-content">
+            <ul>
+                <li><a href="">个人资料</a></li>
+                <li><a href="">修改密码</a></li>
+                <li><a href="">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="am-u-md-9">
+    <div class="box">
+        <div class="box-head">个人资料</div>
+        <div class="box-content">
+            <form class="am-form am-form-horizontal admin-form">
+                <div class="am-form-group">
+                    <label for="username" class="am-u-sm-2 am-form-label">用户名</label>
+                    <div class="am-u-sm-10">
+                        <input type="text" id="username" placeholder="请输入你的用户名">
+                    </div>
+                </div>
+                <div class="am-form-group am-form-file">
+                    <label for="username-logo" class="am-u-sm-2 am-form-label">头像</label>
+                    <div class="am-u-sm-5 am-u-sm-offset-2">
+                        <img src="http://cn.gravatar.com/avatar/acfa2cdf104842f476e8c453f2302b07?s=40&d=mm" alt="">
+                    </div>
+                    <div class="am-u-sm-5">
+                        <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                            <i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
+                        <input id="username-logo" type="file" multiple>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label for="xingque" class="am-u-sm-2 am-form-label">兴趣</label>
+                    <div class="am-u-sm-10">
+                        <input type="text" id="xingque" placeholder="请输入你的兴趣">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <div class="am-u-sm-10 am-u-sm-offset-2">
+                        <button type="submit" class="am-btn am-btn-default">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% include "./widget/siderbar.html" %} {% endblock %} {% block script %}
+<script src="{% static " js/amazeui.datetimepicker.min.js " %}"></script>
+<script src="{% static " js/amazeui.swiper.min.js " %}"></script>
+{% endblock %}

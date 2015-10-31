@@ -134,7 +134,7 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "./reg/",
+                        url: "/reg/",
                         data: $("#reg-form").serialize(),
                         dataType: "json"
                     }).done(function(data, textStatus, jqXHR) {
@@ -170,7 +170,7 @@
                 } else {
                     $.ajax({
                     type: "POST",
-                    url: "./login/",
+                    url: "/login/",
                     data: $("#login-form").serialize(),
                     dataType: "json"
                 }).done(function(data, textStatus, jqXHR) {

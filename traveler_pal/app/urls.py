@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name="logout"),
     url(r'^reset-password/$', views.resetPassword, name="reset-password"),
 
+    url(r'^u/(?P<user_id>[0-9]+)/$', views.getProfile, name="get profile"),
     url(r'^u/(?P<user_id>[0-9]+)/update/$', views.updateProfile, name="update profile"),
     url(r'^u/(?P<user_id>[0-9]+)/comment/$', views.getUserComments, name="user comments"),
 
