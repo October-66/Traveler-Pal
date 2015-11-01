@@ -103,6 +103,12 @@ def delActivity(request, activity_id):
     toDelActivity.delete()
 
 
+def addJournal(request):
+    pass
+
+def delJournal(request, journal_id):
+    pass
+
 """
 所有景点
 """
@@ -115,6 +121,22 @@ def getAllScenery(request):
         "activities": allScenery
     }
     return render_to_response("scenery.html", content)
+
+def getHotScenery(request):
+    """
+    依赖于多少个人游览过这个风景
+    """
+
+def getHotActivities(request):
+    """
+    依赖于多少个人参与了这个活动
+    """
+
+def getHotJournal(request):
+    """
+    依赖于多少个人访问过这个日志
+    """
+
 
 
 def getSceneryInfo(request, scenery_id):
@@ -210,6 +232,15 @@ def getPersonActivities(request, person_id):
             "activities": activities,
         })
         return HttpResponse("activities")
+
+def addComment(request):
+    """
+    关键的信息是用户的信息
+    """
+    pass
+
+def delComment(request):
+    pass
 
 
 def getUserComments(request, user_id):
