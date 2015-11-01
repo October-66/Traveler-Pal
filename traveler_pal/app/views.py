@@ -13,10 +13,13 @@ import json
 
 def index(request):
     if request.method == 'GET':
+        username = request.session.get('username', '')
         content = {
-            "active": "index"
+            "active": "index",
+            "username": username
         }
-    return render_to_response("index.html", content)
+        csrfContext = RequestContext(request, content)
+        return render_to_response("index.html", csrfContext)
 
 
 @login_required
@@ -52,7 +55,8 @@ def getAllActivities(request):
         "active": "activity",
         "activities": activities
     }
-    return render_to_response("activities.html", content)
+    csrfContext = RequestContext(request, content)
+    return render_to_response("activities.html", csrfContext)
 
 
 def getRecentActivities(request):
@@ -120,7 +124,8 @@ def getAllScenery(request):
         "active": "scenery",
         "activities": allScenery
     }
-    return render_to_response("scenery.html", content)
+    csrfContext = RequestContext(request, content)
+    return render_to_response("scenery.html", csrfContext)
 
 def getHotScenery(request):
     """
@@ -158,13 +163,15 @@ def getAllJournal(request):
         "active": "journal",
         "activities": allScenery
     }
-    return render_to_response("journal.html", content)
+    csrfContext = RequestContext(request, content)
+    return render_to_response("journal.html", csrfContext)
 
 
 def register(request):
     if request.method == 'GET':
         pass
     else:
+        print request.POST
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         repassword = request.POST.get('repassword', '')
@@ -184,12 +191,16 @@ def register(request):
 
 
 def login(request):
+    if request.session.get('username', ''):
+        return HttpResponseRedirect('/')
+
     if request.method == 'POST':
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         user = auth.authenticate(username=username, password=password)
         if user is not None and user.is_active:
             auth.login(request, user)
+            request.session['username'] = username
             data = {"status": 1}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
         else:
@@ -213,7 +224,8 @@ def getProfile(request, user_id):
     content = {
         "user": user
     }
-    return render_to_response("profile.html", content)
+    csrfContext = RequestContext(request, content)
+    return render_to_response("profile.html", csrfContext)
 
 
 @login_required
