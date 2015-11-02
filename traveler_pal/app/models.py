@@ -1,6 +1,9 @@
+# encoding: utf-8
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+
+from DjangoUeditor.models import UEditorField
 
 currentDateTime = timezone.now()
 nameFieldMaxSize = 128
@@ -86,3 +89,8 @@ class Journal(Postable):
     only
     """
     activity = models.ForeignKey(Activity, null=True)
+
+class Blog(models.Model):
+    Name=models.CharField(,max_length=100,blank=True)
+    Content=UEditorField(u'内容',width=600, height=300, toolbars="full", imagePath="", filePath="", upload_settings={"imageMaxSize":1204000},
+             settings={},command=None,event_handler=myEventHander(),blank=True)

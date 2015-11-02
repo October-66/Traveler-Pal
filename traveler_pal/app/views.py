@@ -9,6 +9,8 @@ from .models import *
 import json
 import time
 
+
+
 # Create your views here.
 
 
@@ -251,8 +253,10 @@ def updateProfile(request):
 def postJournal(request):
     if request.method == "GET":
         username = request.session.get('username', '')
+        form = TestUEditorForm()
         content = {
-            "username": username
+            "username": username,
+            "form": form
         }
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/post.html", csrfContext)
