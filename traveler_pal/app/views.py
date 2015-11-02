@@ -5,8 +5,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
 from .models import *
-import json
 
+import json
+import time
 
 # Create your views here.
 
@@ -78,25 +79,30 @@ def getPersonActivities(request, person_id):
     return HttpResponse("")
 
 
-"""
-发起活动
-"""
-
-
 @login_required
 def addActivity(request):
     """
+    发起活动
     """
     if request.method == "POST":
-        newActivity = Activity.objects.create(
-            name=request.POST.get('name', ''),
-            launchedDateTime=request.POST.get('launchedDateTime', ''),
-            startDateTime=request.POST.get('startDateTime', ''),
-            endDateTime=request.POST.get('endDateTime', ''),
-            scenerys=request.POST.get('scenerys', '')
-        )
-        newActivity.save()
+        uname = request.POST.get('name', '')
+        ustartDateTime = request.POST.get('startDateTime', '')
+        uendDateTime = request.POST.get('endDateTime', '')
+        uscenery = request.POST.get('scenery', '')
+        uintroduction = request.POST.get('uintroduction', '')
 
+        ulaunchedDateTime = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+
+        for uscenery_list in uscenery:
+            scenery = Scenery.objects.get_or_create(name = uscenery_list)
+            newActivity = Activity.objects.create(
+                name = uname,
+                launchedDateTime = ulaunchedDateTime,
+                startDateTime = ustartDateTime,
+                endDateTime = uendDateTime,
+                scenerys = uscenery_list
+            )
+            newActivity.save()
         data = {"status": 1}
         return HttpResponse(json.dumps(data, ensure_ascii=False))
 
