@@ -247,6 +247,19 @@ def getProfile(request):
 def updateProfile(request):
     return None
 
+@login_required
+def postJournal(request):
+    if request.method == "GET":
+        username = request.session.get('username', '')
+        content = {
+            "username": username
+        }
+        csrfContext = RequestContext(request, content)
+        return render_to_response("profile/post.html", csrfContext)
+    elif request.method == "POST":
+        pass
+
+
 
 def getPersonActivities(request, person_id):
     """

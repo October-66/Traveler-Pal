@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %}攻略{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static "css/amazeui.swiper.min.css " %}">
+<link rel="stylesheet" href="{% static "css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
+{% include "./profile/siderbar.html" %}
+<div class="am-u-md-9">
+    <div class="box profile">
+        <div class="box-head">基本信息</div>
+        <div class="box-content show">
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+</div>
+</div>
+<script src="{% static "js/amazeui.datetimepicker.min.js " %}"></script>
+<script src="{% static "js/amazeui.swiper.min.js " %}"></script>
+{% endblock %}

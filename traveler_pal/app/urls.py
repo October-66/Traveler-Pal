@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^u/$', views.getProfile, name="get profile"),
     url(r'^u/update/$', views.updateProfile, name="update profile"),
     url(r'^u/comment/$', views.getUserComments, name="user comments"),
+    url(r'^u/post/$', views.postJournal, name="post journal"),
 
     url(r'^u/(?P<username>\w+)/$', views.getUserProfile, name="user-profile"),
 
