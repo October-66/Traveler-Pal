@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %}攻略{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static "css/amazeui.swiper.min.css " %}">
+<link rel="stylesheet" href="{% static "css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
+<div class="am-u-md-3">
+    <div class="box admin-nav">
+        <div class="box-head">
+            个人中心
+        </div>
+        <div class="box-content">
+            <ul>
+                <li><a href="/u/">个人资料</a></li>
+                <li><a href="/u/post">发表攻略</a></li>
+                <li><a href="">最近参与活动</a></li>
+                <li><a href="">最近去过的景点</a></li>
+                <li><a href="/u/update">变更信息</a></li>
+                <li><a href="/u/changepassword">修改密码</a></li>
+                <li><a href="/logout/">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="am-u-md-9">
+    <div class="box profile">
+        <div class="box-head">基本信息</div>
+        <div class="box-content show">
+            <div class="am-u-md-offset-3 am-u-md-3">
+                <b>用户名</b>
+            </div>
+            <div class="am-u-md-6">
+                <span>rccoder</span>
+            </div>
+            <div class="am-u-md-offset-3 am-u-md-3">
+                <b>头&nbsp;&nbsp;&nbsp;像</b>
+            </div>
+            <div class="am-u-md-6">
+                <img src="http://cn.gravatar.com/avatar/acfa2cdf104842f476e8c453f2302b07?s=40&d=mm" alt="">
+            </div>
+            <div class="am-u-md-offset-3 am-u-md-3">
+                <b>爱&nbsp;&nbsp;&nbsp;好</b>
+            </div>
+            <div class="am-u-md-6">
+                <span>rccoder</span>
+            </div>
+            <div class="am-u-md-offset-3 am-u-md-3">
+                <b>发起活动次数</b>
+            </div>
+            <div class="am-u-md-6">
+                <span>100</span>
+            </div>
+            <div class="am-u-md-offset-3 am-u-md-3">
+                <b>去过景点个数</b>
+            </div>
+            <div class="am-u-md-6">
+                <span>400</span>
+            </div>
+            <div class="am-u-md-offset-3 am-u-md-3">
+                <b>发表攻略个数</b>
+            </div>
+            <div class="am-u-md-6">
+                <span>100</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="{% static "js/amazeui.datetimepicker.min.js " %}"></script>
+<script src="{% static "js/amazeui.swiper.min.js " %}"></script>
+{% endblock %}

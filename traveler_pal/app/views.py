@@ -234,13 +234,13 @@ def resetPassword(request):
 
 
 @login_required
-def getProfile(request, user_id):
-    user = User.objects.all()
+def getProfile(request):
+    username = request.session.get('username', '')
     content = {
-        "user": user
+        "username": username
     }
     csrfContext = RequestContext(request, content)
-    return render_to_response("profile.html", csrfContext)
+    return render_to_response("profile/profile.html", csrfContext)
 
 
 @login_required
