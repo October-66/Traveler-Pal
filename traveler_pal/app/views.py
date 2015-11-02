@@ -17,7 +17,8 @@ def index(request):
         username = request.session.get('username', '')
         content = {
             "active": "index",
-            "username": username
+            "username": username,
+
         }
         csrfContext = RequestContext(request, content)
         return render_to_response("index.html", csrfContext)
@@ -39,12 +40,21 @@ def getUserProfile(request, username):
 
 
 def getActivityInfo(request, activity_id):
+    username = request.session.get('username', '')
+    content = {
+            "active": "activity",
+            "username": username,
+        }
+    csrfContext = RequestContext(request, content)
+    return render_to_response("activity_info.html", csrfContext)
+    '''
     activity = Activity.objects.get(pk=activity_id)
     context = RequestContext(request, {
         "activity": activity,
 
     })
     return HttpResponse("act info")
+    '''
 
 
 def getAllActivities(request):
@@ -177,7 +187,6 @@ def register(request):
     if request.method == 'GET':
         pass
     else:
-        print request.POST 别写py2的print了￥——￥
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         repassword = request.POST.get('repassword', '')

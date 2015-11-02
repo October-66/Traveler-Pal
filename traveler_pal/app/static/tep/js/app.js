@@ -15,7 +15,7 @@ $(function($) {
     });
 
     $('#swiper-activity').swiper({
-        scrollbar: '.swiper-scrollbar',
+        scrollbar: '#swiper-scrollbar-activity',
         scrollbarHide: true,
         slidesPerView: 'auto',
         centeredSlides: false,
@@ -24,7 +24,7 @@ $(function($) {
     });
 
     $('#swiper-scenery').swiper({
-        scrollbar: '.swiper-scrollbar',
+        scrollbar: '#swiper-scrollbar-scenery',
         scrollbarHide: true,
         slidesPerView: 'auto',
         centeredSlides: false,

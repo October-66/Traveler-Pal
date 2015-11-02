@@ -174,3 +174,14 @@ body {
     margin-top:-30px;
     cursor:pointer;
 }
+.activity-detail .box-content .discuss {
+    padding: 30px;
+    overflow: hidden;
+    img {
+        float: left;
+        margin-right: 20px;
+    }
+    .am-comment-main {
+        margin-bottom: 20px
+    }
+}
