@@ -171,7 +171,7 @@ def register(request):
     if request.method == 'GET':
         pass
     else:
-        print request.POST
+        print request.POST 别写py2的print了￥——￥
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         repassword = request.POST.get('repassword', '')
