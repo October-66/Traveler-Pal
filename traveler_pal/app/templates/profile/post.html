@@ -1,12 +1,18 @@
 {% extends "base.html" %} {% load staticfiles %} {% block title %}攻略{% endblock %} {% block style %}
 <link rel="stylesheet" href="{% static "css/amazeui.swiper.min.css " %}">
-<link rel="stylesheet" href="{% static "css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
+<link rel="stylesheet" href="{% static "css/amazeui.datetimepicker.min.css " %}"> 
+{{ form.media }}
+{% endblock %} {% block content %}
 {% include "./profile/siderbar.html" %}
 <div class="am-u-md-9">
     <div class="box profile">
         <div class="box-head">基本信息</div>
         <div class="box-content show">
-            {{ form }}
+            <form method="post">
+				<input name="title" type="text">
+				{% csrf_token %}
+				{{ form }}
+		</form>
         </div>
     </div>
 </div>

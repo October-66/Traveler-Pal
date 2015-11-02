@@ -91,6 +91,5 @@ class Journal(Postable):
     activity = models.ForeignKey(Activity, null=True)
 
 class Blog(models.Model):
-    Name=models.CharField(,max_length=100,blank=True)
-    Content=UEditorField(u'内容',width=600, height=300, toolbars="full", imagePath="", filePath="", upload_settings={"imageMaxSize":1204000},
-             settings={},command=None,event_handler=myEventHander(),blank=True)
+    title=models.CharField(max_length=100,blank=True)
+    content = UEditorField(imagePath="ueditor/images/", filePath="ueditor/files/", settings={},command=None,blank=True)
