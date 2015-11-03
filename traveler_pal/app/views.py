@@ -14,7 +14,7 @@ from django import forms
 # Create your views here.
 
 class TestUEditorForm(forms.Form):
-    Content=UEditorField(u"描述",initial="abc",width=600,height=800)
+    content=UEditorField(u"",initial="abc")
 
 
 def index(request):

@@ -5,13 +5,33 @@
 {% endblock %} {% block content %}
 {% include "./profile/siderbar.html" %}
 <div class="am-u-md-9">
-    <div class="box profile">
-        <div class="box-head">基本信息</div>
-        <div class="box-content show">
-            <form method="post">
-				<input name="title" type="text">
+    <div class="box">
+        <div class="box-head">发表攻略</div>
+        <div class="box-content post-journal">
+            <form method="post" onsubmit="return false" id="post-jpurnal-form">
+                <div class="am-g">
+                    <div class="am-u-md-offset-1 am-u-md-10">
+                        <input type="text" class="am-form-field am-radius" placeholder="请输入文章标题" name="title"/>
+                    </div>    
+                </div>
+                <div class="am-g">
+                    <div class="am-u-md-3 am-u-md-offset-1">
+                        <input type="text" value="2015-02-15" id="dateTime" class="am-form-field" name="dateTime">
+                    </div>
+                    <div class="am-u-md-2" id="tag">
+                        <input type="text" class="am-form-field am-radius" placeholder="景点" name="scenery-tag"/>
+                    </div>
+                    <div class="add-tag am-u-md-1 am-u-end">
+                        +1
+                    </div>
+                </div>
 				{% csrf_token %}
-				{{ form }}
+                <div class="am-g">
+                    <div class="am-u-md-offset-1 am-u-md-10">
+                    {{ form }}
+                    </div>
+                </div>
+                <button type="submit" class="am-btn am-btn-success right" id="post-submit">绿色按钮</button>
 		</form>
         </div>
     </div>
@@ -19,4 +39,29 @@
 </div>
 <script src="{% static "js/amazeui.datetimepicker.min.js " %}"></script>
 <script src="{% static "js/amazeui.swiper.min.js " %}"></script>
+{% endblock %}
+{% block script %}
+<script>
+    $('#dateTime').datetimepicker({
+        format: 'yyyy-mm-dd'
+    });
+    $(function() {
+        $(".add-tag").click(function() {
+            $("#tag").append('<input type="text" class="am-form-field am-radius" placeholder="景点" name="scenery-tag"/>')
+        })
+
+        $("#post-submit").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/u/post/",
+                data: $("#post-jpurnal-form").serialize(),
+                dataType: "json"
+            }).done(function(data, textStatus, jqXHR) {
+
+            }).fail(function() {
+
+            });
+        })
+    })
+</script>
 {% endblock %}

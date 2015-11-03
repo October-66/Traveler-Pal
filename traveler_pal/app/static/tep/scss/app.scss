@@ -189,8 +189,20 @@ body {
 .profile {
     .show, form {
         padding: 20px;
-        div {
-            margin-bottom: 0px;
+        di {
+            margin-bottom: 20px;
         }
+    }
+}
+.post-journal {
+    margin: 0 auto;
+    input {
+        margin: 20px 0;
+    }
+}
+.post-journal {
+    .add-tag {
+        margin-top: 26px;
+        cursor: pointer;
     }
 }

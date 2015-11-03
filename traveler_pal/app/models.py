@@ -70,7 +70,8 @@ class PersonScenery(models.Model):
 class Postable(models.Model):
     person = models.ForeignKey(Person)
     title = models.CharField(max_length=nameFieldMaxSize)
-    content = models.TextField(null=True)
+    #content = models.TextField(null=True)
+    content = UEditorField(imagePath="ueditor/images/", filePath="ueditor/files/", settings={},command=None,blank=True)
     postDateTime = models.DateTimeField(default=currentDateTime, null=True)
 
     class meta:
@@ -86,7 +87,7 @@ class Comment(Postable):
 
 class Journal(Postable):
     """
-    only
+    only????
     """
     activity = models.ForeignKey(Activity, null=True)
 

@@ -40,9 +40,14 @@
 + response:
   * 1 发起成功
 
-
-
-
+## 发表攻略
++ url :/u/post/
++ method: post
++ request: 
+  * title
+  * dateTime
+  * scenery-tag []
+  * content 
 
 
 
