@@ -11,10 +11,12 @@ import time
 
 from  DjangoUeditor.forms import UEditorField
 from django import forms
+
+
 # Create your views here.
 
 class TestUEditorForm(forms.Form):
-    content=UEditorField(u"",initial="abc")
+    content = UEditorField(u"", initial="abc")
 
 
 def index(request):
@@ -45,11 +47,12 @@ def getUserProfile(request, username):
 
 
 def getActivityInfo(request, activity_id):
+    #todo
     username = request.session.get('username', '')
     content = {
-            "active": "activity",
-            "username": username,
-        }
+        "active": "activity",
+        "username": username,
+    }
     csrfContext = RequestContext(request, content)
     return render_to_response("activity_info.html", csrfContext)
     '''
@@ -78,10 +81,11 @@ def getAllActivities(request):
 def getRecentActivities(request):
     rcntActivitiesSize = 5
     rcntActivities = Activity.objects.order_by("launchedDateTime").all()[:rcntActivitiesSize]
-    content = {
+    context = RequestContext(request, {
         "rcntActivities": rcntActivities,
-    }
-    return render_to_response("", content)
+    })
+    return render_to_response("", context)
+
 
 def getPersonActivities(request, person_id):
     """
@@ -106,32 +110,34 @@ def addActivity(request):
         uscenery = request.POST.getlist('scenery', '')
         uintroduction = request.POST.get('introduction', '')
 
-        ulaunchedDateTime = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+        ulaunchedDateTime = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 
         usponsor = request.session.get('username', '')
 
         newActivity = Activity.objects.create(
-            name = uname,
-            launchedDateTime = ulaunchedDateTime,
-            startDateTime = ustartDateTime,
-            endDateTime = uendDateTime,
-            introduction = uintroduction,
-            sponsor = usponsor,
+            name=uname,
+            launchedDateTime=ulaunchedDateTime,
+            startDateTime=ustartDateTime,
+            endDateTime=uendDateTime,
+            introduction=uintroduction,
+            sponsor=usponsor,
         )
 
         for uscenery_list in uscenery:
-            
-            newScenery = Scenery.objects.get_or_create(name = uscenery_list)[0]
-            
+            newScenery = Scenery.objects.get_or_create(name=uscenery_list)[0]
+
             newActivityScenery = ActivityScenery(
-                activity = newActivity,
-                scenery = newScenery
-                )
+                activity=newActivity,
+                scenery=newScenery
+            )
             newActivityScenery.save()
 
         data = {"status": 1}
         return HttpResponse(json.dumps(data, ensure_ascii=False))
 
+
+def joinActivity(request, activity_id):
+    pass
 
 @login_required
 def delActivity(request, activity_id):
@@ -142,8 +148,10 @@ def delActivity(request, activity_id):
 def addJournal(request):
     pass
 
+
 def delJournal(request, journal_id):
     pass
+
 
 """
 所有景点
@@ -159,21 +167,23 @@ def getAllScenery(request):
     csrfContext = RequestContext(request, content)
     return render_to_response("scenery.html", csrfContext)
 
+
 def getHotScenery(request):
     """
     依赖于多少个人游览过这个风景
     """
+
 
 def getHotActivities(request):
     """
     依赖于多少个人参与了这个活动
     """
 
+
 def getHotJournal(request):
     """
     依赖于多少个人访问过这个日志
     """
-
 
 
 def getSceneryInfo(request, scenery_id):
@@ -184,9 +194,12 @@ def getSceneryInfo(request, scenery_id):
     return HttpResponse("scenery info")
 
 
-"""
-所有攻略
-"""
+def getAllStrategy(request):
+    """
+    所有攻略
+    """
+    allStrategy = Strategy.objects.all()
+    pass
 
 
 def getAllJournal(request):
@@ -264,6 +277,7 @@ def getProfile(request):
 def updateProfile(request):
     return None
 
+
 @login_required
 def postJournal(request):
     if request.method == "GET":
@@ -279,7 +293,6 @@ def postJournal(request):
         pass
 
 
-
 def getPersonActivities(request, person_id):
     """
     refer to ManyToManyField doc
@@ -292,11 +305,13 @@ def getPersonActivities(request, person_id):
         })
         return HttpResponse("activities")
 
+
 def addComment(request):
     """
     关键的信息是用户的信息
     """
     pass
+
 
 def delComment(request):
     pass

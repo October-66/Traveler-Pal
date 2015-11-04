@@ -2,17 +2,18 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-
 from DjangoUeditor.models import UEditorField
 
 currentDateTime = timezone.now()
 nameFieldMaxSize = 128
 
 
-# Create your models here.
 class Scenery(models.Model):
     name = models.CharField(max_length=nameFieldMaxSize, null=True)
     price = models.IntegerField(null=True)
+
+    def ___str__(self):
+        return "scenery name: " + self.name
 
 
 class Activity(models.Model):
@@ -26,6 +27,8 @@ class Activity(models.Model):
     sponsor = models.CharField(default="", max_length=nameFieldMaxSize)
     scenerys = models.ManyToManyField(Scenery, through="ActivityScenery")
 
+    def __str__(self):
+        return "activity name: " + self.name
 
 
 class ActivityScenery(models.Model):
@@ -36,17 +39,15 @@ class ActivityScenery(models.Model):
 class Person(models.Model):
     """
     """
-    # info
+    #User in Django contains email, name, username, password(cannot be seen)
     user = models.ForeignKey(User, null=True)
-    username = models.CharField(max_length=nameFieldMaxSize, null=True)
-    email = models.EmailField(max_length=nameFieldMaxSize, null=True)
-    password = models.CharField(max_length=nameFieldMaxSize, null=True)
+
     interest = models.TextField(null=True)
-    gender = (
+    genderChoices = (
         ('M', 'MALE'),
         ('F', 'FEMALE'),
     )
-
+    gender = models.CharField(max_length=1, choices=genderChoices, default='M')
     activitys = models.ManyToManyField(Activity, through="PersonActivity")
     scenerys = models.ManyToManyField(Scenery, through="PersonScenery")
 
@@ -62,7 +63,7 @@ class PersonActivity(models.Model):
     person = models.ForeignKey(Person, null=True)
     activity = models.ForeignKey(Activity, null=True)
 
-    # joinedDateTime = models.DateTimeField(default=currentDateTime, null=True) #current no usage
+    joinedDateTime = models.DateTimeField(default=currentDateTime, null=True)
     # more user info
 
 
@@ -74,8 +75,8 @@ class PersonScenery(models.Model):
 class Postable(models.Model):
     person = models.ForeignKey(Person)
     title = models.CharField(max_length=nameFieldMaxSize)
-    #content = models.TextField(null=True)
-    content = UEditorField(imagePath="ueditor/images/", filePath="ueditor/files/", settings={},command=None,blank=True)
+    content = UEditorField(imagePath="ueditor/images/",
+                           filePath="ueditor/files/", settings={}, command=None, blank=True)
     postDateTime = models.DateTimeField(default=currentDateTime, null=True)
 
     class meta:
@@ -91,6 +92,13 @@ class Comment(Postable):
 
 class Journal(Postable):
     """
-    only????
+    only can be seen by user himself
     """
     activity = models.ForeignKey(Activity, null=True)
+
+
+class Strategy(Postable):
+    """
+    can be seen by everyone and post on homepage
+    """
+    acitvity = models.ForeignKey(Activity, null=True)
