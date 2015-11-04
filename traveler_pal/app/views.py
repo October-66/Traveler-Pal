@@ -19,7 +19,28 @@ class TestUEditorForm(forms.Form):
     content = UEditorField(u"", initial="abc")
 
 
+'''
+非渲染函数
+'''
+def getRecentActivities():
+    """
+    get recent global activities
+    return a object
+    """
+    rcntActivitiesSize = 5
+    rcntActivities = Activity.objects.order_by("-id").all()[:rcntActivitiesSize]
+    
+    return rcntActivities
+
+
+
+'''
+渲染函数
+'''
 def index(request):
+    """
+    渲染主页
+    """
     if request.method == 'GET':
         username = request.session.get('username', '')
         content = {
@@ -33,6 +54,9 @@ def index(request):
 
 @login_required
 def getUserProfile(request, username):
+    """
+    渲染用户信息界面
+    """
     if request.method == 'GET':
         user = Person.objects.get(username=username)
         context = RequestContext(request, {
@@ -47,27 +71,21 @@ def getUserProfile(request, username):
 
 
 def getActivityInfo(request, activity_id):
-    #todo
+    
     username = request.session.get('username', '')
+    activity = Activity.objects.get(pk=activity_id)
+
     content = {
         "active": "activity",
-        "username": username,
+        "activity": activity
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("activity_info.html", csrfContext)
-    '''
-    activity = Activity.objects.get(pk=activity_id)
-    context = RequestContext(request, {
-        "activity": activity,
-
-    })
-    return HttpResponse("act info")
-    '''
 
 
 def getAllActivities(request):
     """
-    所有活动
+    渲染所有的活动界面
     """
     activities = Activity.objects.all()
     content = {
@@ -76,17 +94,6 @@ def getAllActivities(request):
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("activities.html", csrfContext)
-
-
-def getRecentActivities():
-    """
-    get recent global activities
-    return a object
-    """
-    rcntActivitiesSize = 5
-    rcntActivities = Activity.objects.order_by("-id").all()[:rcntActivitiesSize]
-    
-    return rcntActivities
 
 
 def getPersonActivities(request, person_id):

@@ -5,9 +5,13 @@
     <div class="box activity-list am-g">
         <img src="http://lorempixel.com/600/600/nature/1" alt="" class="am-u-md-4 am-img-responsive">
         <div class="intro am-u-md-6">
-            <h2>开开心心去冰城</h2>
-            <data><b>时间：</b>2015/10/18</data>
-            <p><b>要去景点：</b><span><a href="">帽儿山</a></span>、<span><a href="">731遗址</a></span>、<span><a href="">冰雪大世界</a></span></p>
+            <h2>{{ activity.name }}</h2>
+            <data><b>时间：</b>{{ activity.startDateTime|date:"Y-j-f" }} 至 {{ activity.endDateTime|date:"Y-j-f" }}</data>
+            <p><b>要去景点：</b>
+            {% for s in activity.scenerys.all %}
+            <span><a href="/scenery/{{ s.id }}">{{ s.name }}</a></span>
+            {% endfor %}
+            </p>
             <p><b>活动约估费用：</b>4000元</p>
             <p><b>活动要求：</b>只限妹子参加</p>
             <p><b>活动介绍：</b>嗯，就是这个活动。啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>
