@@ -25,7 +25,7 @@ def index(request):
         content = {
             "active": "index",
             "username": username,
-
+            "recentactivity": getRecentActivities(),
         }
         csrfContext = RequestContext(request, content)
         return render_to_response("index.html", csrfContext)
@@ -78,13 +78,15 @@ def getAllActivities(request):
     return render_to_response("activities.html", csrfContext)
 
 
-def getRecentActivities(request):
+def getRecentActivities():
+    """
+    get recent global activities
+    return a object
+    """
     rcntActivitiesSize = 5
-    rcntActivities = Activity.objects.order_by("launchedDateTime").all()[:rcntActivitiesSize]
-    context = RequestContext(request, {
-        "rcntActivities": rcntActivities,
-    })
-    return render_to_response("", context)
+    rcntActivities = Activity.objects.order_by("-id").all()[:rcntActivitiesSize]
+    
+    return rcntActivities
 
 
 def getPersonActivities(request, person_id):

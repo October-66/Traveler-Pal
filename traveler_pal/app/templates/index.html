@@ -61,20 +61,12 @@
             <div class="am-u-md-9">
                 <div class="swiper-container" id="swiper-activity">
                     <div class="swiper-wrapper">
+                    {% for activity_list in recentactivity %}
                         <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/2)">
-                            <button class="am-btn am-btn-primary am-radius" onclick="window.location.href='/activity/1/'">冰雪4日玩
+                            <button class="am-btn am-btn-primary am-radius" onclick="window.location.href='/activity/{{ activity_list.id }}/'">{{ activity_list.name }}
                             </button>
                         </div>
-                        <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/4)">
-                            <button class="am-btn am-btn-primary am-radius" onclick="window.location.href='/activity/2/'">活动二
-                            </button>
-                        </div>
-                        <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/1)">
-                            <button class="am-btn am-btn-primary am-radius" onclick="window.location.href='/activity/2/'">活动二
-                            </button>
-                        </div>
-                        <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/4)">Slide 4</div>
-                        <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/5)">Slide 5</div>
+                    {% endfor %}
                         <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/3)">
                             <button class="am-btn am-btn-primary am-radius" onclick="window.location.href='/activity/'">点击查看更多活动
                             </button>
