@@ -25,6 +25,7 @@ class Activity(models.Model):
     scenerys = models.ManyToManyField(Scenery, through="ActivityScenery")
 
 
+
 class ActivityScenery(models.Model):
     activity = models.ForeignKey(Activity, null=True)
     scenery = models.ForeignKey(Scenery, null=True)
@@ -90,7 +91,3 @@ class Journal(Postable):
     only????
     """
     activity = models.ForeignKey(Activity, null=True)
-
-class Blog(models.Model):
-    title=models.CharField(max_length=100,blank=True)
-    content = UEditorField(imagePath="ueditor/images/", filePath="ueditor/files/", settings={},command=None,blank=True)

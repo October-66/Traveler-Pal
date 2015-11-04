@@ -108,16 +108,23 @@ def addActivity(request):
 
         ulaunchedDateTime = time.strftime('%Y-%m-%d',time.localtime(time.time()))
 
+
+        newActivity = Activity.objects.create(
+            name = uname,
+            launchedDateTime = ulaunchedDateTime,
+            startDateTime = ustartDateTime,
+            endDateTime = uendDateTime,
+        )
+        
         for uscenery_list in uscenery:
-            scenery = Scenery.objects.get_or_create(name = uscenery_list)
-            newActivity = Activity.objects.create(
-                name = uname,
-                launchedDateTime = ulaunchedDateTime,
-                startDateTime = ustartDateTime,
-                endDateTime = uendDateTime,
-                scenerys = uscenery_list
-            )
-            newActivity.save()
+            newScenery = Scenery.objects.get_or_create(name = uscenery_list)[0]
+            
+            newActivityScenery = ActivityScenery(
+                activity = newActivity,
+                scenery = newScenery
+                )
+            newActivityScenery.save()
+
         data = {"status": 1}
         return HttpResponse(json.dumps(data, ensure_ascii=False))
 
@@ -198,6 +205,7 @@ def register(request):
         email = request.POST.get('email', '')
 
         if password == repassword:
+
             user = User.objects.create_user(
                 username=username,
                 email=email,
