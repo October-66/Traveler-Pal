@@ -22,6 +22,8 @@ class Activity(models.Model):
     launchedDateTime = models.DateTimeField(default=currentDateTime, null=True)
     startDateTime = models.DateTimeField(default=currentDateTime, null=True)
     endDateTime = models.DateTimeField(default=currentDateTime, null=True)
+    introduction = models.CharField(default="", max_length=nameFieldMaxSize)
+    sponsor = models.CharField(default="", max_length=nameFieldMaxSize)
     scenerys = models.ManyToManyField(Scenery, through="ActivityScenery")
 
 
@@ -59,6 +61,7 @@ class PersonActivity(models.Model):
     """
     person = models.ForeignKey(Person, null=True)
     activity = models.ForeignKey(Activity, null=True)
+
     # joinedDateTime = models.DateTimeField(default=currentDateTime, null=True) #current no usage
     # more user info
 

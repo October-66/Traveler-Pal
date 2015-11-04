@@ -103,20 +103,24 @@ def addActivity(request):
         uname = request.POST.get('name', '')
         ustartDateTime = request.POST.get('startDateTime', '')
         uendDateTime = request.POST.get('endDateTime', '')
-        uscenery = request.POST.get('scenery', '')
-        uintroduction = request.POST.get('uintroduction', '')
+        uscenery = request.POST.getlist('scenery', '')
+        uintroduction = request.POST.get('introduction', '')
 
         ulaunchedDateTime = time.strftime('%Y-%m-%d',time.localtime(time.time()))
 
+        usponsor = request.session.get('username', '')
 
         newActivity = Activity.objects.create(
             name = uname,
             launchedDateTime = ulaunchedDateTime,
             startDateTime = ustartDateTime,
             endDateTime = uendDateTime,
+            introduction = uintroduction,
+            sponsor = usponsor,
         )
-        
+
         for uscenery_list in uscenery:
+            
             newScenery = Scenery.objects.get_or_create(name = uscenery_list)[0]
             
             newActivityScenery = ActivityScenery(
