@@ -84,13 +84,30 @@ def getActivityInfo(request, activity_id):
     return render_to_response("activity_info.html", csrfContext)
 
 
+def toJSON(self):
+    fields = []
+    for field in self._meta.fields:
+        fields.append(field.name)
+
+    d = {}
+    for attr in fields:
+        d[attr] = getattr(self, attr)
+
+    import json
+    return json.dumps(d)
+
 def getFuzzySearchScenerys(request, fuzzyQueryWord):
-    scenerys = list(Scenery.objects.filter(name__contains=fuzzyQueryWord))
-    scenerysStr = ", ".join(scenerys) #a, b, c, d
-    scenerysJson = {"scenerys": scenerysStr}
-    return HttpResponse(json.dump(
-        scenerysJson, content_type="application/json"
-    ))
+    """
+    模糊查询景点
+    """
+    scenerys = Scenery.objects.filter(name__contains=fuzzyQueryWord)
+    
+    l=[]
+    for x in scenerys:
+        l.append(toJSON(x))
+    print l
+    return HttpResponse(json.dumps({'data_list':l}, ensure_ascii=False))
+
 
 def getAllActivities(request):
     """

@@ -27,6 +27,7 @@ urlpatterns = [
 
     url(r'^scenery/$', views.getAllScenery, name="all-scenery"),
     url(r'^scenery/(?P<scenery_id>[0-9]+)/$', views.getSceneryInfo, name="scenery-info"),
+    url(r'^scenery/search/(?P<fuzzyQueryWord>\w+)/$', views.getFuzzySearchScenerys, name="getFuzzySearchScenerys"),
 
     url(r'^journal/$', views.getAllJournal, name="all-journal"),
 

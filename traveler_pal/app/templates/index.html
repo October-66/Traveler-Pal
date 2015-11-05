@@ -25,7 +25,7 @@
         <div class="box-head">活动</div>
         <div class="box-content am-g">
             <div class="am-u-md-3">
-                <button type="button" class="am-btn am-btn-primary am-radius" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height:500}">发起活动
+                <button type="button" class="am-btn am-btn-primary am-radius start-activity" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height:500}">发起活动
                 </button>
                 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
                     <div class="am-modal-dialog">
@@ -40,6 +40,9 @@
                                 <div class="scenery-n">
                                     <label for="activity-scenery">要去的景点</label>
                                     <input type="text" id="activity-scenery" placeholder="景点1" name="scenery">
+                                </div>
+                                <div class="scenery-auto">
+                                    <ul></ul>
                                 </div>
                                 <div class="add-one">
                                     +1
@@ -179,6 +182,30 @@ $('#activity-endDateTime').datetimepicker({
   pickerPosition: 'top-right'
 });
 
+$(function() {
+    $(".start-activity").click(function() {
+        $(".scenery-auto").css({'width': '340px'})
+    });
+    $(".scenery-n").keyup(function() {
+        $(".scenery-auto").css({'display': 'block'})
+
+        var queryWord = $(".scenery-n input").slice(-1).val()
+
+        $.ajax({
+            type: "GET",
+            url: "/scenery/search/" + queryWord +"/",
+            dataType: "json"
+        }).done(function(data, textSatus, jqXHR) {
+
+            for(var i = 0; i < data.data_list.length; i++) {
+                $(".scenery-auto ul").append('<li>' + JSON.parse(data.data_list[i]).name + '</li>')
+            }
+
+        }).fail(function() {
+            $(".scenery-auto").css({'display': 'none'})
+        })
+    })
+})
 </script>
 
 <script>

@@ -206,3 +206,13 @@ body {
         cursor: pointer;
     }
 }
+
+.scenery-auto {
+    display: none;
+    position: absolute;
+    left: 30px;
+    width: 340px;
+    border: 1px solid #817fb2;
+    height: 200px;
+    background-color: white
+}
