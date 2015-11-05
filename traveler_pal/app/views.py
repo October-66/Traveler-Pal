@@ -24,6 +24,8 @@ class TestUEditorForm(forms.Form):
 '''
 非渲染函数
 '''
+
+
 def getRecentActivities():
     """
     get recent global activities
@@ -35,10 +37,11 @@ def getRecentActivities():
     return rcntActivities
 
 
-
 '''
 渲染函数
 '''
+
+
 def index(request):
     """
     渲染主页
@@ -85,11 +88,12 @@ def getActivityInfo(request, activity_id):
 
 
 def getFuzzySearchScenerys(request, fuzzyQueryWord):
-    scenerys =[s.name for s in list(Scenery.objects.filter(name__contains=fuzzyQueryWord))]
-    scenerysStr = ", ".join(scenerys) #a, b, c, d
+    scenerys = [s.name for s in list(Scenery.objects.filter(name__contains=fuzzyQueryWord))]
+    scenerysStr = ", ".join(scenerys)  # a, b, c, d
     return HttpResponse(json.dump(
         scenerysStr, content_type="application/json"
     ))
+
 
 def getAllActivities(request):
     """
@@ -168,7 +172,6 @@ def joinActivity(request, activity_id):
             activity=toJoinAct,
             joinedDateTime=Utils.getCurDateTime()
         ).save()
-
 
 
 @login_required
@@ -329,6 +332,7 @@ def postJournal(request):
     elif request.method == "POST":
         pass
 
+
 @login_required
 def getPersonActivities(request):
     """
@@ -342,15 +346,30 @@ def getPersonActivities(request):
         return HttpResponse(json.dump(activities))
 
 
-def addComment(request):
-    """
-    关键的信息是用户的信息
-    """
-    pass
+def getPerson(request):
+    username = request.session['username']
+    assert username
+    return Person.objects.get(username=username)
 
 
-def delComment(request):
-    pass
+def addCommentToScenery(request):
+    sceneryName = request.session['scenery']
+    assert sceneryName
+    if request.POST:
+        reqPerson = getPerson(request)
+        Comment.objects.create(
+            person=reqPerson,
+            title=request.POST['title'],
+            content=request.POST['content'],
+            postDateTime=request.POST['postDateTime'],
+            scenery=Scenery.objects.get(name=sceneryName)
+        ).save()
+        return HttpResponse(json.dump({"status": 1}))
+
+
+def delComment(request, comment_id):
+    Comment.objects.get(pk=comment_id).delete()
+    return HttpResponse(json.dump({"status": 1}))
 
 
 def addStrategy(request):
@@ -364,7 +383,12 @@ def getUserComments(request, user_id):
 
 
 def getSceneryComments(request, scenery_id):
-    return None
+    if request.GET:
+        commentSet = Scenery.objects.get(pk=scenery_id).comment_set.all()
+        commentsJson = {}
+        for comment in commentSet:
+            commentsJson[comment.person.username] = comment.content
+        return HttpResponse(json.dump(commentsJson))
 
 
 """

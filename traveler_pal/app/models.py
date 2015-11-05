@@ -74,7 +74,7 @@ class PersonScenery(models.Model):
 
 
 class Postable(models.Model):
-    person = models.ForeignKey(Person)
+    person = models.ForeignKey(Person, null=True)
     title = models.CharField(max_length=nameFieldMaxSize)
     content = UEditorField(imagePath="ueditor/images/",
                            filePath="ueditor/files/", settings={}, command=None, blank=True)
