@@ -42,6 +42,7 @@ class Person(models.Model):
     #User in Django contains email, name, username, password(cannot be seen)
     user = models.ForeignKey(User, null=True)
 
+    username = models.CharField(max_length=nameFieldMaxSize, null=True) #to identify user and avoid get User fk
     interest = models.TextField(null=True)
     genderChoices = (
         ('M', 'MALE'),

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
 from .models import *
+from . import Utils
 
 import json
 import time
@@ -14,6 +15,7 @@ from django import forms
 
 
 # Create your views here.
+
 
 class TestUEditorForm(forms.Form):
     content = UEditorField(u"", initial="abc")
@@ -150,9 +152,15 @@ def joinActivity(request, activity_id):
         toJoinAct = Activity.objects.get(pk=activity_id)
         username = request.session['username']
         assert username
-        #todo ?
-        # user = Person.objects.all()
 
+        curPerson = Person.objects.get(username=username)
+        assert curPerson == None
+
+        PersonActivity.objects.create(
+            person=curPerson,
+            activity=toJoinAct,
+            joinedDateTime=Utils.getCurDateTime()
+        ).save()
 
 
 
@@ -240,10 +248,15 @@ def register(request):
 
         if password == repassword:
 
-            user = User.objects.create_user(
+            newUser = User.objects.create_user(
                 username=username,
                 email=email,
                 password=password,
+            )
+
+            newPerson = Person.objects.create(
+                user=newUser,
+                username=username
             )
             data = {"status": 1}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
