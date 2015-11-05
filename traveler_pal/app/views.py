@@ -86,7 +86,7 @@ def getActivityInfo(request, activity_id):
 
 def getFuzzySearchScenerys(request, fuzzyQueryWord):
     scenerys = list(Scenery.objects.filter(name__contains=fuzzyQueryWord))
-    scenerysStr = ", ".join(scenerys)
+    scenerysStr = ", ".join(scenerys) #a, b, c, d
     scenerysJson = {"scenerys": scenerysStr}
     return HttpResponse(json.dump(
         scenerysJson, content_type="application/json"
