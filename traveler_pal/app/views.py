@@ -29,7 +29,7 @@ def getRecentActivities():
     """
     rcntActivitiesSize = 5
     rcntActivities = Activity.objects.order_by("-id").all()[:rcntActivitiesSize]
-    
+
     return rcntActivities
 
 
@@ -71,7 +71,6 @@ def getUserProfile(request, username):
 
 
 def getActivityInfo(request, activity_id):
-    
     username = request.session.get('username', '')
     activity = Activity.objects.get(pk=activity_id)
 
@@ -116,7 +115,7 @@ def addActivity(request):
         uname = request.POST.get('name', '')
         ustartDateTime = request.POST.get('startDateTime', '')
         uendDateTime = request.POST.get('endDateTime', '')
-        uscenery = request.POST.getlist('scenery', '')
+        scenerys = request.POST.getlist('scenery', '')
         uintroduction = request.POST.get('introduction', '')
 
         ulaunchedDateTime = time.strftime('%Y-%m-%d', time.localtime(time.time()))
@@ -131,9 +130,10 @@ def addActivity(request):
             introduction=uintroduction,
             sponsor=usponsor,
         )
+        newActivity.save()
 
-        for uscenery_list in uscenery:
-            newScenery = Scenery.objects.get_or_create(name=uscenery_list)[0]
+        for scenery in scenerys:
+            newScenery, isCreated = Scenery.objects.get_or_create(name=scenery)
 
             newActivityScenery = ActivityScenery(
                 activity=newActivity,
@@ -146,7 +146,15 @@ def addActivity(request):
 
 
 def joinActivity(request, activity_id):
-    pass
+    if request.POST:
+        toJoinAct = Activity.objects.get(pk=activity_id)
+        username = request.session['username']
+        assert username
+        #todo ?
+        # user = Person.objects.all()
+
+
+
 
 @login_required
 def delActivity(request, activity_id):
@@ -324,6 +332,12 @@ def addComment(request):
 
 def delComment(request):
     pass
+
+
+def addStrategy(request):
+    newStrategy = Strategy.objects.create(
+
+    )
 
 
 def getUserComments(request, user_id):
