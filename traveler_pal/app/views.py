@@ -85,11 +85,10 @@ def getActivityInfo(request, activity_id):
 
 
 def getFuzzySearchScenerys(request, fuzzyQueryWord):
-    scenerys = list(Scenery.objects.filter(name__contains=fuzzyQueryWord))
+    scenerys =[s.name for s in list(Scenery.objects.filter(name__contains=fuzzyQueryWord))]
     scenerysStr = ", ".join(scenerys) #a, b, c, d
-    scenerysJson = {"scenerys": scenerysStr}
     return HttpResponse(json.dump(
-        scenerysJson, content_type="application/json"
+        scenerysStr, content_type="application/json"
     ))
 
 def getAllActivities(request):
@@ -330,18 +329,17 @@ def postJournal(request):
     elif request.method == "POST":
         pass
 
-
-def getPersonActivities(request, person_id):
+@login_required
+def getPersonActivities(request):
     """
     refer to ManyToManyField doc
     """
     if request.method == "GET":
-        reqPerson = Person.objects.get(pk=person_id)
-        activities = Activity.objects.all()
-        context = RequestContext(request, {
-            "activities": activities,
-        })
-        return HttpResponse("activities")
+        username = request.session['username']
+        assert username
+        reqPerson = Person.objects.get(username=username)
+        activities = [a.name for a in list(reqPerson.activitys.all())]
+        return HttpResponse(json.dump(activities))
 
 
 def addComment(request):
