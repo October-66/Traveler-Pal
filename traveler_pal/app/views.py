@@ -84,6 +84,14 @@ def getActivityInfo(request, activity_id):
     return render_to_response("activity_info.html", csrfContext)
 
 
+def getFuzzySearchScenerys(request, fuzzyQueryWord):
+    scenerys = list(Scenery.objects.filter(name__contains=fuzzyQueryWord))
+    scenerysStr = ", ".join(scenerys)
+    scenerysJson = {"scenerys": scenerysStr}
+    return HttpResponse(json.dump(
+        scenerysJson, content_type="application/json"
+    ))
+
 def getAllActivities(request):
     """
     渲染所有的活动界面
