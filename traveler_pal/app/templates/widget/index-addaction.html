@@ -1,0 +1,59 @@
+<div class="box-head">活动</div>
+        <div class="box-content am-g">
+            <div class="am-u-md-3">
+                <button type="button" class="am-btn am-btn-primary am-radius start-activity" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height:500}">发起活动
+                </button>
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">
+                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                        </div>
+                        <div class="am-modal-bd">
+                            <form  class="am-form" id="add-activity-form" onsubmit="return false">
+                                <label for="activity-name">活动名称</label>
+                                {% csrf_token %}
+                                <input type="text" id="activity-name" placeholder="请输入活动名称" name="name" required>
+                                <div class="scenery-n">
+                                    <label for="activity-scenery">要去的景点</label>
+                                    <input type="text" id="activity-scenery" placeholder="景点1" name="scenery">
+                                </div>
+                                <div class="scenery-auto">
+                                    <ul></ul>
+                                    <span>关闭</span>
+                                </div>
+                                <div class="add-one">
+                                    +1
+                                </div>
+                                <label for="activity-startDateTime">开始时间</label>
+                                <input type="text" value="2015-02-15" id="activity-startDateTime" class="am-form-field" name="startDateTime">
+                                <label for="activity-endDateTime">结束时间</label>
+                                <input type="text" value="2015-02-15" id="activity-endDateTime" class="am-form-field" name="endDateTime">
+                                <label for="activity-introduction"></label>
+                                <input type="text" placeholder="请输入活动介绍" id="activity-introduction" name="introduction">
+                                <div class="warning"></div>
+                                <button type="submit" class="am-btn am-btn-primary am-radius" id="submit-add-activity">发起
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-9">
+                <div class="swiper-container" id="swiper-activity">
+                    <div class="swiper-wrapper">
+                    {% for activity_list in recentactivity %}
+                        <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/2)">
+                            <button class="am-btn am-btn-primary am-radius" onclick="window.location.href='/activity/{{ activity_list.id }}/'">{{ activity_list.name }}
+                            </button>
+                        </div>
+                    {% endfor %}
+                        <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/3)">
+                            <button class="am-btn am-btn-primary am-radius" onclick="window.location.href='/activity/'">点击查看更多活动
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-scrollbar" id="swiper-scrollbar-activity"></div>
+                </div>
+            </div>
+        </div>

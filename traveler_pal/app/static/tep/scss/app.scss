@@ -213,6 +213,24 @@ body {
     left: 30px;
     width: 340px;
     border: 1px solid #817fb2;
-    height: 200px;
-    background-color: white
+    background-color: white;
+    ul {
+        margin: 0;
+        padding: 0;
+        li.auto-li {
+            margin: 0;
+            padding: 0 10px;
+            border-bottom: 1px solid #817fb2;
+            text-align: left;
+            list-style: none;
+            cursor: pointer;
+            &:hover {
+                background-color:#C0C0C0;
+            }
+        }
+    }
+    span {
+        text-align: left;
+        cursor: pointer;
+    }
 }
