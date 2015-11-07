@@ -16,37 +16,45 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from . import views
+from .views import views
+from .views import index
+from .views import user
+from .views import u
+from .views import activity
+from .views import scenery
+from .views import journal
+from .views import test
 
 urlpatterns = [
-    url(r'^$', views.index, name="index"),
+    url(r'^$', index.index, name="index"),
 
-    url(r'^activity/$', views.getAllActivities, name="all-activities"),
-    url(r'^activity/add/$', views.addActivity, name="addActivity"),
-    url(r'^activity/(?P<activity_id>[0-9]+)/$', views.getActivityInfo, name="activity-info"),
+    url(r'^activity/$', activity.getAllActivities, name="all-activities"),
+    url(r'^activity/add/$', activity.addActivity, name="addActivity"),
+    url(r'^activity/(?P<activity_id>[0-9]+)/$', activity.getActivityInfo, name="activity-info"),
 
-    url(r'^scenery/$', views.getAllScenery, name="all-scenery"),
-    url(r'^scenery/(?P<scenery_id>[0-9]+)/$', views.getSceneryInfo, name="scenery-info"),
-    url(r'^scenery/search/(?P<fuzzyQueryWord>\w+)/$', views.getFuzzySearchScenerys, name="getFuzzySearchScenerys"),
+    url(r'^scenery/$', scenery.getAllScenery, name="all-scenery"),
+    url(r'^scenery/(?P<scenery_id>[0-9]+)/$', scenery.getSceneryInfo, name="scenery-info"),
+    url(r'^scenery/search/(?P<fuzzyQueryWord>\w+)/$', scenery.getFuzzySearchScenerys, name="getFuzzySearchScenerys"),
+    url(r'^scenery/(?P<scenery_id>[0-9]+)/comment/$', scenery.getSceneryComments, name="scenery comments"),
 
-    url(r'^journal/$', views.getAllJournal, name="all-journal"),
-
-
-    url(r'^reg/$', views.register, name="register"),
-    url(r'^login/$', views.login, name="login"),
-    url(r'^logout/$', views.logout, name="logout"),
-    url(r'^reset-password/$', views.resetPassword, name="reset-password"),
-
-    url(r'^u/$', views.getProfile, name="get profile"),
-    url(r'^u/update/$', views.updateProfile, name="update profile"),
-    url(r'^u/comment/$', views.getUserComments, name="user comments"),
-    url(r'^u/post/$', views.postJournal, name="post journal"),
-
-    url(r'^u/(?P<username>\w+)/$', views.getUserProfile, name="user-profile"),
-
-    url(r'^scenery/(?P<scenery_id>[0-9]+)/comment/$', views.getSceneryComments, name="scenery comments"),
+    url(r'^journal/$', journal.getAllJournal, name="all-journal"),
 
 
-    url(r'^test/', views.test, name="test")
+    url(r'^reg/$', user.register, name="register"),
+    url(r'^login/$', user.login, name="login"),
+    url(r'^logout/$', user.logout, name="logout"),
+
+
+    url(r'^u/reset-password/$', u.resetPassword, name="reset-password"),
+    url(r'^u/$', u.getProfile, name="get profile"),
+    url(r'^u/update/$', u.updateProfile, name="update profile"),
+    url(r'^u/comment/$', u.getUserComments, name="user comments"),
+    url(r'^u/post/$', u.postJournal, name="post journal"),
+
+    url(r'^u/(?P<username>\w+)/$', u.getUserProfile, name="user-profile"),
+
+
+
+    url(r'^test/', test.test, name="test")
 
 ]
