@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^activity/$', activity.getAllActivities, name="all-activities"),
     url(r'^activity/add/$', activity.addActivity, name="addActivity"),
     url(r'^activity/(?P<activity_id>[0-9]+)/$', activity.getActivityInfo, name="activity-info"),
+    url(r'^activity/join/$', activity.joinActivity, name="activity-join"),
 
     url(r'^scenery/$', scenery.getAllScenery, name="all-scenery"),
     url(r'^scenery/(?P<scenery_id>[0-9]+)/$', scenery.getSceneryInfo, name="scenery-info"),

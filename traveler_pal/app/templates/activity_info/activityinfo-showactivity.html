@@ -14,15 +14,26 @@
         </div>
     </div>
     <div class="join-activity am-u-md-2">
+        {% if activity.sponsor != user.username %}
         <button type="button" class="am-btn am-btn-primary am-radius" data-am-modal="{target: '#join-alert'}">我要加入
         </button>
+        {% else %}
+        <button type="button" class="am-btn am-btn-primary am-radius">修改活动
+        </button>
+        {% endif %}
     </div>
 </div>
+{% if activity.sponsor != user.username %}
 <div class="am-modal am-modal-alert" tabindex="-1" id="join-alert">
     <div class="am-modal-dialog">
         <div class="am-modal-hd"><b>确定加入？</b></div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" id="join-button">确定</span>
         </div>
+        <form onsubmit="return false" id="join-form">
+            {% csrf_token %}
+            <input type="hidden" name="activity_id" value="{{ activity.id }}">
+        </form>
     </div>
 </div>
+{% endif %}

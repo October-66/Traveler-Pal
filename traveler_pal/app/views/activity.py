@@ -90,20 +90,27 @@ def addActivity(request):
         return HttpResponse(json.dumps(data, ensure_ascii=False))
 
 
-def joinActivity(request, activity_id):
-    if request.POST:
+def joinActivity(request):
+    if request.method == "POST":
+    	activity_id = request.POST.get('activity_id', '')
         toJoinAct = Activity.objects.get(pk=activity_id)
         username = request.session['username']
-        assert username
 
         curPerson = Person.objects.get(username=username)
-        assert curPerson == None
 
-        PersonActivity.objects.create(
-            person=curPerson,
-            activity=toJoinAct,
-            joinedDateTime=Utils.getCurDateTime()
-        ).save()
+        try:
+        	newPersonActivity = PersonActivity(
+	            person=curPerson,
+	            activity=toJoinAct,
+	            joinedDateTime=Utils.getCurDateTime()
+	        )
+	        newPersonActivity.save()
+
+	        data = {"status": 1}
+        except:
+	    	data = {"status": 0}
+
+        return HttpResponse(json.dumps(data, ensure_ascii=False))
 
 
 @login_required
