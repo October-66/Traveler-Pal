@@ -1,0 +1,28 @@
+<div class="box activity-list am-g">
+    <img src="http://lorempixel.com/600/600/nature/1" alt="" class="am-u-md-4 am-img-responsive">
+    <div class="intro am-u-md-6">
+        <h2>{{ activity.name }}</h2>
+        <data><b>时间：</b>{{ activity.startDateTime|date:"Y-j-f" }} 至 {{ activity.endDateTime|date:"Y-j-f" }}</data>
+        <p><b>要去景点：</b> {% for s in activity.scenerys.all %}
+            <span><a href="/scenery/{{ s.id }}">{{ s.name }}</a></span> {% endfor %}
+        </p>
+        <p><b>活动约估费用：</b>4000元</p>
+        <p><b>发起人：</b>{{ activity.sponsor }}</p>
+        <p><b>活动介绍：</b>{{ activity.introduction }}</p>
+        <div class="people">
+            <p><b>现参与人数：</b><a href="">rccoder</a>、<a href="">jiajia</a>、<a href="">lala</a></p>
+        </div>
+    </div>
+    <div class="join-activity am-u-md-2">
+        <button type="button" class="am-btn am-btn-primary am-radius" data-am-modal="{target: '#join-alert'}">我要加入
+        </button>
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="join-alert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd"><b>确定加入？</b></div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" id="join-button">确定</span>
+        </div>
+    </div>
+</div>
