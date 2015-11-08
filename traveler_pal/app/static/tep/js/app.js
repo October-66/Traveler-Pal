@@ -32,6 +32,6 @@ $(function($) {
         grabCursor: true
     });
 
-    $(".scenery-auto").css({'width': $('#activity-scenery').width()})
+    $(".scenery-auto").css({'width': $('#activity-scenery').width()});
 
 });

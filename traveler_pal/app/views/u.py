@@ -46,6 +46,9 @@ def getUserComments(request, user_id):
 
 @login_required
 def postJournal(request):
+    """
+    发表攻略
+    """
     if request.method == "GET":
         username = request.session.get('username', '')
         form = TestUEditorForm()
@@ -55,8 +58,13 @@ def postJournal(request):
         }
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/post.html", csrfContext)
-    elif request.method == "POST":
-        pass
+    else:
+        title = request.POST.get('title', '')
+        dateTime = request.POST.get('dateTime', '')
+        scenery = request.POST.getlist('scenery-tag', '')
+        content = request.POST.get('content', '')
+
+        
 
 def getUserComments(request):
 	pass
