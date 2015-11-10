@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from .views import views
 from .views import index
 from .views import user
 from .views import u

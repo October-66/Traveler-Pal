@@ -6,12 +6,11 @@ from django.shortcuts import *
 from django.http import *
 from ..models import *
 from .. import Utils
-
 import json
 import time
-
 from  DjangoUeditor.forms import UEditorField
 from django import forms
+
 
 def getAllJournal(request):
     allScenery = Journal.objects.all()
@@ -22,18 +21,35 @@ def getAllJournal(request):
     csrfContext = RequestContext(request, content)
     return render_to_response("journal.html", csrfContext)
 
+
+@login_required
 def addJournal(request):
-    pass
+    if request.POST:
+        username = request.session.get('username')
+        assert username
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        activity_id = request.POST.get('activity_id')
+        Journal.objects.create(
+            person=Person.objects.get(username=username),
+            title=title,
+            content=content,
+            activity=Activity.objects.get(pk=activity_id),
+        ).save()
 
 
-def delJournal(request, journal_id):
-    pass
+@login_required
+def delJournal(request):
+    if request.POST:
+        id = request.POST.get('journal_id', '')
+        Journal.objects.get(pk=id).delete()
 
 
 def getHotJournal(request):
     """
     依赖于多少个人访问过这个日志
     """
+
 
 def getAllStrategy(request):
     """
@@ -43,11 +59,14 @@ def getAllStrategy(request):
     pass
 
 
-def delComment(request, comment_id):
-    Comment.objects.get(pk=comment_id).delete()
-    return HttpResponse(json.dump({"status": 1}))
+@login_required
+def delComment(request):
+    if request.POST:
+        Comment.objects.get(pk=request.POST['comment_id']).delete()
+        return HttpResponse(json.dump({"status": 1}))
 
 
+@login_required
 def addStrategy(request):
     newStrategy = Strategy.objects.create(
 

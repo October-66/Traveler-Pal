@@ -6,12 +6,11 @@ from django.shortcuts import *
 from django.http import *
 from ..models import *
 from .. import Utils
-
 import json
 import time
-
 from  DjangoUeditor.forms import UEditorField
 from django import forms
+
 
 def getRecentActivities():
     """
@@ -22,7 +21,6 @@ def getRecentActivities():
     rcntActivities = Activity.objects.order_by("-id").all()[:rcntActivitiesSize]
 
     return rcntActivities
-
 
 
 def getAllActivities(request):
@@ -48,7 +46,6 @@ def getActivityInfo(request, activity_id):
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("activity_info.html", csrfContext)
-
 
 
 @login_required
@@ -92,35 +89,44 @@ def addActivity(request):
 
 def joinActivity(request):
     if request.method == "POST":
-    	activity_id = request.POST.get('activity_id', '')
+        activity_id = request.POST.get('activity_id', '')
         toJoinAct = Activity.objects.get(pk=activity_id)
         username = request.session['username']
 
         curPerson = Person.objects.get(username=username)
 
         try:
-        	newPersonActivity = PersonActivity(
-	            person=curPerson,
-	            activity=toJoinAct,
-	            joinedDateTime=Utils.getCurDateTime()
-	        )
-	        newPersonActivity.save()
+            newPersonActivity = PersonActivity(
+                person=curPerson,
+                activity=toJoinAct,
+                joinedDateTime=Utils.getCurDateTime()
+            )
+            newPersonActivity.save()
 
-	        data = {"status": 1}
+            data = {"status": 1}
         except:
-	    	data = {"status": 0}
+            data = {"status": 0}
 
         return HttpResponse(json.dumps(data, ensure_ascii=False))
 
 
 @login_required
-def delActivity(request, activity_id):
-    toDelActivity = Activity.objects.get(pk=activity_id)
-    toDelActivity.delete()
+def delActivity(request):
+    if request.POST:
+        id = request.POST.get('activity_id', '')
+        toDelActivity = Activity.objects.get(pk=id)
+        toDelActivity.delete()
 
 
 def getHotActivities(request):
     """
     依赖于多少个人参与了这个活动
     """
+    leastSizeAsHot = 3
+    hotActivities = filter(
+        lambda activity: len(activity.person_set.all()) > 3,
+        Activity.objects.all())
 
+    return HttpResponse(json.dumps(
+        {'hotActivities': map(Utils.toJSON, hotActivities)}
+    ), ensure_ascii=False)
