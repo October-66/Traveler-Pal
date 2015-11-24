@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import *
 from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
+from django.core.paginator import *
 from ..models import *
 from .. import Utils
 import json
@@ -27,7 +28,16 @@ def getAllActivities(request):
     """
     渲染所有的活动界面
     """
+    limit  = 5
     activities = Activity.objects.all()
+    paginator = Paginator(activities, limit)
+    page = request.GET.get('page')
+    try:
+        activities = paginator.page(page)
+    except EmptyPage:
+        activities = paginator.page(paginator.num_pages)
+    except:
+        activities = paginator.page(1)
     content = {
         "active": "activity",
         "activities": activities

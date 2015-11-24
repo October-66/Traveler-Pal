@@ -15,7 +15,7 @@ import os
 
 ON_MYSQL = False
 
-if os.environ['COMPUTERNAME'] == 'DESKTOP-LDI03VL':
+if os.environ['COMPUTERNAME'] == 'RCCODER-PC':
     ON_MYSQL = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
