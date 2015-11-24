@@ -16,3 +16,7 @@ def toJSON(self):
     import json
     return json.dumps(d)
 
+def not_response():
+    """
+    indicate this function don't response to anything
+    """
