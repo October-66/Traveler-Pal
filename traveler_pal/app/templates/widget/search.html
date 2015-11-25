@@ -1,9 +1,9 @@
 <div class="box search">
     <div class="box-content">
-        <form action="" class="am-form am-form-inline">
+        <form action="{% if active == "activity" %}/activity/s{% elif active == "scenery" %}/scenery/s{% endif %}" class="am-form am-form-inline">
             <div class="am-form-group am-form-icon">
                 <i class="am-icon-search"></i>
-                <input type="text" class="am-form-field" placeholder="搜索">
+                <input type="text" name="name" class="am-form-field" placeholder="搜索">
             </div>
         </form>
     </div>

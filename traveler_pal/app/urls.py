@@ -31,11 +31,14 @@ urlpatterns = [
     url(r'^activity/add/$', activity.addActivity, name="addActivity"),
     url(r'^activity/(?P<activity_id>[0-9]+)/$', activity.getActivityInfo, name="activity-info"),
     url(r'^activity/join/$', activity.joinActivity, name="activity-join"),
+    url(r'^activity/s/$', activity.searchActivity, name="activity-search"),
 
     url(r'^scenery/$', scenery.getAllScenery, name="all-scenery"),
     url(r'^scenery/(?P<scenery_id>[0-9]+)/$', scenery.getSceneryInfo, name="scenery-info"),
     url(r'^scenery/search/(?P<fuzzyQueryWord>\w+)/$', scenery.getFuzzySearchScenerys, name="getFuzzySearchScenerys"),
     url(r'^scenery/(?P<scenery_id>[0-9]+)/comment/$', scenery.getSceneryComments, name="scenery comments"),
+    url(r'^scenery/s/$', scenery.searchScenery, name="scenery-search"),
+
 
     url(r'^journal/$', journal.getAllJournal, name="all-journal"),
 

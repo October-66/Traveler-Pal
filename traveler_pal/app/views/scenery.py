@@ -36,7 +36,27 @@ def getAllScenery(request):
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("scenery.html", csrfContext)
-
+def searchScenery(request):
+    """
+    search secnery all
+    """
+    limit = 5
+    s = request.GET.get("name")
+    allScenery = Scenery.objects.filter(name__contains=s)
+    paginator = Paginator(allScenery, limit)
+    page = request.GET.get('page')
+    try:
+        allScenery = paginator.page(page)
+    except EmptyPage:
+        allScenery = paginator.page(paginator.num_pages)
+    except:
+        allScenery = paginator.page(1)
+    content = {
+        "active": "scenery",
+        "allScenery": allScenery
+    }
+    csrfContext = RequestContext(request, content)
+    return render_to_response("scenery.html", csrfContext)
 
 def toJSON(self):
     fields = []

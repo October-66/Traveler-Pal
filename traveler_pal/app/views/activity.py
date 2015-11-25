@@ -45,6 +45,29 @@ def getAllActivities(request):
     csrfContext = RequestContext(request, content)
     return render_to_response("activities.html", csrfContext)
 
+def searchActivity(request):
+    """
+    search activity
+    """
+    s = request.GET.get('name')
+    
+    limit  = 5
+    activities = Activity.objects.filter(name__contains=s)
+    paginator = Paginator(activities, limit)
+    page = request.GET.get('page')
+    try:
+        activities = paginator.page(page)
+    except EmptyPage:
+        activities = paginator.page(paginator.num_pages)
+    except:
+        activities = paginator.page(1)
+    content = {
+        "active": "activity",
+        "activities": activities
+    }
+    csrfContext = RequestContext(request, content)
+    return render_to_response("activities.html", csrfContext)
+
 
 def getActivityInfo(request, activity_id):
     username = request.session.get('username', '')
