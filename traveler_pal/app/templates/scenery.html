@@ -2,10 +2,11 @@
 <link rel="stylesheet" href="{% static " css/amazeui.swiper.min.css " %}">
 <link rel="stylesheet" href="{% static " css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
 <div class="am-u-sm-12 am-u-md-9 ">
+    {% for scenery in allScenery %}
     <div class="box scenery-list">
         <img src="http://lorempixel.com/600/600/nature/5" alt="" class="am-u-md-4 am-img-responsive">
         <div class="intro am-u-md-8">
-            <h2>喜马拉雅山</h2>
+            <h2>{{ scenery.name }}</h2>
             <p><b>地点：</b>地球村中国市</p>
             <h3>相关攻略：</h3>
             <ul>
@@ -28,139 +29,23 @@
             </ul>
         </div>
     </div>
-    <div class="box scenery-list">
-        <img src="http://lorempixel.com/600/600/nature/5" alt="" class="am-u-md-4 am-img-responsive">
-        <div class="intro am-u-md-8">
-            <h2>喜马拉雅山</h2>
-            <p><b>地点：</b>地球村中国市</p>
-            <h3>相关攻略：</h3>
-            <ul>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="box scenery-list">
-        <img src="http://lorempixel.com/600/600/nature/5" alt="" class="am-u-md-4 am-img-responsive">
-        <div class="intro am-u-md-8">
-            <h2>喜马拉雅山</h2>
-            <p><b>地点：</b>地球村中国市</p>
-            <h3>相关攻略：</h3>
-            <ul>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="box scenery-list">
-        <img src="http://lorempixel.com/600/600/nature/5" alt="" class="am-u-md-4 am-img-responsive">
-        <div class="intro am-u-md-8">
-            <h2>喜马拉雅山</h2>
-            <p><b>地点：</b>地球村中国市</p>
-            <h3>相关攻略：</h3>
-            <ul>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="box scenery-list">
-        <img src="http://lorempixel.com/600/600/nature/5" alt="" class="am-u-md-4 am-img-responsive">
-        <div class="intro am-u-md-8">
-            <h2>喜马拉雅山</h2>
-            <p><b>地点：</b>地球村中国市</p>
-            <h3>相关攻略：</h3>
-            <ul>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="box scenery-list">
-        <img src="http://lorempixel.com/600/600/nature/5" alt="" class="am-u-md-4 am-img-responsive">
-        <div class="intro am-u-md-8">
-            <h2>喜马拉雅山</h2>
-            <p><b>地点：</b>地球村中国市</p>
-            <h3>相关攻略：</h3>
-            <ul>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-                <li>
-                    <a href="">山上的那一夜令我很难忘</a>
-                    <data class="right">【10-16】</data>
-                </li>
-            </ul>
-        </div>
-    </div>
+    {% endfor %}
     <div class="page-nav">
-        <button class="am-btn am-btn-primary am-btn-xs" id="pre">上一页</button>
-        <button class="am-btn am-btn-primary am-btn-xs" id="next">下一页</button>
+        <ul class="am-pagination">
+            {% if allScenery.has_previous %}
+                <li class="am-pagination-prev"><a href="/scenery?page={{ allScenery.previous_page_number }}">&laquo;</a></li>
+            {% endif %}
+            {% for page_number in allScenery.paginator.page_range %}
+                {% ifequal page_number  activities.number %}
+                  <li class="am-active"><a href="/scenery?page={{ page_number }}">{{ page_number }}</a></li>
+                {% else %}
+                    <li><a href="/scenery?page={{ page_number }}">{{ page_number }}</a></li>
+                {% endifequal %}
+            {% endfor %}
+            {% if allScenery.has_next %}
+            <li class="am-pagination-next "><a href="/scenery?page={{ allScenery.next_page_number }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
     </div>
 </div>
 {% include "./widget/siderbar.html" %} {% endblock %} {% block script %}

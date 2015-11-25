@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import *
 from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
+from django.core.paginator import *
 from ..models import *
 from .. import Utils
 
@@ -19,10 +20,19 @@ def getAllScenery(request):
     """
     所有景点
     """
+    limit = 5
     allScenery = Scenery.objects.all()
+    paginator = Paginator(allScenery, limit)
+    page = request.GET.get('page')
+    try:
+        allScenery = paginator.page(page)
+    except EmptyPage:
+        allScenery = paginator.page(paginator.num_pages)
+    except:
+        allScenery = paginator.page(1)
     content = {
         "active": "scenery",
-        "activities": allScenery
+        "allScenery": allScenery
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("scenery.html", csrfContext)
