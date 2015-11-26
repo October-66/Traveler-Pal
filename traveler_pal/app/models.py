@@ -51,6 +51,7 @@ class Person(models.Model):
     gender = models.CharField(max_length=1, choices=genderChoices, default='M')
     activitys = models.ManyToManyField(Activity, through="PersonActivity")
     scenerys = models.ManyToManyField(Scenery, through="PersonScenery")
+    isroot = models.CharField(max_length = 1, default="N")
 
     def __str__(self):
         return "user named %s with all stuff" % self.username

@@ -1,7 +1,7 @@
 # encoding: utf-8
 from django.contrib import auth
 from django.contrib.auth.decorators import *
-from django.contrib.auth.models import User
+from django.contrib.auth.models import *
 from django.shortcuts import *
 from django.http import *
 from ..models import *
