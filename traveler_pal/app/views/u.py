@@ -25,8 +25,10 @@ def resetPassword(request):
 @login_required
 def getProfile(request):
     username = request.session.get('username', '')
+    isroot = request.session.get('isroot', '')
     content = {
-        "username": username
+        "username": username,
+        "isroot": isroot
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("profile/profile.html", csrfContext)

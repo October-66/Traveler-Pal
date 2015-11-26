@@ -1,7 +1,7 @@
 # encoding: utf-8
 from django.contrib import auth
 from django.contrib.auth.decorators import *
-from django.contrib.auth.models import *
+from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
 from ..models import *
@@ -51,6 +51,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None and user.is_active:
             auth.login(request, user)
+            request.session['isroot'] = Person.objects.get(username=username).isroot
             request.session['username'] = username
             data = {"status": 1}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
@@ -62,4 +63,6 @@ def login(request):
 @login_required
 def logout(request):
     auth.logout(request)
+    request.session['username'] = ''
+    request.session['isroot'] = 'N'
     return HttpResponseRedirect("/")

@@ -19,6 +19,7 @@ from django.contrib import admin
 from .views import index
 from .views import user
 from .views import u
+from .views import root
 from .views import activity
 from .views import scenery
 from .views import journal
@@ -49,12 +50,20 @@ urlpatterns = [
 
 
     url(r'^u/reset-password/$', u.resetPassword, name="reset-password"),
-    url(r'^u/$', u.getProfile, name="get profile"),
     url(r'^u/update/$', u.updateProfile, name="update profile"),
     url(r'^u/comment/$', u.getUserComments, name="user comments"),
     url(r'^u/post/$', u.postJournal, name="post journal"),
 
+    url(r'^u/slmanage/$', root.getslider, name="getslider"),
+    url(r'^u/slmanage/add/$', root.addslider, name="getslider"),
+    url(r'^u/acmanage/$', root.getactivity, name="getactivity"),
+    url(r'^u/scmanage/$', root.getscenery, name="getscenery"),
+    url(r'^u/jomanage/$', root.getjournal, name="getjournal"),
+    url(r'^u/usmanage/$', root.getuser, name="getuser"),
+
     url(r'^u/(?P<username>\w+)/$', u.getUserProfile, name="user-profile"),
+
+    url(r'^u/$', u.getProfile, name="get profile"),
 
 
 

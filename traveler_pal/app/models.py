@@ -54,7 +54,7 @@ class Person(models.Model):
     isroot = models.CharField(max_length = 1, default="N")
 
     def __str__(self):
-        return "user named %s with all stuff" % self.username
+        return self.username
 
 
 class PersonActivity(models.Model):
@@ -104,3 +104,10 @@ class Strategy(Postable):
     can be seen by everyone and post on homepage
     """
     acitvity = models.ForeignKey(Activity, null=True)
+
+class Slider(models.Model):
+    title = models.CharField(max_length="20", default="轮播图")
+    sliderImg = models.FileField(upload_to = './upload/')
+
+    def __str__(self):
+        return self.title

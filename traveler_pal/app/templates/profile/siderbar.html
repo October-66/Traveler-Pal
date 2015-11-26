@@ -16,4 +16,20 @@
             </ul>
         </div>
     </div>
+    {% if isroot == 'Y'%}
+    <div class="box admin-nav">
+        <div class="box-head">
+            管理中心
+        </div>
+        <div class="box-content">
+            <ul>
+                <li><a href="/u/slmanage">轮播图管理</a></li>
+                <li><a href="/u/acmanage/">活动管理</a></li>
+                <li><a href="/u/scmanage/">景点管理</a></li>
+                <li><a href="/u/jomanage/">攻略管理</a></li>
+                <li><a href="/u/usmanage/">用户管理</a></li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
 </div>

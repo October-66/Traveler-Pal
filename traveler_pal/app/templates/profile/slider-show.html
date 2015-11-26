@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %}攻略{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static " css/amazeui.swiper.min.css " %}">
+<link rel="stylesheet" href="{% static " css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %} {% include "./profile/siderbar.html" %}
+<div class="am-u-md-9">
+    <div class="box slider-show-root">
+        <div class="box-head">轮播图管理</div>
+        <div class="box-content">
+            <form method="post" enctype="mulipart/form-data"></form>
+            {% csrf_token %}
+            <div class="am-g slider-root">
+                <div class="am-u-lg-7"><img src="http://lorempixel.com/600/600/nature/2" alt=""></div>
+                <div class="am-u-lg-5 am-form-file">
+                    <p>这是标题啊</p>
+                    <button type="button" class="am-btn am-btn-primary am-btn-sm">
+                        <i class="am-icon-cloud-upload"></i>上传文件</button>
+                    <input id="slider-file" type="file" multiple>
+                    <button class="am-btn am-btn-danger am-radius">更新</button>
+                    <button class="am-btn am-btn-danger am-radius">删除</button>
+                </div>
+            </div>
+            </form>
+            <form method="post" enctype="mulipart/form-data"></form>
+            {% csrf_token %}
+            <div class="am-g slider-root">
+                <div class="am-u-lg-7"><img src="http://lorempixel.com/600/600/nature/2" alt=""></div>
+                <div class="am-u-lg-5 am-form-file">
+                    <p>这是标题啊</p>
+                    <button type="button" class="am-btn am-btn-primary am-btn-sm">
+                        <i class="am-icon-cloud-upload"></i>上传文件</button>
+                    <input id="slider-file" type="file" multiple>
+                </div>
+                <button class="am-btn am-btn-danger am-radius">更新</button>
+                <button class="am-btn am-btn-danger am-radius">删除</button>
+            </div>
+            </form>
+            <div class="am-g slider-root">
+                <div class="am-u-lg-7"><img src="http://lorempixel.com/600/600/nature/2" alt=""></div>
+                <div class="am-u-lg-5">
+                    <p>这是标题啊</p>
+                    <button type="button" class="am-btn am-btn-primary am-radius">修改</button>
+                    <button type="button" class="am-btn am-btn-danger am-radius">删除</button>
+                </div>
+            </div>
+            <!--
+            <form action="/u/slmanage/add/" method="post">
+            <div class="am-g slider-root">
+                <div class="am-u-lg-7"><img src="http://lorempixel.com/600/600/nature/2" alt=""></div>
+                <div class="am-u-lg-5 am-form-file">
+                    <p>这是标题啊</p>
+                    <button type="button" class="am-btn am-btn-primary am-btn-sm">
+                        <i class="am-icon-cloud-upload"></i>上传图片</button>
+                    <input id="slider-file" type="file" multiple>
+                    <button class="am-btn am-btn-danger am-radius">添加幻灯片</button>
+                </div>
+            </div>
+            </form>
+            -->
+            <button class="am-btn am-btn-primary am-radius add-slider">添加新的幻灯片</button>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+  (function() {
+    $('.add-slider').click(function() {
+      var tmp = '<form action="/u/slmanage/add/" method="post" class="add-slider_form" enctype="mulipart/form-data"><div class="am-g slider-root"><div class="am-u-lg-7"><img src="http://lorempixel.com/600/600/nature/2" alt=""></div><div class="am-u-lg-5 am-form-file"><p>这是标题啊</p><button type="button" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-cloud-upload"></i>上传文件</button><input id="slider-file" type="file" multiple></div><button class="am-btn am-btn-danger am-radius" type="submit">添加</button></div></form>';
+      $(".slider-show-root .box-content").append(tmp)
+      var csrf = $('input[name=csrfmiddlewaretoken').val()
+      $(".add-slider_form").append('<input type="hidden" name="csrfmiddlewaretoken" value="' + csrf + '">')
+    })
+  })();
+</script>
+{% endblock %}
