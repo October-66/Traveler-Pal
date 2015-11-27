@@ -31,18 +31,24 @@ def getslider(request):
         return render_to_response("profile/slider-show.html", csrfContext)
 
 def addslider(request):
-    pass
+    if isroot(request) and ispost(request):
+        print 111
+        title = request.POST['title']
+        sliderImg = request.FILES['sliderImg']
+
+        print title
+        print sliderImg
+        newSlider = Slider.objects.create(
+            title = title,
+            sliderImg = sliderImg
+            )
+        
+        return HttpResponse('ok')
 
 def getactivity(request):
-    if isroot(request) and ispost(request):
-        file = request.FILES
+    pass
 
-        newSlider = Slider.objects.create(
-            title = '',
-            sliderImg = file
-            )
 
-        
 
 
 def getscenery(request):

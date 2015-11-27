@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles import views
+from django.conf import settings
 
 from .views import index
 from .views import user
@@ -55,7 +57,7 @@ urlpatterns = [
     url(r'^u/post/$', u.postJournal, name="post journal"),
 
     url(r'^u/slmanage/$', root.getslider, name="getslider"),
-    url(r'^u/slmanage/add/$', root.addslider, name="getslider"),
+    url(r'^u/slmanage/add/$', root.addslider, name="addslider"),
     url(r'^u/acmanage/$', root.getactivity, name="getactivity"),
     url(r'^u/scmanage/$', root.getscenery, name="getscenery"),
     url(r'^u/jomanage/$', root.getjournal, name="getjournal"),
@@ -65,8 +67,11 @@ urlpatterns = [
 
     url(r'^u/$', u.getProfile, name="get profile"),
 
-
-
     url(r'^test/', test.test, name="test")
 
+]
+
+urlpatterns += [
+    url(r'^static/(?P<path>.*)$', views.static.serve, {'document_root': settings.STATIC_ROOT}, name="static"),
+    url(r'^media/(?P<path>.*)$', views.static.serve, {'document_root': settings.MEDIA_ROOT}, name="media")
 ]
