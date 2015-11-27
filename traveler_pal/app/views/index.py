@@ -23,7 +23,12 @@ def getRecentActivities():
     rcntActivities = Activity.objects.order_by("-id").all()[:rcntActivitiesSize]
 
     return rcntActivities
-    
+
+def getslider():
+    """
+    get the slider to show in index.html
+    """
+    return Slider.objects.all()
 
 def index(request):
     """
@@ -35,6 +40,7 @@ def index(request):
             "active": "index",
             "username": username,
             "recentactivity": getRecentActivities(),
+            "slider": getslider,
         }
         csrfContext = RequestContext(request, content)
         return render_to_response("index.html", csrfContext)

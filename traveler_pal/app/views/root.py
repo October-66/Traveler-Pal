@@ -24,7 +24,7 @@ def getslider(request):
     if isroot(request) and isget(request):
         slider = Slider.objects.all()
         content = {
-            "isroot": isroot,
+            "isroot": 'Y',
             "slider": slider
         }
         csrfContext = RequestContext(request, content)
@@ -32,18 +32,32 @@ def getslider(request):
 
 def addslider(request):
     if isroot(request) and ispost(request):
-        print 111
         title = request.POST['title']
         sliderImg = request.FILES['sliderImg']
 
-        print title
-        print sliderImg
+
         newSlider = Slider.objects.create(
             title = title,
             sliderImg = sliderImg
             )
         
-        return HttpResponse('ok')
+        return HttpResponseRedirect('/u/slmanage/')
+
+def updateslider(request):
+    if isroot(request) and ispost(request):
+        uid = request.POST['id']
+        title = request.POST['title']
+        sliderImg = request.FILES['sliderImg']
+
+        newSlider = Slider(
+            id = uid,
+            title = title,
+            sliderImg = sliderImg
+            )
+        newSlider.save()
+
+        return HttpResponseRedirect('/u/slmanage')
+
 
 def getactivity(request):
     pass

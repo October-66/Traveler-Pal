@@ -6,20 +6,21 @@
         <div class="box-head">轮播图管理</div>
         <div class="box-content">
             {% for s in slider %}
-            <form method="post" enctype="mulipart/form-data"></form>
-            {% csrf_token %}
-            <div class="am-g slider-root">
-                <div class="am-u-lg-7"><img src="{{ s.sliderImg.url }}" alt=""></div>
-                <div class="am-u-lg-5 am-form-file">
-                    <input type="text" value="{{ s.title }}">
-                    <button type="button" class="am-btn am-btn-primary am-btn-sm">
-                        <i class="am-icon-cloud-upload"></i>上传文件</button>
-                    <input id="slider-file" type="file" multiple>
-                </div>
-                <button class="am-btn am-btn-danger am-radius">更新</button>
-                <button class="am-btn am-btn-danger am-radius">删除</button>
-            </div>
-            </form>
+              <div class="am-g slider-root">
+                <form method="post" action="/u/slmanage/update/" enctype="multipart/form-data">
+                {% csrf_token %}
+                  <div class="am-u-lg-7"><img src="{{ s.sliderImg.url }}" alt=""></div>
+                  <input type="hidden" name="id" value="{{ s.id }}" id="slider-id">
+                  <input type="text" name="title" value="{{ s.title }}">
+                  <div class="am-u-lg-5 am-form-file">
+                      <button type="button" class="am-btn am-btn-primary am-btn-sm">
+                          <i class="am-icon-cloud-upload"></i>上传文件</button>
+                      <input id="slider-file" type="file" name="sliderImg">
+                  </div>
+                  <button class="am-btn am-btn-danger am-radius" type="submit">更新</button>
+                  <button class="am-btn am-btn-danger am-radius" id="slider-del">删除</button>
+                </form>
+              </div>
             {% endfor %}
             <button class="am-btn am-btn-primary am-radius add-slider">添加新的幻灯片</button>
         </div>
@@ -35,7 +36,7 @@
       $(".slider-show-root .box-content").append(tmp)
       var csrf = $('input[name=csrfmiddlewaretoken').val()
       $(".add-slider_form").append('<input type="hidden" name="csrfmiddlewaretoken" value="' + csrf + '">')
-    })
+    });
   })();
 </script>
 {% endblock %}
