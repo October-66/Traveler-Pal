@@ -23,7 +23,7 @@
 				dataType: "json"
 			}).done(function(data, textStatus, jqXHR) {
 				if (jqXHR.status == 200) {
-                        if (data.status == 0) {
+                        if (data.status == -1) {
                         	alert("请不要重复加入");
                         } else if (data.status == 1) {
                             alert("成功加入");

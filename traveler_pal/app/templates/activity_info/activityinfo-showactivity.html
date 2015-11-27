@@ -2,7 +2,7 @@
     <img src="http://lorempixel.com/600/600/nature/1" alt="" class="am-u-md-4 am-img-responsive">
     <div class="intro am-u-md-6">
         <h2>{{ activity.name }}</h2>
-        <data><b>时间：</b>{{ activity.startDateTime|date:"Y-j-f" }} 至 {{ activity.endDateTime|date:"Y-j-f" }}</data>
+        <data><b>时间：</b>{{ activity.startDateTime|date:"Y-M-D" }} 至 {{ activity.endDateTime|date:"Y-j-f" }}</data>
         <p><b>要去景点：</b> {% for s in activity.scenerys.all %}
             <span><a href="/scenery/{{ s.id }}">{{ s.name }}</a></span> {% endfor %}
         </p>
@@ -10,7 +10,11 @@
         <p><b>发起人：</b><a href="">{{ activity.sponsor }}</a></p>
         <p><b>活动介绍：</b>{{ activity.introduction }}</p>
         <div class="people">
-            <p><b>现参与人数：</b><a href="">rccoder</a>、<a href="">jiajia</a>、<a href="">lala</a></p>
+            <p><b>现参与人数：</b>
+            {% for tep in joinpeople %}
+            <a href="/u/{{ tep.person.username }}">{{ tep.person.username }}</a>
+            {% endfor %}
+            </p>
         </div>
     </div>
     <div class="join-activity am-u-md-2">

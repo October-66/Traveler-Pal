@@ -29,7 +29,7 @@ def getAllActivities(request):
     渲染所有的活动界面
     """
     limit  = 5
-    activities = Activity.objects.all()
+    activities = Activity.objects.order_by("-id").all()
     paginator = Paginator(activities, limit)
     page = request.GET.get('page')
     try:
@@ -72,10 +72,12 @@ def searchActivity(request):
 def getActivityInfo(request, activity_id):
     username = request.session.get('username', '')
     activity = Activity.objects.get(pk=activity_id)
-
+    joinpeople = PersonActivity.objects.filter(activity=activity)
+    print joinpeople
     content = {
         "active": "activity",
-        "activity": activity
+        "activity": activity,
+        "joinpeople": joinpeople
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("activity_info.html", csrfContext)
@@ -123,20 +125,24 @@ def addActivity(request):
 def joinActivity(request):
     if request.method == "POST":
         activity_id = request.POST.get('activity_id', '')
+
         toJoinAct = Activity.objects.get(pk=activity_id)
-        username = request.session['username']
+        username = request.user
 
         curPerson = Person.objects.get(username=username)
 
         try:
-            newPersonActivity = PersonActivity(
-                person=curPerson,
-                activity=toJoinAct,
-                joinedDateTime=Utils.getCurDateTime()
-            )
-            newPersonActivity.save()
+            if (PersonActivity.objects.filter(person=curPerson).filter(activity=toJoinAct)) != []:
+                data = {"status": -1}
+            else:
+                newPersonActivity = PersonActivity(
+                    person=curPerson,
+                    activity=toJoinAct,
+                    joinedDateTime=Utils.getCurDateTime()
+                )
+                newPersonActivity.save()
 
-            data = {"status": 1}
+                data = {"status": 1}
         except:
             data = {"status": 0}
 
