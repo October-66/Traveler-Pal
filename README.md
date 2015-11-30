@@ -11,6 +11,7 @@ traveler-pal, a helper for travelers
 ```shell
 pip install DjangoUeditor
 ```
+install [duoshuo](http://dev.duoshuo.com/threads/500c9c58a03193c12400000c)
 
 ```shell
 cd ./Traveler-Pal/Traveler-Pal/app/static && npm install
