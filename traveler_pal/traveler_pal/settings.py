@@ -1,3 +1,4 @@
+#*_*coding:utf-8*_*
 """
 Django settings for traveler_pal project.
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'app',
     'DjangoUeditor',
+    'duoshuo',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,7 +79,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'traveler_pal.wsgi.application'
 
+# SMTP setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sina.com'                   #SMTP地址
+EMAIL_PORT = 587                                 #SMTP端口
+EMAIL_HOST_USER = '***'           #自己的邮箱名
+EMAIL_HOST_PASSWORD = '****'           #自己的邮箱密码
+EMAIL_SUBJECT_PREFIX = '2BiTT'            #为邮件Subject-line前缀,默认是'[django]'
+EMAIL_USE_TLS = True                             #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
 
+
+# duoshuo setting
+DUOSHUO_SECRET = '530990f912b04020f8fe5bdb58959a5c'
+
+DUOSHUO_SHORT_NAME = 'traveler-pal'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 

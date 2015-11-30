@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
 from django.core.paginator import *
+from django.core.mail import send_mail
+
 from ..models import *
 from .. import Utils
 import json
