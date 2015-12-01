@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import *
 from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
+from django.core.mail import send_mail
 from ..models import *
 from .. import Utils
 
@@ -20,6 +21,7 @@ from django import forms
 
 def test(request):
     if request.method == "GET":
+        send_mail('subject', 'message', 'ysbinang@qq.com', ['admin@rccoder.net','rccoder@foxmail.com'],fail_silently=False)
         return render(request, 'test.html')
 
     else:

@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'traveler_pal.wsgi.application'
 
 # SMTP setting
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sina.com'                   #SMTP地址
+EMAIL_HOST = 'smtp.qq.com'                   #SMTP地址
 EMAIL_PORT = 587                                 #SMTP端口
-EMAIL_HOST_USER = '***'           #自己的邮箱名
-EMAIL_HOST_PASSWORD = '****'           #自己的邮箱密码
-EMAIL_SUBJECT_PREFIX = '2BiTT'            #为邮件Subject-line前缀,默认是'[django]'
+EMAIL_HOST_USER = 'ysbinang@qq.com'           #自己的邮箱名
+EMAIL_HOST_PASSWORD = '***********'           #自己的邮箱密码(测试的时候改成自己能够使用的或者申请一个公用的邮箱)
+EMAIL_SUBJECT_PREFIX = 'Traveler_Pal'            #为邮件Subject-line前缀,默认是'[django]'
 EMAIL_USE_TLS = True                             #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
 
 

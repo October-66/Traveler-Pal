@@ -147,7 +147,12 @@ def joinActivity(request):
                 data = {"status": 1}
         except:
             data = {"status": 0}
-
+        # send mail
+        joinpeople = PersonActivity.objects.filter(activity=toJoinAct)
+        to_email = list()
+        for t in joinpeople:
+            to_email.append(t.person.email)
+        send_mail('subject', 'message', 'ysbinang@qq.com', to_email,fail_silently=False)
         return HttpResponse(json.dumps(data, ensure_ascii=False))
 
 
