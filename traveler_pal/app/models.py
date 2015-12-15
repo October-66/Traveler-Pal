@@ -106,7 +106,7 @@ class Strategy(Postable):
     acitvity = models.ForeignKey(Activity, null=True)
 
 class Slider(models.Model):
-    title = models.CharField(max_length="20", default="轮播图")
+    title = models.CharField(max_length=20, default="轮播图")
     sliderImg = models.FileField(upload_to = './upload/')
 
     def __str__(self):
