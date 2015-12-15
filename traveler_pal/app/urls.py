@@ -24,7 +24,7 @@ from .views import u
 from .views import root
 from .views import activity
 from .views import scenery
-from .views import journal
+from .views import postable
 from .views import test
 
 urlpatterns = [
@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^scenery/s/$', scenery.searchScenery, name="scenery-search"),
 
 
-    url(r'^journal/$', journal.getAllJournal, name="all-journal"),
+    url(r'^journal/$', postable.getAllJournal, name="all-journal"),
 
 
     url(r'^reg/$', user.register, name="register"),
