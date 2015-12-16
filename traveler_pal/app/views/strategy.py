@@ -30,5 +30,10 @@ def getAllStrategy(request):
 @login_required
 def addStrategy(request):
     newStrategy = Strategy.objects.create(
-
+            person=Person.objects.get(username=request.POST.get('username')),
+            title=request.POST.get('title'),
+            content=request.POST.get('content'),
+            postDateTime=request.POST.get('postDateTime'),
+            scenerys=request.POST.getlist('scenery')
     )
+    newStrategy.save()

@@ -89,8 +89,11 @@ class Strategy(Postable):
     """
     can be seen by everyone and post on homepage
     """
-    acitvity = models.ForeignKey(Activity, null=True)
+    scenerys = models.ManyToManyField(Scenery, through="StrategyScenery")
 
+class StrategyScenery(models.Model):
+    strategy=models.ForeignKey(Strategy)
+    scenery=models.ForeignKey(Scenery)
 
 class Slider(models.Model):
     title = models.CharField(max_length=20, default="轮播图")
