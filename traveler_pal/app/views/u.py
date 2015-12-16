@@ -59,8 +59,6 @@ def postStrategy(request):
         return render_to_response("profile/post.html", csrfContext)
     else:
         strategy.addStrategy(request)
-        
-
 
 
 @login_required

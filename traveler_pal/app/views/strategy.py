@@ -13,7 +13,7 @@ def getAllStrategy(request):
     """
     limit = 5
     allStrategy = Strategy.objects.all()
-    pagtor = Paginator(allStrategy, 5)
+    pagtor = Paginator(allStrategy, limit)
     page = request.GET.get('page')
     try:
         pagedStgy = pagtor.page(page)
@@ -37,3 +37,21 @@ def addStrategy(request):
             scenerys=request.POST.getlist('scenery')
     )
     newStrategy.save()
+
+@login_required
+def getPostedStrategy(request):
+    username = request.session['username']
+    strgySet = Strategy.objects.filter(person=Person.objects.get(username=username))
+    limit = 5
+    pagtor = Paginator(strgySet, limit)
+    page = request.GET.get('page')
+    try:
+        pagedStgy = pagtor.page(page)
+    except EmptyPage:
+        pagedStgy = pagtor.page(pagtor.num_pages)
+    except InvalidPage:
+        pagedStgy = pagtor.page(1)
+    return render_to_response("posted-strategy.html", RequestContext(request, {
+        "active": "posted-strategy",
+        "allStrategy": pagedStgy
+    }))
