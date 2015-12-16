@@ -101,3 +101,14 @@ def getPersonActivities(request):
         reqPerson = Person.objects.get(username=username)
         activities = [a.name for a in list(reqPerson.activitys.all())]
         return HttpResponse(json.dump(activities))
+
+@login_required
+def updateProfile(request):
+    if request.GET:
+        return render_to_response("profile/update.html")
+    if request.POST:
+        username=request.session['username']
+        reqPerson=Person.objects.get(username=username)
+        reqPerson.interest=request.POST.get('interest')
+        reqPerson.gender=request.POST.get('gender')
+
