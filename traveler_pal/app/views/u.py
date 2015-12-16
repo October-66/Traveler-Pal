@@ -12,7 +12,7 @@ import time
 
 from  DjangoUeditor.forms import UEditorField
 from django import forms
-
+from . import strategy
 
 
 
@@ -58,11 +58,7 @@ def postStrategy(request):
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/post.html", csrfContext)
     else:
-        title = request.POST.get('title', '')
-        dateTime = request.POST.get('dateTime', '')
-        scenery = request.POST.getlist('scenery-tag', '')
-        content = request.POST.get('content', '')
-
+        strategy.addStrategy(request)
         
 
 
