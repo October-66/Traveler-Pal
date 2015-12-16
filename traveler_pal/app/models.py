@@ -1,8 +1,8 @@
 # encoding: utf-8
+from DjangoUeditor.models import UEditorField
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-from DjangoUeditor.models import UEditorField
 
 currentDateTime = timezone.now()
 nameFieldMaxSize = 128
@@ -39,10 +39,10 @@ class ActivityScenery(models.Model):
 class Person(models.Model):
     """
     """
-    #User in Django contains email, name, username, password(cannot be seen)
+    # User in Django contains email, name, username, password(cannot be seen)
     user = models.ForeignKey(User, null=True)
 
-    username = models.CharField(max_length=nameFieldMaxSize, null=True) #to identify user and avoid get User fk
+    username = models.CharField(max_length=nameFieldMaxSize, null=True)  # to identify user and avoid get User fk
     interest = models.TextField(null=True)
     genderChoices = (
         ('M', 'MALE'),
@@ -51,7 +51,7 @@ class Person(models.Model):
     gender = models.CharField(max_length=1, choices=genderChoices, default='M')
     activitys = models.ManyToManyField(Activity, through="PersonActivity")
     scenerys = models.ManyToManyField(Scenery, through="PersonScenery")
-    isroot = models.CharField(max_length = 1, default="N")
+    isroot = models.CharField(max_length=1, default="N")
 
     def __str__(self):
         return self.username
@@ -85,29 +85,16 @@ class Postable(models.Model):
         abstract = True
 
 
-class Comment(Postable):
-    """
-    made by user, apply to scenery
-    """
-    scenery = models.ForeignKey(Scenery, null=True)
-
-
-class Journal(Postable):
-    """
-    only can be seen by user himself
-    """
-    activity = models.ForeignKey(Activity, null=True)
-
-
 class Strategy(Postable):
     """
     can be seen by everyone and post on homepage
     """
     acitvity = models.ForeignKey(Activity, null=True)
 
+
 class Slider(models.Model):
     title = models.CharField(max_length=20, default="轮播图")
-    sliderImg = models.FileField(upload_to = './upload/')
+    sliderImg = models.FileField(upload_to='./upload/')
 
     def __str__(self):
         return self.title

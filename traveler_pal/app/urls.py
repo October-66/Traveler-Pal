@@ -39,7 +39,6 @@ urlpatterns = [
     url(r'^scenery/$', scenery.getAllScenery, name="all-scenery"),
     url(r'^scenery/(?P<scenery_id>[0-9]+)/$', scenery.getSceneryInfo, name="scenery-info"),
     url(r'^scenery/search/(?P<fuzzyQueryWord>\w+)/$', scenery.getFuzzySearchScenerys, name="getFuzzySearchScenerys"),
-    url(r'^scenery/(?P<scenery_id>[0-9]+)/comment/$', scenery.getSceneryComments, name="scenery comments"),
     url(r'^scenery/s/$', scenery.searchScenery, name="scenery-search"),
 
 
@@ -53,8 +52,7 @@ urlpatterns = [
 
     url(r'^u/reset-password/$', u.resetPassword, name="reset-password"),
     url(r'^u/update/$', u.updateProfile, name="update profile"),
-    url(r'^u/comment/$', u.getUserComments, name="user comments"),
-    url(r'^u/post/$', u.postJournal, name="post journal"),
+    url(r'^u/post/$', u.postStrategy, name="post journal"),
 
     url(r'^u/slmanage/$', root.getslider, name="getslider"),
     url(r'^u/slmanage/add/$', root.addslider, name="addslider"),

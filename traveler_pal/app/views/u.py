@@ -43,11 +43,8 @@ def getPerson(request):
 def updateProfile(request):
     return None
 
-def getUserComments(request, user_id):
-    return None
-
 @login_required
-def postJournal(request):
+def postStrategy(request):
     """
     发表攻略
     """
@@ -68,8 +65,6 @@ def postJournal(request):
 
         
 
-def getUserComments(request):
-	pass
 
 
 @login_required
