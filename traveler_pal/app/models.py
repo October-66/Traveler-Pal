@@ -54,7 +54,7 @@ class Person(models.Model):
     isroot = models.CharField(max_length=1, default="N")
 
     def __str__(self):
-        return self.username
+        return "[name=" + self.username + "]"
 
 
 class PersonActivity(models.Model):

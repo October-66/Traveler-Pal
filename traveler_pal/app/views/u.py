@@ -20,7 +20,7 @@ class TestUEditorForm(forms.Form):
     content = UEditorField(u"", initial="abc")
 
 def resetPassword(request):
-    return None
+    pass
 
 @login_required
 def getProfile(request):
@@ -73,16 +73,18 @@ def postStrategy(request):
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/post.html", csrfContext)
     else:
-        print "add strategy"
+        print "add strategy: ", request.POST.get('title')
         print Strategy.objects.all()
-
+        username=request.session.get('username')
+        print Person.objects.get(username=username)
         newStrategy = Strategy.objects.create(
-            person=Person.objects.get(username=request.session.get('username')),
+            person=Person.objects.get(username=username),
             title=request.POST.get('title'),
             content=request.POST.get('content'),
             postDateTime=request.POST.get('postDateTime'),
             scenerys=request.POST.getlist('scenery')
         )
+        print newStrategy
         newStrategy.save()
 
 
