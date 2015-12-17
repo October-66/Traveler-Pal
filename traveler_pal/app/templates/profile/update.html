@@ -6,10 +6,11 @@
     <div class="box profile">
         <div class="box-head">个人资料</div>
         <div class="box-content">
-            <form class="am-form am-form-horizontal admin-form">
+            <form method="post" class="am-form am-form-horizontal admin-form" id="post-profile-form" onsubmit="return false">
                 <div class="am-form-group">
                     <label for="username" class="am-u-sm-2 am-form-label">用户名</label>
                     <div class="am-u-sm-10">
+                        {% csrf_token %}
                         <input type="text" id="username" placeholder="请输入你的用户名">
                     </div>
                 </div>
@@ -25,14 +26,14 @@
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label for="xingque" class="am-u-sm-2 am-form-label">兴趣</label>
+                    <label for="interest" class="am-u-sm-2 am-form-label">兴趣</label>
                     <div class="am-u-sm-10">
-                        <input type="text" id="xingque" placeholder="请输入你的兴趣">
+                        <input type="text" id="interest" name="interest" placeholder="请输入你的兴趣">
                     </div>
                 </div>
                 <div class="am-form-group">
                     <div class="am-u-sm-10 am-u-sm-offset-2">
-                        <button type="submit" class="am-btn am-btn-default">保存</button>
+                        <button type="submit" class="am-btn am-btn-default" id="save-profile">保存</button>
                     </div>
                 </div>
             </form>
@@ -42,4 +43,20 @@
 </div>
 <script src="{% static "js/amazeui.datetimepicker.min.js " %}"></script>
 <script src="{% static "js/amazeui.swiper.min.js " %}"></script>
+{% endblock %}
+{% block script %}
+<script>
+    $(function () {
+        $("#save-profile").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/u/update/",
+                data: $("#post-profile-form").serialize(),
+                dataType: "json"
+            }).done(function(data, textStatus, jq) {
+
+            }).fail();
+        })
+    })
+</script>
 {% endblock %}

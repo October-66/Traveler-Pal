@@ -36,6 +36,7 @@ def getAllScenery(request):
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("scenery.html", csrfContext)
+
 def searchScenery(request):
     """
     search secnery all
@@ -105,18 +106,3 @@ def getHotScenery(request):
     依赖于多少个人游览过这个风景
     """
     pass
-
-
-def addCommentToScenery(request):
-    sceneryName = request.session['scenery']
-    assert sceneryName
-    if request.POST:
-        reqPerson = getPerson(request)
-        Comment.objects.create(
-            person=reqPerson,
-            title=request.POST['title'],
-            content=request.POST['content'],
-            postDateTime=request.POST['postDateTime'],
-            scenery=Scenery.objects.get(name=sceneryName)
-        ).save()
-        return HttpResponse(json.dump({"status": 1}))

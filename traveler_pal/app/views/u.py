@@ -25,9 +25,10 @@ def resetPassword(request):
 @login_required
 def getProfile(request):
     username = request.session.get('username', '')
+    person = Person.objects.get(username=username)
     isroot = request.session.get('isroot', '')
     content = {
-        "username": username,
+        "person": person,
         "isroot": isroot
     }
     csrfContext = RequestContext(request, content)
@@ -37,6 +38,24 @@ def getPerson(request):
     username = request.session['username']
     assert username
     return Person.objects.get(username=username)
+
+
+@login_required
+def getUserProfile(request, username):
+    """
+    渲染用户信息界面
+    """
+    if request.method == 'GET':
+        user = Person.objects.get(username=username)
+        context = RequestContext(request, {
+            "username": user.username,
+            "email": user.email,
+            "interest": user.interest,
+            "gender": user.gender,
+            "activitys": user.activitys,
+            "scenerys": user.scenerys,
+        })
+    return HttpResponse("User id: %s" % username)
 
 
 @login_required
@@ -68,24 +87,6 @@ def postStrategy(request):
 
 
 @login_required
-def getUserProfile(request, username):
-    """
-    渲染用户信息界面
-    """
-    if request.method == 'GET':
-        user = Person.objects.get(username=username)
-        context = RequestContext(request, {
-            "username": user.username,
-            "email": user.email,
-            "interest": user.interest,
-            "gender": user.gender,
-            "activitys": user.activitys,
-            "scenerys": user.scenerys,
-        })
-    return HttpResponse("User id: %s" % username)
-
-
-@login_required
 def getPersonActivities(request):
     """
     refer to ManyToManyField doc
@@ -105,13 +106,27 @@ def getPersonActivities(request):
 
 @login_required
 def updateProfile(request):
-    if request.GET:
-        return render_to_response("profile/update.html")
-    if request.POST:
-        username=request.session['username']
-        reqPerson=Person.objects.get(username=username)
-        reqPerson.interest=request.POST.get('interest')
-        reqPerson.gender=request.POST.get('gender')
+    print "updateprofile"
+    if request.method == "GET":
+        content = {
+        # "active": "activity",
+        # "activities": activities
+        }
+        csrfContext = RequestContext(request, content)
+        return render_to_response("profile/update.html", csrfContext)
+    else:
+        username = request.session['username']
+        print username
+        reqPerson = Person.objects.get(username=username)
+        reqPerson.interest = request.POST.get("interest")
+        print "reqPerson.interest: ", reqPerson.interest
+        reqPerson.save()
+        content = {
+        }
+        csrfContext = RequestContext(request, content)
+        return render_to_response("profile/update.html", csrfContext)
+
+
 
 @login_required
 def changePw(request):
