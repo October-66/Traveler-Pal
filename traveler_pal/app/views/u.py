@@ -76,13 +76,14 @@ def postStrategy(request):
         print "add strategy: ", request.POST.get('title')
         print Strategy.objects.all()
         username=request.session.get('username')
+        scenery=request.POST.get("scenery")
         print Person.objects.get(username=username)
         newStrategy = Strategy.objects.create(
             person=Person.objects.get(username=username),
             title=request.POST.get('title'),
             content=request.POST.get('content'),
             postDateTime=request.POST.get('postDateTime'),
-            scenerys=request.POST.getlist('scenery')
+            scenerys=Scenery.objects.get(scenery=scenery)
         )
         print newStrategy
         newStrategy.save()

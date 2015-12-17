@@ -89,7 +89,10 @@ class Strategy(Postable):
     """
     can be seen by everyone and post on homepage
     """
-    scenerys = models.ManyToManyField(Scenery, through="StrategyScenery")
+    scenerys = models.ForeignKey(Scenery, null=True)
+
+    def __str__(self):
+        return "title=" + self.title
 
 class StrategyScenery(models.Model):
     strategy=models.ForeignKey(Strategy)

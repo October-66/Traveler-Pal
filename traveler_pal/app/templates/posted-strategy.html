@@ -6,9 +6,9 @@
     <div class="box journal-list">
         <h3>{{ strategy.title }}</h3>
         <img src="http://lorempixel.com/600/600/nature/2" alt="" class="am-img-responsive">
-        {{ strategy.content }}
+        <p>{{ strategy.content }}<p>
         <span><b>景点：</b><a href="">未名湖</a>、<a href="">狼牙山</a></span>
-        <span>发布者：{{ strategy.person }}</span>
+        <span>发布者：{{ strategy.person.username }}</span>
         <span><b>时间：</b>{{ strategy.postDateTime }}</span>
     </div>
     {% endfor %}
