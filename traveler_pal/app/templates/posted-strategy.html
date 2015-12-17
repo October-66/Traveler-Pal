@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %}攻略{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static " css/amazeui.swiper.min.css " %}">
+<link rel="stylesheet" href="{% static " css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
+<div class="am-u-sm-12 am-u-md-9 ">
+    <div class="box journal-list">
+        <h3>{{ strategy.title }}</h3>
+        <img src="http://lorempixel.com/600/600/nature/2" alt="" class="am-img-responsive">
+        <p>啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心</p>
+        <span><b>景点：</b><a href="">未名湖</a>、<a href="">狼牙山</a></span>
+        <span><b>时间：</b>{{ pagedStgy.postDateTime }}</span>
+    </div>
+    {% for strategy in allStrategy %}
+    <div class="box journal-list">
+        <h3>{{ strategy.title }}</h3>
+        <img src="http://lorempixel.com/600/600/nature/2" alt="" class="am-img-responsive">
+        <p>啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心，么么哒啦啦啦啦啦啦，我很开心</p>
+        <span><b>景点：</b><a href="">未名湖</a>、<a href="">狼牙山</a></span>
+        <span><b>时间：</b>{{ pagedStgy.postDateTime }}</span>
+    </div>
+    {% endfor %}
+    <div class="page-nav">
+        <button class="am-btn am-btn-primary am-btn-xs" id="pre">上一页</button>
+        <button class="am-btn am-btn-primary am-btn-xs" id="next">下一页</button>
+    </div>
+</div>
+{% include "./widget/siderbar.html" %} {% endblock %} {% block script %}
+<script src="{% static " js/amazeui.datetimepicker.min.js " %}"></script>
+<script src="{% static " js/amazeui.swiper.min.js " %}"></script>
+{% endblock %}

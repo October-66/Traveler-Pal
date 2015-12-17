@@ -54,7 +54,17 @@ def postStrategy(request):
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/post.html", csrfContext)
     else:
-        strategy.addStrategy(request)
+        print "add strategy"
+        print Strategy.objects.all()
+
+        newStrategy = Strategy.objects.create(
+            person=Person.objects.get(username=request.session.get('username')),
+            title=request.POST.get('title'),
+            content=request.POST.get('content'),
+            postDateTime=request.POST.get('postDateTime'),
+            scenerys=request.POST.getlist('scenery')
+        )
+        newStrategy.save()
 
 
 @login_required
@@ -75,17 +85,6 @@ def getUserProfile(request, username):
     return HttpResponse("User id: %s" % username)
 
 
-
-def getPersonActivities(request, person_id):
-    """
-    find all personal activities according to person_id
-    """
-    reqPerson = Person.objects.get(pk=person_id)
-    context = RequestContext(request, {
-        "reqPerson": reqPerson,
-    })
-    return HttpResponse("")
-
 @login_required
 def getPersonActivities(request):
     """
@@ -96,7 +95,13 @@ def getPersonActivities(request):
         assert username
         reqPerson = Person.objects.get(username=username)
         activities = [a.name for a in list(reqPerson.activitys.all())]
-        return HttpResponse(json.dump(activities))
+        content = {
+        "active": "activity",
+        "activities": activities
+    }
+    csrfContext = RequestContext(request, content)
+    return render_to_response("joined-activities.html", csrfContext)
+
 
 @login_required
 def updateProfile(request):

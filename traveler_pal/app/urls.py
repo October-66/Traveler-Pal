@@ -62,9 +62,11 @@ urlpatterns = [
     url(r'^u/jomanage/$', root.getjournal, name="getjournal"),
     url(r'^u/usmanage/$', root.getuser, name="getuser"),
 
-    url(r'^u/(?P<username>\w+)/$', u.getUserProfile, name="user-profile"),
+    # url(r'^u/(?P<username>\w+)/$', u.getUserProfile, name="user-profile"),
 
     url(r'^u/$', u.getProfile, name="get profile"),
+    url(r'^u/activity/$', u.getPersonActivities),
+    url(r'^u/post/list/$', strategy.getPostedStrategy, name="get all strategy"),
 
     url(r'^test/', test.test, name="test")
 

@@ -26,32 +26,25 @@ def getAllStrategy(request):
         "allStrategy": pagedStgy
     }))
 
-
-@login_required
-def addStrategy(request):
-    newStrategy = Strategy.objects.create(
-            person=Person.objects.get(username=request.POST.get('username')),
-            title=request.POST.get('title'),
-            content=request.POST.get('content'),
-            postDateTime=request.POST.get('postDateTime'),
-            scenerys=request.POST.getlist('scenery')
-    )
-    newStrategy.save()
-
 @login_required
 def getPostedStrategy(request):
     username = request.session['username']
     strgySet = Strategy.objects.filter(person=Person.objects.get(username=username))
-    limit = 5
-    pagtor = Paginator(strgySet, limit)
-    page = request.GET.get('page')
-    try:
-        pagedStgy = pagtor.page(page)
-    except EmptyPage:
-        pagedStgy = pagtor.page(pagtor.num_pages)
-    except InvalidPage:
-        pagedStgy = pagtor.page(1)
+    # limit = 5
+    # pagtor = Paginator(strgySet, limit)
+    # page = request.GET.get('page')
+    # try:
+    #     pagedStgy = pagtor.page(page)
+    # except EmptyPage:
+    #     pagedStgy = pagtor.page(pagtor.num_pages)
+    # except InvalidPage:
+    #     pagedStgy = pagtor.page(1)
+    # return render_to_response("posted-strategy.html", RequestContext(request, {
+    #     "active": "posted-strategy",
+    #     "allStrategy": pagedStgy
+    # }))
+    allStrategy = Strategy.objects.all()
     return render_to_response("posted-strategy.html", RequestContext(request, {
-        "active": "posted-strategy",
-        "allStrategy": pagedStgy
+    "active": "posted-strategy",
+    "allStrategy": allStrategy
     }))
