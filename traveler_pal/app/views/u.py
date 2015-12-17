@@ -40,10 +40,6 @@ def getPerson(request):
 
 
 @login_required
-def updateProfile(request):
-    return None
-
-@login_required
 def postStrategy(request):
     """
     发表攻略
@@ -112,3 +108,6 @@ def updateProfile(request):
         reqPerson.interest=request.POST.get('interest')
         reqPerson.gender=request.POST.get('gender')
 
+@login_required
+def changePw(request):
+    pass
