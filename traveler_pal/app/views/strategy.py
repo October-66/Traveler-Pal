@@ -1,6 +1,6 @@
 # encoding: utf-8
 from django.contrib.auth.decorators import *
-from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.core.paginator import *
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -12,25 +12,29 @@ def getAllStrategy(request):
     所有攻略
     """
     limit = 5
-    allStrategy = Strategy.objects.all()
-    pagtor = Paginator(allStrategy, limit)
+    allStrategy = Strategy.objects.order_by("-id").all()
+    paginator = Paginator(allStrategy, limit)
     page = request.GET.get('page')
     try:
-        pagedStgy = pagtor.page(page)
+        allStrategy = paginator.page(page)
     except EmptyPage:
-        pagedStgy = pagtor.page(pagtor.num_pages)
+        allStrategy = paginator.page(paginator.num_pages)
     except InvalidPage:
-        pagedStgy = pagtor.page(1)
-    return render_to_response("strategy.html", RequestContext(request, {
+        allStrategy = paginator.page(1)
+
+    content = {
         "active": "strategy",
-        "allStrategy": pagedStgy
-    }))
+        "allStrategy": allStrategy
+    }
+    csrfContent = RequestContext(request, content)
+
+    return render_to_response("strategy.html", csrfContent)
 
 @login_required
 def getPostedStrategy(request):
     username = request.session['username']
     allStrategy = Strategy.objects.filter(person=Person.objects.get(username=username))
     return render_to_response("posted-strategy.html", RequestContext(request, {
-    "active": "posted-strategy",
-    "allStrategy": allStrategy
+        "active": "posted-strategy",
+        "allStrategy": allStrategy
     }))
