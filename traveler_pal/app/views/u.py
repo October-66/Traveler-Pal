@@ -73,20 +73,20 @@ def postStrategy(request):
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/post.html", csrfContext)
     else:
-        print "add strategy: ", request.POST.get('title')
-        print Strategy.objects.all()
         username=request.session.get('username')
-        scenery=request.POST.get("scenery")
-        print Person.objects.get(username=username)
+        scenery=request.POST.get("scenery-tag")
         newStrategy = Strategy.objects.create(
             person=Person.objects.get(username=username),
             title=request.POST.get('title'),
             content=request.POST.get('content'),
-            postDateTime=request.POST.get('postDateTime'),
-            scenerys=Scenery.objects.get(scenery=scenery)
+            postDateTime=request.POST.get('dateTime'),
+            scenerys=Scenery.objects.get_or_create(name=scenery)[0]
         )
         print newStrategy
         newStrategy.save()
+        
+        data = {"status": 1}
+        return HttpResponse(json.dumps(data, ensure_ascii=False))
 
 
 @login_required
