@@ -111,23 +111,27 @@ def getPersonActivities(request):
 def updateProfile(request):
     print "updateprofile"
     if request.method == "GET":
+        userInfo = Person.objects.get(username=request.user.username)
         content = {
-        # "active": "activity",
-        # "activities": activities
+            "userInfo": userInfo
         }
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/update.html", csrfContext)
     else:
-        username = request.session['username']
-        print username
-        reqPerson = Person.objects.get(username=username)
-        reqPerson.interest = request.POST.get("interest")
-        print "reqPerson.interest: ", reqPerson.interest
-        reqPerson.save()
-        content = {
-        }
-        csrfContext = RequestContext(request, content)
-        return render_to_response("profile/update.html", csrfContext)
+        try:
+            username = request.session['username']
+            # print username
+            reqPerson = Person.objects.get(username=username)
+            reqPerson.interest = request.POST.get("interest")
+            #print "reqPerson.interest: ", reqPerson.interest
+            reqPerson.gender = request.POST.get("genderChoices")
+            reqPerson.save()
+        
+            data = {"status": 1}
+        except:
+            data = {"status": 0}
+        
+        return HttpResponse(json.dumps(data, ensure_ascii=False))
 
 
 

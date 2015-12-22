@@ -11,7 +11,7 @@
                     <label for="username" class="am-u-sm-2 am-form-label">用户名</label>
                     <div class="am-u-sm-10">
                         {% csrf_token %}
-                        <input type="text" id="username" placeholder="请输入你的用户名">
+                        <input type="text" id="username" placeholder="请输入你的用户名" value={{ user.username }} disabled>
                     </div>
                 </div>
                 <div class="am-form-group am-form-file">
@@ -26,14 +26,22 @@
                     </div>
                 </div>
                 <div class="am-form-group">
+                    <label for="interest" class="am-u-sm-2 am-form-label">性别</label>
+                    <div class="am-u-sm-10">
+                        <input type="radio" name="genderChoices" value="M" {% if userInfo.gender == 'M' %} checked {% endif %}>男
+                        <input type="radio" name="genderChoices" value="F" {% if userInfo.gender == 'F' %} checked {% endif %}>女
+                    </div>
+                </div>
+                <div class="am-form-group">
                     <label for="interest" class="am-u-sm-2 am-form-label">兴趣</label>
                     <div class="am-u-sm-10">
-                        <input type="text" id="interest" name="interest" placeholder="请输入你的兴趣">
+                        <input type="text" id="interest" name="interest" value={{ userInfo.interest }} placeholder="请输入你的兴趣">
                     </div>
                 </div>
                 <div class="am-form-group">
                     <div class="am-u-sm-10 am-u-sm-offset-2">
                         <button type="submit" class="am-btn am-btn-default" id="save-profile">保存</button>
+                        <div class="warning"></div>
                     </div>
                 </div>
             </form>
@@ -53,9 +61,15 @@
                 url: "/u/update/",
                 data: $("#post-profile-form").serialize(),
                 dataType: "json"
-            }).done(function(data, textStatus, jq) {
-
-            }).fail();
+            }).done(function(data, textStatus, jqXHR) {
+                if(jqXHR.status == 200) {
+                    if(data.status == 1) {
+                        $(".warning").html('更新成功')
+                    }
+                }
+            }).fail(function() {
+                $(".warning").html('更新失败')
+            });
         })
     })
 </script>
