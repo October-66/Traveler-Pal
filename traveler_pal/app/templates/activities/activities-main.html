@@ -1,0 +1,15 @@
+{% for activity in activities.object_list %}
+<div class="box activity-list am-g">
+    <img src="http://lorempixel.com/600/600/nature/1" alt="" class="am-u-md-4 am-img-responsive">
+    <div class="intro am-u-md-6">
+        <h2><a href="/activity/{{ activity.id }}">{{ activity.name }}</a></h2>
+        <data><b>时间：</b>{{ activity.startDateTime }}-{{ activity.endDateTime }} (<data><b>发起时间：</b>{{ activity.launchedDateTime }}</data>)</data>
+        <p><b>要去景点：</b>
+        {% for scenery in activity.scenerys.all %}
+            <span><a href="/scenery/{{ scenery.id }}">{{ scenery.name }}</a></span>
+        {% endfor %}
+        </p>
+        <p><b>活动介绍：</b>{{ activity.introduction }}</p>
+    </div>
+</div>
+{% endfor %}
