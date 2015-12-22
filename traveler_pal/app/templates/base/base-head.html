@@ -1,6 +1,3 @@
-{% load staticfiles %}
-<!doctype html>
-<html class="no-js" lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,24 +26,3 @@
     {% block style %}{% endblock %}
     <link rel="stylesheet" href="{% static "css/app.min.css" %}">
 </head>
-<body>
-    {% include "./base/base-header.html" %}
-    {% include "./base/base-reg-modal.html" %}
-    {% include "./base/base-login-modal.html" %}
-    <div class="am-g am-container">
-        {% block content %}{% endblock %}
-    </div>
-    {% include "./base/base-footer.html" %}
-    <!--[if lte IE 8 ]>
-	<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-	<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-	<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-	<![endif]-->
-    <script src="{% static "js/amazeui.min.js" %}"></script>
-    {% block script %}{% endblock %}
-    {% include "./base/base-js.html" %}
-    <script src="{% static "js/all.min.js" %}"></script>
-
-</body>
-
-</html>

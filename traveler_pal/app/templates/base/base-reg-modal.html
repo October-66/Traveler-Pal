@@ -1,0 +1,18 @@
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="reg-model">
+    <div class="am-modal-dialog reg-dialog">
+        <div class="am-modal-hd">注册
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <form action="" class="am-form" id="reg-form" onsubmit="return false">
+                {% csrf_token %}
+                <input type="text" id="reg-username" name="username" placeholder="请输入用户名" required>
+                <input type="password" id="reg-passowrd" name="password" placeholder="请输入密码" required>
+                <input type="password" id="reg-repassword" name="repassword" placeholder="请重新输入密码" required>
+                <input type="email" id="reg-email" name="email" placeholder="请输入你的邮件" required>
+                <div class="warning"></div>
+                <button type="submit" class="am-btn am-btn-primary am-radius" id="reg-submit">注册</button>
+            </form>
+        </div>
+    </div>
+</div>

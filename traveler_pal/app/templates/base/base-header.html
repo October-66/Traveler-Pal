@@ -1,0 +1,40 @@
+<header class="am-topbar am-topbar-fixed-top">
+    <div class="am-container">
+        <h1 class="am-topbar-brand"><a href="#">Traveler-Pal</a></h1>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse" id="collapse-head">
+            <ul class="am-nav am-nav-pills am-topbar-nav">
+                <li {% if active == "index" %} class="am-active" {% endif %}><a href="/">首页</a></li>
+                <li {% if active == "activity" %} class="am-active" {% endif %}><a href="/activity">活动</a></li>
+                <li {% if active == "scenery" %} class="am-active" {% endif %}><a href="/scenery">景点</a></li>
+                <li {% if active == "journal" %} class="am-active" {% endif %}><a href="/strategy">攻略</a></li>
+            </ul>
+            {% if user.is_authenticated %}
+            <div class="am-topbar-right">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">{{ user.username }}
+                        <span class="am-icon-caret-down"></span>
+                    </a>
+                        <ul class="am-dropdown-content">
+                            <li class="am-dropdown-header">个人中心</li>
+                            <li><a href="/u/">个人资料</a></li>
+                            <li><a href="/u/reset-password/">修改密码</a></li>
+                            <li><a href="/logout">注销</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            {% else %}
+            <div class="am-topbar-right">
+                <button type="button" class="am-btn am-btn-primary am-btn-secondary am-topbar-btn am-btn-sm" data-am-modal="{target: '#reg-model', closeViaDimmer: 0, width: 400, height: 400}"><span class="am-icon-pencil"></span> 注册
+                 </button>
+            </div>
+            <div class="am-topbar-right">
+                <button type="button" class="am-btn am-btn-primary am-btn-secondary am-topbar-btn am-btn-sm" data-am-modal="{target: '#login-model', closeViaDimmer: 0, width: 400, height: 400}"><span class="am-icon-user"></span> 登录
+                 </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</header>

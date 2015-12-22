@@ -1,0 +1,16 @@
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="login-model">
+    <div class="am-modal-dialog login-dialog">
+        <div class="am-modal-hd">登录
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <form action="" class="am-form" id="login-form" onsubmit="return false">
+                {% csrf_token %}
+                <input type="text" id="login-username" name="username" placeholder="请输入用户名" required>
+                <input type="password" id="login-passowrd" name="password" placeholder="请输入密码" required>
+                <div class="warning"></div>
+                <button type="submit" class="am-btn am-btn-primary am-radius" id="login-submit">登录</button>
+            </form>
+        </div>
+    </div>
+</div>

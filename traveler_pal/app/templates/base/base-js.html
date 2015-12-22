@@ -1,0 +1,68 @@
+<script type="text/javascript">
+    $(function() {
+
+        $reg_warning = $("#reg-form .warning");
+
+        $("#reg-submit").click(function() {
+            $reg_warning.html("");
+            if($("#reg-passowrd").val() !== $("#reg-repassword").val()) {
+                $reg_warning.html("两次输入密码不一致")
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/reg/",
+                    data: $("#reg-form").serialize(),
+                    dataType: "json"
+                }).done(function(data, textStatus, jqXHR) {
+                    if (jqXHR.status == 200) {
+                        if (data.status == -1) {
+                            $reg_warning.html("该用户名已经被注册");
+                        } else if (data.status == -2) {
+                            $reg_warning.html("该邮箱已经被注册");
+                        } else if (data.status == -3) {
+                            $reg_warning.html("你好像不是一个人");
+                        } else if(data.status == 1) {
+                            $reg_warning.html("注册成功");
+                            location.href = "/";
+                        }
+                    } else {
+                        $reg_warning.html("未知名错误")
+                    }
+                }).fail(function(jqXHR) {
+                     $reg_warning.html("未知名错误,即将为你跳转到首页");
+                     location.href = "./";
+                })
+            }
+        });
+
+        $login_username = $("#login-username");
+        $login_password = $("#login-passowrd");
+        $login_warning = $("#login-form .warning");
+
+        $("#login-submit").click(function() {
+            $login_warning.html("")
+            if ($login_username.val() == "" || $login_password.val() == "") {
+                $login_warning.html("你输入的用户名或者密码是空");
+            } else {
+                $.ajax({
+                type: "POST",
+                url: "/login/",
+                data: $("#login-form").serialize(),
+                dataType: "json"
+            }).done(function(data, textStatus, jqXHR) {
+                if (jqXHR.status == 200) {
+                    if (data.status == 0) {
+                        $login_warning.html("密码错误");
+                    } else if (data.status == 1) {
+                        $login_warning.html("登录成功");
+                        location.href = "./u/update/";
+                    }
+                }
+            }).fail(function(jqXHR) {
+                $login_warning.html("未知名错误，即将为你跳转到首页");
+                location.href = "./";
+            });
+            }
+        })
+    })
+</script>
