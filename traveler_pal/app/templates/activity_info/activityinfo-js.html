@@ -1,0 +1,25 @@
+<script>
+	$(function() {
+		$("#join-button").click(function() {
+			console.log("clicked")
+			$.ajax({
+				type: "POST",
+				url: "/activity/join/",
+				data: $("#join-form").serialize(),
+				dataType: "json"
+			}).done(function(data, textStatus, jqXHR) {
+				if (jqXHR.status == 200) {
+                        if (data.status == -1) {
+                        	alert("请不要重复加入");
+                        } else if (data.status == 1) {
+                            alert("成功加入");
+                            var name = $(".am-topbar .am-topbar-collapse .am-topbar-right>ul>li>a").text()
+                            $(".intro .people p").append("、<a href='xxx'>" + name +"</a>")
+                        }
+                    }
+			}) .fail(function(jqXHR) {
+
+			})
+		})
+	})
+</script>

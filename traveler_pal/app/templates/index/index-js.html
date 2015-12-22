@@ -1,0 +1,92 @@
+<script>
+
+//增加活动景点+1效果
+$(".add-one").click(function() {
+    $(".scenery-n").append('<input type="text" placeholder="请输入景点名称" name="scenery">');
+    var tep = $(".activity .am-modal-dialog").height()+40+"px";
+    $(".activity .am-modal-dialog").css("height", tep)
+})
+
+//增加活动日期格式化
+$('#activity-startDateTime').datetimepicker({
+  format: 'yyyy-mm-dd'
+});
+$('#activity-endDateTime').datetimepicker({
+  format: 'yyyy-mm-dd',
+  pickerPosition: 'top-right'
+});
+
+
+//模糊查询景点功能
+$(function() {
+    $(".start-activity").click(function() {
+        $(".scenery-auto").css({'width': '340px'})
+    });
+    $(".scenery-n").keyup(function() {
+        $(".scenery-auto").css({'display': 'block'})
+        var queryWord = $(".scenery-n input").slice(-1).val()
+
+        $.ajax({
+            type: "GET",
+            url: "/scenery/search/" + queryWord +"/",
+            dataType: "json"
+        }).done(function(data, textSatus, jqXHR) {
+        	//填充值
+        	$(".scenery-auto ul").html("")
+        	//console.log(data)
+            for(var i = 0; i < data.data_list.length; i++) {
+                $(".scenery-auto ul").append('<li class="auto-li">' + JSON.parse(data.data_list[i]).name + '</li>')
+            }
+            //点击提示层的时候改变iput的值
+            $(".auto-li").click(function() {
+            	var v = $(this).context.innerHTML
+            	//console.log(v)
+            	$("#activity-scenery").val(v)
+            })
+
+        }).fail(function() {
+            $(".scenery-auto").css({'display': 'none'})
+        })
+    })
+
+    //点击关闭或者其他地方的时候隐藏提示层
+    $(".am-form").click(function() {
+    	$(".scenery-auto").css({'display': 'none'})
+    })
+    $(".scenery-auto span").click(function() {
+    	$(".scenery-auto").css({'display': 'none'})
+    })
+})
+</script>
+
+<script>
+    $(function() {
+        //增加活动AJAX提交
+        $("#submit-add-activity").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/activity/add/",
+                data: $("#add-activity-form").serialize(),
+                dataType: "json"
+            }).done(function(data, textSatus, jqXHR){
+                if(jqXHR.status == 200) {
+                    if(data.status == 1) {
+                        $("#add-activity-form .warning").html("添加成功，即将返回主页");
+                        location.href = "./";
+                    } else {
+
+                    }
+                }
+            }).fail(function(){
+                $().html("非法操作，即将返回主页");
+                location.href = "./";
+            })
+        })
+
+        // 增加景点Ajax提交
+
+        // 获得最新活动AJAX拉取
+
+        // 获得热门景点AJAX拉取
+    })
+</script>
