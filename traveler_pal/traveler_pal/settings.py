@@ -120,7 +120,7 @@ else:
 
 LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'CCT'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

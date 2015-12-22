@@ -41,7 +41,7 @@
                     <li {% if active == "index" %} class="am-active" {% endif %}><a href="/">首页</a></li>
                     <li {% if active == "activity" %} class="am-active" {% endif %}><a href="/activity">活动</a></li>
                     <li {% if active == "scenery" %} class="am-active" {% endif %}><a href="/scenery">景点</a></li>
-                    <li {% if active == "journal" %} class="am-active" {% endif %}><a href="/journal">攻略</a></li>
+                    <li {% if active == "journal" %} class="am-active" {% endif %}><a href="/strategy">攻略</a></li>
                 </ul>
                 {% if user.is_authenticated %}
                 <div class="am-topbar-right">
@@ -53,7 +53,7 @@
                             <ul class="am-dropdown-content">
                                 <li class="am-dropdown-header">个人中心</li>
                                 <li><a href="/u/">个人资料</a></li>
-                                <li><a href="/u/changepassword/">修改密码</a></li>
+                                <li><a href="/u/reset-password/">修改密码</a></li>
                                 <li><a href="/logout">注销</a></li>
                             </ul>
                         </li>

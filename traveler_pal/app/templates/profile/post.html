@@ -21,8 +21,9 @@
                     <div class="am-u-md-2" id="tag">
                         <input type="text" class="am-form-field am-radius" placeholder="景点" name="scenery-tag"/>
                     </div>
+
                     <div class="add-tag am-u-md-1 am-u-end">
-                        +1
+                    <!--    +1 -->
                     </div>
                 </div>
 				{% csrf_token %}
@@ -31,7 +32,7 @@
                     {{ form }}
                     </div>
                 </div>
-                <button type="submit" class="am-btn am-btn-success right" id="post-submit">绿色按钮</button>
+                <button type="submit" class="am-btn am-btn-success right" id="post-submit">发表</button>
 		</form>
         </div>
     </div>
@@ -57,9 +58,13 @@
                 data: $("#post-jpurnal-form").serialize(),
                 dataType: "json"
             }).done(function(data, textStatus, jqXHR) {
-
+                    if (jqXHR.status == 200) {
+                        if(data.status == 1) {
+                            alert('发表成功');
+                        }
+                    }
             }).fail(function() {
-
+                alert('发表失败');
             });
         })
     })
