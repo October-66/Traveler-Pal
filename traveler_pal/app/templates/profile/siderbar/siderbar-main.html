@@ -1,0 +1,35 @@
+<div class="am-u-md-3">
+    <div class="box admin-nav">
+        <div class="box-head">
+            个人中心
+        </div>
+        <div class="box-content">
+            <ul>
+                <li><a href="/u/">个人资料</a></li>
+                <li><a href="/u/post/">发表攻略</a></li>
+                <li><a href="/u/activity/">最近参与活动</a></li>
+                <li><a href="/u/scenery/">最近去过的景点</a></li>
+                <li><a href="/u/post/list/">最近发表的攻略</a></li>
+                <li><a href="/u/update/">变更信息</a></li>
+                <li><a href="/u/reset-password/">修改密码</a></li>
+                <li><a href="/logout/">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    {% if isroot == 'Y' %}
+    <div class="box admin-nav">
+        <div class="box-head">
+            管理中心
+        </div>
+        <div class="box-content">
+            <ul>
+                <li><a href="/u/slmanage">轮播图管理</a></li>
+                <li><a href="/u/acmanage/">活动管理</a></li>
+                <li><a href="/u/scmanage/">景点管理</a></li>
+                <li><a href="/u/jomanage/">攻略管理</a></li>
+                <li><a href="/u/usmanage/">用户管理</a></li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>

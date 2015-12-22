@@ -28,7 +28,7 @@ def getslider(request):
             "slider": slider
         }
         csrfContext = RequestContext(request, content)
-        return render_to_response("profile/slider-show.html", csrfContext)
+        return render_to_response("profile/slider.html", csrfContext)
 
 def addslider(request):
     if isroot(request) and ispost(request):

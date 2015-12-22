@@ -1,0 +1,27 @@
+<script>
+    $('#dateTime').datetimepicker({
+        format: 'yyyy-mm-dd'
+    });
+    $(function() {
+        $(".add-tag").click(function() {
+            $("#tag").append('<input type="text" class="am-form-field am-radius" placeholder="景点" name="scenery-tag"/>')
+        })
+
+        $("#post-submit").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/u/post/",
+                data: $("#post-jpurnal-form").serialize(),
+                dataType: "json"
+            }).done(function(data, textStatus, jqXHR) {
+                    if (jqXHR.status == 200) {
+                        if(data.status == 1) {
+                            alert('发表成功');
+                        }
+                    }
+            }).fail(function() {
+                alert('发表失败');
+            });
+        })
+    })
+</script>

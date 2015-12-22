@@ -19,9 +19,6 @@ from . import strategy
 class TestUEditorForm(forms.Form):
     content = UEditorField(u"", initial="abc")
 
-def resetPassword(request):
-    pass
-
 @login_required
 def getProfile(request):
     username = request.session.get('username', '')
@@ -65,10 +62,12 @@ def postStrategy(request):
     """
     if request.method == "GET":
         username = request.session.get('username', '')
+        isroot = request.session.get('isroot', '')
         form = TestUEditorForm()
         content = {
             "username": username,
-            "form": form
+            "form": form,
+            "isroot": isroot
         }
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/post.html", csrfContext)
@@ -112,19 +111,22 @@ def updateProfile(request):
     print "updateprofile"
     if request.method == "GET":
         userInfo = Person.objects.get(username=request.user.username)
+        isroot = request.session.get('isroot', '')
         content = {
-            "userInfo": userInfo
+            "userInfo": userInfo,
+            "isroot": isroot
         }
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/update.html", csrfContext)
     else:
         try:
             username = request.session['username']
-            # print username
+
             reqPerson = Person.objects.get(username=username)
+
             reqPerson.interest = request.POST.get("interest")
-            #print "reqPerson.interest: ", reqPerson.interest
             reqPerson.gender = request.POST.get("genderChoices")
+
             reqPerson.save()
         
             data = {"status": 1}
@@ -136,5 +138,17 @@ def updateProfile(request):
 
 
 @login_required
-def changePw(request):
-    pass
+def resetPassword(request):
+    if request.method == "GET":
+        isroot = request.session.get('isroot', '')
+        content = {
+            "isroot": isroot
+        }
+        csrfContext = RequestContext(request, content)
+        return render_to_response("profile/reset-password.html", csrfContext)
+    else:
+        """
+        //TODO
+        参数： password  newpassword 不能直接存储，要使用某种加密方式（Django自带认证的那种，查一下解决方案吧
+        """
+        pass

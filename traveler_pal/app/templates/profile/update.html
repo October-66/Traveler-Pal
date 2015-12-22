@@ -2,75 +2,11 @@
 <link rel="stylesheet" href="{% static "css/amazeui.swiper.min.css " %}">
 <link rel="stylesheet" href="{% static "css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
 {% include "./profile/siderbar.html" %}
-<div class="am-u-md-9">
-    <div class="box profile">
-        <div class="box-head">个人资料</div>
-        <div class="box-content">
-            <form method="post" class="am-form am-form-horizontal admin-form" id="post-profile-form" onsubmit="return false">
-                <div class="am-form-group">
-                    <label for="username" class="am-u-sm-2 am-form-label">用户名</label>
-                    <div class="am-u-sm-10">
-                        {% csrf_token %}
-                        <input type="text" id="username" placeholder="请输入你的用户名" value={{ user.username }} disabled>
-                    </div>
-                </div>
-                <div class="am-form-group am-form-file">
-                    <label for="username-logo" class="am-u-sm-2 am-form-label">头像</label>
-                    <div class="am-u-sm-5 am-u-sm-offset-2">
-                        <img src="http://cn.gravatar.com/avatar/acfa2cdf104842f476e8c453f2302b07?s=40&d=mm" alt="">
-                    </div>
-                    <div class="am-u-sm-5">
-                        <button type="button" class="am-btn am-btn-danger am-btn-sm">
-                            <i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
-                        <input id="username-logo" type="file" multiple>
-                    </div>
-                </div>
-                <div class="am-form-group">
-                    <label for="interest" class="am-u-sm-2 am-form-label">性别</label>
-                    <div class="am-u-sm-10">
-                        <input type="radio" name="genderChoices" value="M" {% if userInfo.gender == 'M' %} checked {% endif %}>男
-                        <input type="radio" name="genderChoices" value="F" {% if userInfo.gender == 'F' %} checked {% endif %}>女
-                    </div>
-                </div>
-                <div class="am-form-group">
-                    <label for="interest" class="am-u-sm-2 am-form-label">兴趣</label>
-                    <div class="am-u-sm-10">
-                        <input type="text" id="interest" name="interest" value={{ userInfo.interest }} placeholder="请输入你的兴趣">
-                    </div>
-                </div>
-                <div class="am-form-group">
-                    <div class="am-u-sm-10 am-u-sm-offset-2">
-                        <button type="submit" class="am-btn am-btn-default" id="save-profile">保存</button>
-                        <div class="warning"></div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+{% include "./profile/update/update-main.html" %}
 </div>
 <script src="{% static "js/amazeui.datetimepicker.min.js " %}"></script>
 <script src="{% static "js/amazeui.swiper.min.js " %}"></script>
 {% endblock %}
 {% block script %}
-<script>
-    $(function () {
-        $("#save-profile").click(function() {
-            $.ajax({
-                type: "POST",
-                url: "/u/update/",
-                data: $("#post-profile-form").serialize(),
-                dataType: "json"
-            }).done(function(data, textStatus, jqXHR) {
-                if(jqXHR.status == 200) {
-                    if(data.status == 1) {
-                        $(".warning").html('更新成功')
-                    }
-                }
-            }).fail(function() {
-                $(".warning").html('更新失败')
-            });
-        })
-    })
-</script>
+{% include "./profile/update/update-js.html" %}
 {% endblock %}

@@ -1,0 +1,10 @@
+<script>
+  (function() {
+    $('.add-slider').click(function() {
+      var tmp = '<form action="/u/slmanage/add/" method="post" class="add-slider_form" enctype="multipart/form-data"><div class="am-g slider-root"><div class="am-u-lg-7"><img src="http://lorempixel.com/600/600/nature/2" alt=""></div><input type="text" name="title" placeholder="请输入幻灯片标题"><div class="am-u-lg-5 am-form-file"><button type="button" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-cloud-upload"></i>上传文件</button><input id="slider-file" type="file" name="sliderImg"></div><button class="am-btn am-btn-danger am-radius" type="submit">添加</button></div></form>';
+      $(".slider-show-root .box-content").append(tmp)
+      var csrf = $('input[name=csrfmiddlewaretoken').val()
+      $(".add-slider_form").append('<input type="hidden" name="csrfmiddlewaretoken" value="' + csrf + '">')
+    });
+  })();
+</script>

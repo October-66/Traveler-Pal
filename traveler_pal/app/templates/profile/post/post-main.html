@@ -1,0 +1,34 @@
+<div class="am-u-md-9">
+    <div class="box">
+        <div class="box-head">发表攻略</div>
+        <div class="box-content post-journal">
+            <form method="post" onsubmit="return false" id="post-jpurnal-form">
+                <div class="am-g">
+                    <div class="am-u-md-offset-1 am-u-md-10">
+                        <input type="text" class="am-form-field am-radius" placeholder="请输入文章标题" name="title"/>
+                    </div>
+                </div>
+                <div class="am-g">
+                    <div class="am-u-md-3 am-u-md-offset-1">
+                        <input type="text" value="2015-02-15" id="dateTime" class="am-form-field" name="dateTime">
+                    </div>
+                    <div class="am-u-md-2" id="tag">
+                        <input type="text" class="am-form-field am-radius" placeholder="景点" name="scenery-tag"/>
+                    </div>
+
+                    <div class="add-tag am-u-md-1 am-u-end">
+                    <!--    +1 -->
+                    </div>
+                </div>
+				{% csrf_token %}
+                <div class="am-g">
+                    <div class="am-u-md-offset-1 am-u-md-10">
+                    {{ form }}
+                    </div>
+                </div>
+                <button type="submit" class="am-btn am-btn-success right" id="post-submit">发表</button>
+		</form>
+        </div>
+    </div>
+</div>
+</div>
