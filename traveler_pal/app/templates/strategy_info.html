@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %}攻略{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static " css/amazeui.swiper.min.css " %}">
+<link rel="stylesheet" href="{% static " css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
+<div class="am-u-sm-12 am-u-md-9 ">
+    {% include "./strategy_info/strategy_info-content.html" %}
+    {% include "./strategy_info/strategy_info-duoshuo.html" %}
+</div>
+{% include "./widget/siderbar.html" %} {% endblock %} {% block script %}
+{% endblock %}

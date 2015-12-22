@@ -38,3 +38,15 @@ def getPostedStrategy(request):
         "active": "posted-strategy",
         "allStrategy": allStrategy
     }))
+
+def getOneStrategy(request, strategy_id):
+    strategy = Strategy.objects.get(pk=strategy_id)
+
+    content = {
+        "active": "strategy",
+        "strategy": strategy
+    }
+
+    csrfContent = RequestContext(request, content)
+
+    return render_to_response("strategy_info.html", csrfContent)

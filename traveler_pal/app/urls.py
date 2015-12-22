@@ -42,8 +42,8 @@ urlpatterns = [
     url(r'^scenery/s/$', scenery.searchScenery, name="scenery-search"),
 
 
-    url(r'^strategy/$', strategy.getAllStrategy, name="all-journal"),
-
+    url(r'^strategy/$', strategy.getAllStrategy, name="all-strategy"),
+    url(r'^strategy/(?P<strategy_id>[0-9]+)/$', strategy.getOneStrategy, name="one-strategy"),
 
     url(r'^reg/$', user.register, name="register"),
     url(r'^login/$', user.login, name="login"),

@@ -4,7 +4,7 @@
 <div class="am-u-sm-12 am-u-md-9 ">
     {% for strategy in allStrategy.object_list %}
     <div class="box journal-list">
-        <h3>{{ strategy.title }}</h3>
+        <h3><a href="/strategy/{{ strategy.id }}">{{ strategy.title }}</a></h3>
         <img src="http://lorempixel.com/600/600/nature/2" alt="" class="am-img-responsive">
         <p>{{ strategy.content|safe|truncatewords:"100" }}</p>
         <span><b>景点：</b><a href="">{{ strategy.scenerys.name }}</a></span>
