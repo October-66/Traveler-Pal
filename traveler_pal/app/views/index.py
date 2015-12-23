@@ -24,6 +24,24 @@ def getRecentActivities():
 
     return rcntActivities
 
+def getRecentScenery():
+    """
+    get rencent global scenerys
+    """
+    rcntScenerySize = 5
+    rcntScenery = Scenery.objects.order_by("-id").all()[:rcntScenerySize]
+
+    return rcntScenery
+
+def getRecentStrategy():
+    """
+    get recent global strategy
+    """
+    rcntStrategySize = 8
+    rcntStrategy = Strategy.objects.order_by("-id").all()[:rcntStrategySize]
+
+    return rcntStrategy
+
 def getslider():
     """
     get the slider to show in index.html
@@ -40,6 +58,8 @@ def index(request):
             "active": "index",
             "username": username,
             "recentactivity": getRecentActivities(),
+            "recentscenery": getRecentScenery(),
+            "recentstrategy": getRecentStrategy(),
             "slider": getslider,
         }
         csrfContext = RequestContext(request, content)

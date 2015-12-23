@@ -2,57 +2,17 @@
 <div class="box-content am-g">
     <div class="am-u-md-8">
         <ul>
+            {% for strategy_list in recentstrategy %}
             <li>
                 <h5>
-                                    <a href="#">南极洲之旅南极洲之旅南极洲之旅南极洲之旅</a>
-                                    <data class="right">【10-16】</data>
-                                </h5>
+                    <a href="./strategy/{{ strategy_list.id }}">{{ strategy_list.title|safe|truncatewords:"1" }}</a>
+                    <data class="right">【{{ strategy_list.postDateTime}}】</data>
+                </h5>
             </li>
-            <li>
-                <h5>
-                                    <a href="#">南极洲之旅南极洲之旅南极洲之旅南极洲之旅</a>
-                                    <data class="right">【10-16】</data>
-                                </h5>
-            </li>
-            <li>
-                <h5>
-                                    <a href="#">南极洲之旅南极洲之旅南极洲之旅南极洲之旅</a>
-                                    <data class="right">【10-16】</data>
-                                </h5>
-            </li>
-            <li>
-                <h5>
-                                    <a href="#">南极洲之旅南极洲之旅南极洲之旅南极洲之旅</a>
-                                    <data class="right">【10-16】</data>
-                                </h5>
-            </li>
-            <li>
-                <h5>
-                                    <a href="#">南极洲之旅南极洲之旅南极洲之旅南极洲之旅</a>
-                                    <data class="right">【10-16】</data>
-                                </h5>
-            </li>
-            <li>
-                <h5>
-                                    <a href="#">南极洲之旅南极洲之旅南极洲之旅南极洲之旅</a>
-                                    <data class="right">【10-16】</data>
-                                </h5>
-            </li>
-            <li>
-                <h5>
-                                    <a href="#">南极洲之旅南极洲之旅南极洲之旅南极洲之旅</a>
-                                    <data class="right">【10-16】</data>
-                                </h5>
-            </li>
-            <li>
-                <h5>
-                                    <a href="#">南极洲之旅南极洲之旅南极洲之旅南极洲之旅</a>
-                                    <data class="right">【10-16】</data>
-                                </h5>
-            </li>
+            {% endfor %}
         </ul>
     </div>
     <div class="am-u-md-4">
-        <button type="button" class="am-btn am-btn-primary am-radius">我要写攻略</button>
+        <button type="button" class="am-btn am-btn-primary am-radius" onclick="window.location.href='./u/post/'">我要写攻略</button>
     </div>
 </div>
