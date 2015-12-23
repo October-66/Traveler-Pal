@@ -2,32 +2,8 @@
 <link rel="stylesheet" href="{% static " css/amazeui.swiper.min.css " %}">
 <link rel="stylesheet" href="{% static " css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
 <div class="am-u-sm-12 am-u-md-9 ">
-    {% for strategy in allStrategy.object_list %}
-    <div class="box journal-list">
-        <h3><a href="/strategy/{{ strategy.id }}">{{ strategy.title }}</a></h3>
-        <img src="http://lorempixel.com/600/600/nature/2" alt="" class="am-img-responsive">
-        <p>{{ strategy.content|safe|truncatewords:"100" }}</p>
-        <span><b>景点：</b><a href="">{{ strategy.scenerys.name }}</a></span>
-        <span><b>时间：</b>{{ strategy.postDateTime }}</span>
-    </div>
-    {% endfor %}
-    <div class="page-nav">
-        <ul class="am-pagination">
-            {% if allStrategy.has_previous %}
-                <li class="am-pagination-prev"><a href="/activity?page={{ activies.previous_page_number }}">&laquo;</a></li>
-            {% endif %}
-            {% for page_number in allStrategy.paginator.page_range %}
-                {% ifequal page_number  allStrategy.number %}
-                  <li class="am-active"><a href="/strategy?page={{ page_number }}">{{ page_number }}</a></li>
-                {% else %}
-                    <li><a href="/strategy?page={{ page_number }}">{{ page_number }}</a></li>
-                {% endifequal %}
-            {% endfor %}
-            {% if allStrategy.has_next %}
-            <li class="am-pagination-next "><a href="/strategy?page={{ allStrategy.next_page_number }}">&raquo;</a></li>
-            {% endif %}
-        </ul>
-    </div>
+    {% include "./strategy/strategy-content.html" %}
+    {% include "./strategy/strategy-page.html" %}
 </div>
 {% include "./widget/siderbar.html" %} {% endblock %} {% block script %}
 <script src="{% static " js/amazeui.datetimepicker.min.js " %}"></script>

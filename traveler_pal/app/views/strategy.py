@@ -6,7 +6,6 @@ from django.template import RequestContext
 
 from ..models import *
 
-
 def getAllStrategy(request):
     """
     所有攻略
@@ -21,6 +20,9 @@ def getAllStrategy(request):
         allStrategy = paginator.page(paginator.num_pages)
     except InvalidPage:
         allStrategy = paginator.page(1)
+
+
+
 
     content = {
         "active": "strategy",
