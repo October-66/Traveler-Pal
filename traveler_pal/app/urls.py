@@ -25,6 +25,7 @@ from .views import root
 from .views import activity
 from .views import scenery
 from .views import strategy
+from .views import siderbar
 from .views import test
 
 urlpatterns = [
@@ -67,6 +68,11 @@ urlpatterns = [
     url(r'^u/$', u.getProfile, name="get profile"),
     url(r'^u/activity/$', u.getPersonActivities),
     url(r'^u/post/list/$', strategy.getPostedStrategy, name="get all strategy"),
+
+    url(r'^siderbar/activity/$', siderbar.activity),
+    url(r'^siderbar/popular/activity/$', siderbar.popular_activity),
+    url(r'^siderbar/popular/scenery/$', siderbar.popular_scenery),
+    url(r'^siderbar/popular/strategy/$', siderbar.popular_strategy),
 
     url(r'^test/', test.test, name="test")
 
