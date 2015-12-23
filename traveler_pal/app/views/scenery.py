@@ -86,10 +86,17 @@ def getFuzzySearchScenerys(request, fuzzyQueryWord):
 
 def getSceneryInfo(request, scenery_id):
     scenery = Scenery.objects.get(pk=scenery_id)
-    context = RequestContext(request, {
+    strategy = Strategy.objects.filter(scenerys=scenery)
+    activity = Activity.objects.filter(scenerys=scenery)
+    content = RequestContext(request, {
+        "active": "scenery",
         "scenery": scenery,
+        "strategy": strategy,
+        "activity": activity
+
     })
-    return HttpResponse("scenery info")
+    csrfContext = RequestContext(request, content)
+    return render_to_response("scenery_info.html", csrfContext)
 
 
 def getSceneryComments(request, scenery_id):

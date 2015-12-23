@@ -1,1 +1,21 @@
-...
+{% extends "base.html" %} {% load staticfiles %} {% block title %}活动{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static "css/amazeui.swiper.min.css " %}">
+<link rel="stylesheet" href="{% static "css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %}
+<div class="am-u-sm-12 am-u-md-9 ">
+    {% include "./scenery_info/scenery_info-main.html" %}
+    <div class="box activity-detail am-g">
+        {% include "./scenery_info/scenery_info-strategy.html" %}
+    </div>
+    <div class="box activity-detail am-g">
+        {% include "./scenery_info/scenery_info-activity.html" %}
+    </div>
+    <div class="box activity-detail am-g">
+        {% include "./scenery_info/scenery_info-duoshuo.html" %}
+    </div>
+
+</div>
+{% include "./widget/siderbar.html" %} {% endblock %}
+{% block script %}
+    {% include "./activity_info/activityinfo-js.html" %}
+<script src="{% static "js/amazeui.swiper.min.js" %}"></script>
+{% endblock %}

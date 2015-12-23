@@ -1,0 +1,12 @@
+<div class="box-head">你可能想了解的活动</div>
+<div class="box-content">
+    <div class="swiper-container" id="swiper-scenery">
+        <div class="swiper-wrapper">
+            {% for item in activity %}
+                <div class="swiper-slide" style="background-image:url(http://lorempixel.com/600/600/nature/2)" onclick="window.location.href='/activity/{{ item.id }}'">{{ item.name }}</div>
+            {% endfor %}
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-scrollbar" id="swiper-scrollbar-scenery"></div>
+    </div>
+</div>

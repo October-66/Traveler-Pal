@@ -1,1 +1,18 @@
-...
+<div class="box-head">
+    相关攻略
+</div>
+<div class="box-content scenery-strategy">
+    <ul>
+    {% for item in strategy %}
+        <li>
+            <a href="/strategy/{{ item.id }}">{{ item.title }}</a>
+            <div class="data">
+                <span>{{ item.postDateTime }}</span>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+    {% for item in activity %}
+        {{ item.name }}
+    {% endfor %}
+</div>
