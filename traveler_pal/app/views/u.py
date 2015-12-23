@@ -23,10 +23,16 @@ class TestUEditorForm(forms.Form):
 def getProfile(request):
     username = request.session.get('username', '')
     person = Person.objects.get(username=username)
+    activity_length = len(PersonActivity.objects.filter(person=person))
+    strategy_length = len(Scenery.objects.filter(person=person))
+    print activity_length
+    print strategy_length
     isroot = request.session.get('isroot', '')
     content = {
         "person": person,
-        "isroot": isroot
+        "isroot": isroot,
+        "activity_length": activity_length,
+        "strategy_length": strategy_length
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("profile/profile.html", csrfContext)
