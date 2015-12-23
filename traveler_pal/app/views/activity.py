@@ -75,11 +75,13 @@ def getActivityInfo(request, activity_id):
     username = request.session.get('username', '')
     activity = Activity.objects.get(pk=activity_id)
     joinpeople = PersonActivity.objects.filter(activity=activity)
+    scenery = Scenery.objects.order_by("-id").all()[:5]
     print joinpeople
     content = {
         "active": "activity",
         "activity": activity,
-        "joinpeople": joinpeople
+        "joinpeople": joinpeople,
+        "scenery": scenery
     }
     csrfContext = RequestContext(request, content)
     return render_to_response("activity_info.html", csrfContext)
