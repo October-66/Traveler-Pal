@@ -1,14 +1,14 @@
 <script>
     var DeleteIt = function (event) {
         var value = event.value;
-
+        console.log("gggggggggggggggggggg");
         $.ajax({
             type: "POST",
-            url: "/acmanage/",
+            url: "/u/scmanage/",
             data: {scenery_id: value},
-            dataType: json,
+            dataType: "json",
         }).done(function() {
-
+            location.href='';
         });
     }
 </script>

@@ -11,6 +11,7 @@ from .. import Utils
 
 import json
 import time
+from django.views.decorators.csrf import *
 
 def isroot(request):
     return request.session.get('isroot', '') == 'Y'
@@ -60,7 +61,7 @@ def updateslider(request):
 
         return HttpResponseRedirect('/u/slmanage')
 
-
+@csrf_exempt
 def getactivity(request):
     if request.POST:
         if not Person.objects.get(username=request.session['username']).isroot:
@@ -68,6 +69,8 @@ def getactivity(request):
         if request.POST:
             toDelScry = Scenery.objects.get(pk=request.POST["scenery_id"])
             toDelScry.delete()
+            data = {"status": 1}
+            return HttpResponse(json.dumps(data, ensure_ascii=False))
     else:
         limit  = 5
         activities = Activity.objects.order_by("-id").all()
@@ -90,7 +93,7 @@ def getactivity(request):
 
 
 
-
+@csrf_exempt
 def getscenery(request):
     if request.POST:
         if not Person.objects.get(username=request.session['username']).isroot:
@@ -98,6 +101,9 @@ def getscenery(request):
         if request.POST:
             toDelScry = Scenery.objects.get(pk=request.POST["scenery_id"])
             toDelScry.delete()
+
+            data = {"status": 1}
+            return HttpResponse(json.dumps(data, ensure_ascii=False))
     else:
         """
         所有景点
@@ -120,7 +126,7 @@ def getscenery(request):
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/scenery.html", csrfContext)
 
-
+@csrf_exempt
 def getstrategy(request):
     """
     所有攻略
@@ -131,6 +137,8 @@ def getstrategy(request):
         if request.POST:
             toDelStgy = Strategy.objects.get(pk=request.POST["strategy_id"])
             toDelStgy.delete()
+            data = {"status": 1}
+            return HttpResponse(json.dumps(data, ensure_ascii=False))
 
     else:
         limit = 5
@@ -150,7 +158,7 @@ def getstrategy(request):
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/strategy.html", csrfContext)
 
-
+@csrf_exempt
 def getuser(request):
     if request.POST:
         if not Person.objects.get(username=request.session['username']).isroot:
@@ -158,6 +166,8 @@ def getuser(request):
         if request.POST:
             person = Person.objects.get(username=request.POST['username'])
             person.delete()
+            data = {"status": 1}
+            return HttpResponse(json.dumps(data, ensure_ascii=False))
     else:
         limit = 5
         allUser = User.objects.all()

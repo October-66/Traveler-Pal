@@ -4,11 +4,11 @@
 
         $.ajax({
             type: "POST",
-            url: "/acmanage/",
+            url: "/u/usmanage/",
             data: {scenery_id: value},
-            dataType: json,
+            dataType: "json",
         }).done(function() {
-
+            location.href='';
         });
     }
 </script>
