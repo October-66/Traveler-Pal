@@ -4,7 +4,9 @@
         <h3><a href="/strategy/{{ strategy.id }}">{{ strategy.title }}</a></h3>
         <img src="http://lorempixel.com/600/600/nature/2" alt="" class="am-img-responsive">
         <p>{{ strategy.content|cut_images|safe|truncatewords:"100" }}</p>
-        <span><b>景点：</b><a href="">{{ strategy.scenerys.name }}</a></span>
+
+        "></p>
+        <span><b>景点：</b><a href="/scenery/{{ strategy.scenerys.id }}">{{ strategy.scenerys.name }}</a></span>
         <span><b>时间：</b>{{ strategy.postDateTime }}</span>
     </div>
 {% endfor %}
