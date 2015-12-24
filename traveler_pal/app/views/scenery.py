@@ -37,6 +37,14 @@ def getAllScenery(request):
     csrfContext = RequestContext(request, content)
     return render_to_response("scenery.html", csrfContext)
 
+def delScenery(request):
+
+    if not Person.objects.get(username=request.session['username']).isroot:
+        return HttpResponseRedirect("/")
+    if request.POST:
+        toDelScry = Scenery.objects.get(pk=request.POST["scenery_id"])
+        toDelScry.delete()
+
 def searchScenery(request):
     """
     search secnery all
@@ -76,7 +84,7 @@ def getFuzzySearchScenerys(request, fuzzyQueryWord):
     模糊查询景点
     """
     scenerys = Scenery.objects.filter(name__contains=fuzzyQueryWord)
-    
+
     l=[]
     for x in scenerys:
         l.append(toJSON(x))

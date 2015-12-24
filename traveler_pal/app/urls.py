@@ -60,7 +60,7 @@ urlpatterns = [
     url(r'^u/slmanage/update/$', root.updateslider, name="updateslider"),
     url(r'^u/acmanage/$', root.getactivity, name="getactivity"),
     url(r'^u/scmanage/$', root.getscenery, name="getscenery"),
-    url(r'^u/jomanage/$', root.getjournal, name="getjournal"),
+    url(r'^u/jomanage/$', root.getstrategy, name="getjournal"),
     url(r'^u/usmanage/$', root.getuser, name="getuser"),
 
     # url(r'^u/(?P<username>\w+)/$', u.getUserProfile, name="user-profile"),

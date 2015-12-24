@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import *
 from django.contrib.auth.models import User
 from django.shortcuts import *
 from django.http import *
+from django.core.paginator import *
+
 from ..models import *
 from .. import Utils
 
@@ -40,7 +42,7 @@ def addslider(request):
             title = title,
             sliderImg = sliderImg
             )
-        
+
         return HttpResponseRedirect('/u/slmanage/')
 
 def updateslider(request):
@@ -60,20 +62,116 @@ def updateslider(request):
 
 
 def getactivity(request):
-    pass
+    if request.POST:
+        if not Person.objects.get(username=request.session['username']).isroot:
+            return HttpResponseRedirect("/")
+        if request.POST:
+            toDelScry = Scenery.objects.get(pk=request.POST["scenery_id"])
+            toDelScry.delete()
+
+    else:
+        limit  = 5
+        activities = Activity.objects.order_by("-id").all()
+        paginator = Paginator(activities, limit)
+        page = request.GET.get('page')
+        try:
+            activities = paginator.page(page)
+        except EmptyPage:
+            activities = paginator.page(paginator.num_pages)
+        except:
+            activities = paginator.page(1)
+        content = {
+            "active": "activity",
+            "activities": activities
+        }
+        csrfContext = RequestContext(request, content)
+        return render_to_response("activities.html", csrfContext)
+
 
 
 
 
 def getscenery(request):
-    pass
+    if request.POST:
+        if not Person.objects.get(username=request.session['username']).isroot:
+            return HttpResponseRedirect("/")
+        if request.POST:
+            toDelScry = Scenery.objects.get(pk=request.POST["scenery_id"])
+            toDelScry.delete()
+    else:
+        """
+    所有景点
+    """
+        limit = 5
+        allScenery = Scenery.objects.all()
+        paginator = Paginator(allScenery, limit)
+        page = request.GET.get('page')
+        try:
+            allScenery = paginator.page(page)
+        except EmptyPage:
+            allScenery = paginator.page(paginator.num_pages)
+        except:
+            allScenery = paginator.page(1)
+        content = {
+            "active": "scenery",
+            "allScenery": allScenery
+        }
+        csrfContext = RequestContext(request, content)
+        return render_to_response("profile/scenery.html", csrfContext)
 
 
-def getjournal(request):
-    pass
+def getstrategy(request):
+    """
+    所有攻略
+    """
+    if request.POST:
+        if not Person.objects.get(username=request.session['username']).isroot:
+            return HttpResponseRedirect("/")
+        if request.POST:
+            toDelStgy = Strategy.objects.get(pk=request.POST["strategy_id"])
+            toDelStgy.delete()
+
+    else:
+        limit = 5
+        allStrategy = Strategy.objects.order_by("-id").all()
+        paginator = Paginator(allStrategy, limit)
+        page = request.GET.get('page')
+        try:
+            allStrategy = paginator.page(page)
+        except EmptyPage:
+            allStrategy = paginator.page(paginator.num_pages)
+        except InvalidPage:
+            allStrategy = paginator.page(1)
+        content = {
+                "allStrategy": allStrategy
+            }
+        csrfContext = RequestContext(request, content)
+        return render_to_response("profile/strategy.html", csrfContext)
+
 
 def getuser(request):
-    pass
+    if request.POST:
+        if not Person.objects.get(username=request.session['username']).isroot:
+            return HttpResponseRedirect("/")
+        if request.POST:
+            person = Person.objects.get(username=request.POST['username'])
+            person.delete()
+    else:
+        limit = 5
+        allUser = User.objects.all()
+        paginator = Paginator(allStrategy, limit)
+        page = request.GET.get('page')
+        try:
+            allUser = paginator.page(page)
+        except EmptyPage:
+            allUser = paginator.page(paginator.num_pages)
+        except InvalidPage:
+            allUser = paginator.page(1)
+        content = {
+            "allUser": allUser
+        }
+        csrfContext = RequestContext(request, content)
+        return render_to_response("profile/user.html", csrfContext)
 
 
 
