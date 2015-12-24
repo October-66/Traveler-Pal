@@ -68,7 +68,6 @@ def getactivity(request):
         if request.POST:
             toDelScry = Scenery.objects.get(pk=request.POST["scenery_id"])
             toDelScry.delete()
-
     else:
         limit  = 5
         activities = Activity.objects.order_by("-id").all()
@@ -85,7 +84,7 @@ def getactivity(request):
             "activities": activities
         }
         csrfContext = RequestContext(request, content)
-        return render_to_response("activities.html", csrfContext)
+        return render_to_response("profile/activity.html", csrfContext)
 
 
 
