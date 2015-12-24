@@ -68,7 +68,6 @@ def getactivity(request):
         if request.POST:
             toDelScry = Scenery.objects.get(pk=request.POST["scenery_id"])
             toDelScry.delete()
-
     else:
         limit  = 5
         activities = Activity.objects.order_by("-id").all()
