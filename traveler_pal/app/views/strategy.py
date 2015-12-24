@@ -52,3 +52,4 @@ def getOneStrategy(request, strategy_id):
     csrfContent = RequestContext(request, content)
 
     return render_to_response("strategy_info.html", csrfContent)
+

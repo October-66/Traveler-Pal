@@ -14,7 +14,6 @@ import time
 from  DjangoUeditor.forms import UEditorField
 from django import forms
 
-
 def getRecentActivities():
     """
     get recent global activities
@@ -52,7 +51,7 @@ def searchActivity(request):
     search activity
     """
     s = request.GET.get('name')
-    
+
     limit  = 5
     activities = Activity.objects.filter(name__contains=s)
     paginator = Paginator(activities, limit)
@@ -134,9 +133,9 @@ def joinActivity(request):
         username = request.user
 
         curPerson = Person.objects.get(username=username)
-
+        print "person name: ", curPerson.username
         try:
-            if (PersonActivity.objects.filter(person=curPerson).filter(activity=toJoinAct)) != []:
+            if len(PersonActivity.objects.filter(person=curPerson).filter(activity=toJoinAct)) != 0:
                 data = {"status": -1}
             else:
                 newPersonActivity = PersonActivity(
@@ -164,17 +163,3 @@ def delActivity(request):
         id = request.POST.get('activity_id', '')
         toDelActivity = Activity.objects.get(pk=id)
         toDelActivity.delete()
-
-
-def getHotActivities(request):
-    """
-    依赖于多少个人参与了这个活动
-    """
-    leastSizeAsHot = 3
-    hotActivities = filter(
-        lambda activity: len(activity.person_set.all()) > 3,
-        Activity.objects.all())
-
-    return HttpResponse(json.dumps(
-        {'hotActivities': map(Utils.toJSON, hotActivities)}
-    ), ensure_ascii=False)

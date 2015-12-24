@@ -49,7 +49,7 @@ class Person(models.Model):
         ('F', 'FEMALE'),
     )
     gender = models.CharField(max_length=1, choices=genderChoices, default='M')
-    userImg = models.FileField(upload_to='./upload/userImg/')
+    userImg = models.FileField(upload_to='./upload/userImg/', null=True)
     activitys = models.ManyToManyField(Activity, through="PersonActivity")
     scenerys = models.ManyToManyField(Scenery, through="PersonScenery")
     isroot = models.CharField(max_length=1, default="N")
