@@ -21,8 +21,8 @@ def activity(request):
         person = Person.objects.get(username=request.session['username'])
         acts = person.activitys
         return HttpResponse(json.dumps(
-        {'hotActivities': map(Utils.toJSON, acts)}
-    , ensure_ascii=False))
+                {'hotActivities': map(Utils.toJSON, acts)}
+                , ensure_ascii=False))
 
 
 def popular_activity(request):
@@ -37,16 +37,17 @@ def popular_activity(request):
         act.startDateTime = None
         act.endDateTime = None
     return HttpResponse(json.dumps(
-        {'hotActivities': map(Utils.toJSON, hotActivities)}
-    , ensure_ascii=False))
+            {'hotActivities': map(Utils.toJSON, hotActivities)}
+            , ensure_ascii=False))
+
 
 def popular_scenery(request):
     size = 5
     hotScenerys = list(Scenery.objects.all())[-size:]
 
     return HttpResponse(json.dumps(
-        {'hotScenerys': map(Utils.toJSON, hotScenerys)}
-    , ensure_ascii=False))
+            {'hotScenerys': map(Utils.toJSON, hotScenerys)}
+            , ensure_ascii=False))
 
 
 def popular_strategy(request):
@@ -55,5 +56,5 @@ def popular_strategy(request):
     for stgy in hotStrategys:
         stgy.postDateTime = None
     return HttpResponse(json.dumps(
-        {'hotStrategys': map(Utils.toJSON, hotStrategys)}
-    , ensure_ascii=False))
+            {'hotStrategys': map(Utils.toJSON, hotStrategys)}
+            , ensure_ascii=False))

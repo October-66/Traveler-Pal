@@ -1,14 +1,5 @@
 <script>
     window.onload = function() {
-        $.ajax({
-            type: "GET",
-            url: "/siderbar/activity/",
-            data: "",
-            dataType: "json",
-            success: function(msg) {
-
-            }
-        });
 
         $.ajax({
             type: "GET",
@@ -16,9 +7,15 @@
             data: "",
             dataType: "json",
             success: function(msg) {
-
+                $("#popular-activity").html("");
+                var hot = msg.hotActivities;
+                for (var i = 0;  i < hot.length; i++) {
+                    var hotname = JSON.parse(hot[i]).name;
+                    var hotid = JSON.parse(hot[i]).id;
+                    $("#popular-activity").append("<li><a href='/activity/" + hotid + "/'>" + hotname + "</a>");
+                }
             }
-        })
+        });
 
         $.ajax({
             type: "GET",
@@ -26,18 +23,30 @@
             data: "",
             dataType: "json",
             success: function(msg) {
-
+                $("#popular-scenery").html("");
+                var hot = msg.hotScenerys;
+                for (var i = 0; i < hot.length; i++) {
+                    var hotname = JSON.parse(hot[i]).name;
+                    var hotid = JSON.parse(hot[i]).id;
+                    $("#popular-scenery").append("<li><a href='/scenery/" + hotid + "/'>" + hotname + "</a>");
+                }
             }
-        })
+        });
 
         $.ajax({
             type: "GET",
-            url: "/siderbar/strategy/",
+            url: "/siderbar/popular/strategy/",
             data: "",
             dataType: "json",
             success: function(msg) {
-
+                $("#popular-strategy").html("");
+                var hot = msg.hotStrategys;
+                for (var i = 0; i < hot.length; i++) {
+                    var hotname = JSON.parse(hot[i]).title;
+                    var hotid = JSON.parse(hot[i]).id;
+                    $("#popular-strategy").append("<li><a href='/strategy/" + hotid + "/'>" + hotname + "</a>");
+                }
             }
-        })
+        });
     }
 </script>

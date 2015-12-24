@@ -14,7 +14,7 @@ def toJSON(self):
         d[attr] = getattr(self, attr)
 
     import json
-    return json.dumps(d)
+    return json.dumps(d).encode('utf-8')
 
 def not_response():
     """
