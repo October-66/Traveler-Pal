@@ -21,6 +21,13 @@ def getAllStrategy(request):
     except InvalidPage:
         allStrategy = paginator.page(1)
 
+    content = {
+        "active": "strategy",
+        "allStrategy": allStrategy
+    }
+    csrfContext = RequestContext(request, content)
+    return render_to_response("strategy.html", csrfContext)
+
 def delStrategy(request):
 
     if not Person.objects.get(username=request.session['username']).isroot:
