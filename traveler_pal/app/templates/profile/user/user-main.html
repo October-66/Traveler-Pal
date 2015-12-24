@@ -14,7 +14,7 @@
                 {% for user in allUser.object_list %}
                     <tr>
                         <td>{{ user.id }}</td>
-                        <td>{{ user.name }}</td>
+                        <td>{{ user.username }}</td>
                         <td>
                         <button type="submit" class="am-btn am-btn-success am-radius" onclick="DeleteIt(this)" id="delete-user" value="{{ user.id }}" >删除</button>
                         </td>

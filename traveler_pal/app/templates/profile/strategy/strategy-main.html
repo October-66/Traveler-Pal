@@ -14,7 +14,7 @@
                 {% for strategy in allStrategy.object_list %}
                     <tr>
                         <td>{{ strategy.id }}</td>
-                        <td><a href="strategy/{{ strategy.id }}">{{ strategy.title }}</a></td>
+                        <td><a href="/strategy/{{ strategy.id }}">{{ strategy.title }}</a></td>
                         <td>
                         <button type="submit" class="am-btn am-btn-success am-radius" onclick="DeleteIt(this)" id="delete-strategy" value="{{ strategy.id }}" >删除</button>
                         </td>

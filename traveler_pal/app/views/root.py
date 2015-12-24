@@ -81,11 +81,12 @@ def getactivity(request):
         except:
             activities = paginator.page(1)
         content = {
+            "isroot": 'Y',
             "active": "activity",
             "activities": activities
         }
         csrfContext = RequestContext(request, content)
-        return render_to_response("activities.html", csrfContext)
+        return render_to_response("profile/activity.html", csrfContext)
 
 
 
@@ -100,8 +101,8 @@ def getscenery(request):
             toDelScry.delete()
     else:
         """
-    所有景点
-    """
+        所有景点
+        """
         limit = 5
         allScenery = Scenery.objects.all()
         paginator = Paginator(allScenery, limit)
@@ -113,6 +114,7 @@ def getscenery(request):
         except:
             allScenery = paginator.page(1)
         content = {
+            "isroot": 'Y',
             "active": "scenery",
             "allScenery": allScenery
         }
@@ -143,8 +145,9 @@ def getstrategy(request):
         except InvalidPage:
             allStrategy = paginator.page(1)
         content = {
-                "allStrategy": allStrategy
-            }
+            "isroot": 'Y',
+            "allStrategy": allStrategy
+        }
         csrfContext = RequestContext(request, content)
         return render_to_response("profile/strategy.html", csrfContext)
 
@@ -159,7 +162,7 @@ def getuser(request):
     else:
         limit = 5
         allUser = User.objects.all()
-        paginator = Paginator(allStrategy, limit)
+        paginator = Paginator(allUser, limit)
         page = request.GET.get('page')
         try:
             allUser = paginator.page(page)
@@ -168,6 +171,7 @@ def getuser(request):
         except InvalidPage:
             allUser = paginator.page(1)
         content = {
+            "isroot": 'Y',
             "allUser": allUser
         }
         csrfContext = RequestContext(request, content)

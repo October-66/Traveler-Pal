@@ -14,7 +14,7 @@
                 {% for activity in activities.object_list %}
                     <tr>
                         <td>{{ activity.id }}</td>
-                        <td><a href="activity/{{ activity.id }}">{{ activity.name }}</a></td>
+                        <td><a href="/activity/{{ activity.id }}">{{ activity.name }}</a></td>
                         <td>
                         <button type="submit" class="am-btn am-btn-success am-radius" onclick="DeleteIt(this)" id="delete-activity" value="{{ activity.id }}" >删除</button>
                         </td>

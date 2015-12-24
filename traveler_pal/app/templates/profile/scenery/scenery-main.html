@@ -14,7 +14,7 @@
                 {% for scenery in allScenery.object_list %}
                     <tr>
                         <td>{{ scenery.id }}</td>
-                        <td><a href="scenery/{{ scenery.id }}">{{ scenery.name }}</a></td>
+                        <td><a href="/scenery/{{ scenery.id }}">{{ scenery.name }}</a></td>
                         <td>
                         <button type="submit" class="am-btn am-btn-success am-radius" onclick="DeleteIt(this)" id="delete-scenery" value="{{ scenery.id }}" >删除</button>
                         </td>
