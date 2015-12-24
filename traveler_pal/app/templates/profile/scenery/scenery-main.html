@@ -1,0 +1,27 @@
+<div class="am-u-md-9">
+    <div class="box profile">
+        <div class="box-head">景点管理</div>
+        <div class="box-content">
+            <table class="am-table am-table-bordered am-table-radius am-table-striped">
+                <thead>
+                    <tr>
+                        <th>景点ID</th>
+                        <th>景点名称</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for scenery in allScenery.object_list %}
+                    <tr>
+                        <td>{{ scenery.id }}</td>
+                        <td><a href="scenery/{{ scenery.id }}">{{ scenery.name }}</a></td>
+                        <td>
+                        <button type="submit" class="am-btn am-btn-success am-radius" onclick="DeleteIt(this)" id="delete-scenery" value="{{ scenery.id }}" >删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

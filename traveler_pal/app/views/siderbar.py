@@ -53,8 +53,10 @@ def popular_scenery(request):
 def popular_strategy(request):
     size = 5
     hotStrategys = list(Strategy.objects.all())[-size:]
+    stgyIDs = dict()
+
     for stgy in hotStrategys:
-        stgy.postDateTime = None
+        stgyIDs[stgy.id] = stgy.title
     return HttpResponse(json.dumps(
-            {'hotStrategys': map(Utils.toJSON, hotStrategys)}
+            {'hotStrategys': stgyIDs}
             , ensure_ascii=False))

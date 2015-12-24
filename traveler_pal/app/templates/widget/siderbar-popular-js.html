@@ -41,10 +41,8 @@
             success: function(msg) {
                 $("#popular-strategy").html("");
                 var hot = msg.hotStrategys;
-                for (var i = 0; i < hot.length; i++) {
-                    var hotname = JSON.parse(hot[i]).title;
-                    var hotid = JSON.parse(hot[i]).id;
-                    $("#popular-strategy").append("<li><a href='/strategy/" + hotid + "/'>" + hotname + "</a>");
+                for (var i in hot) {
+                    $("#popular-strategy").append("<li><a href='/strategy/" + i + "/'>" + hot[i] + "</a>");
                 }
             }
         });

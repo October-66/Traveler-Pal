@@ -1,0 +1,27 @@
+<div class="am-u-md-9">
+    <div class="box profile">
+        <div class="box-head">活动管理管理</div>
+        <div class="box-content">
+            <table class="am-table am-table-bordered am-table-radius am-table-striped">
+                <thead>
+                    <tr>
+                        <th>活动ID</th>
+                        <th>活动名称</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for activity in activities.object_list %}
+                    <tr>
+                        <td>{{ activity.id }}</td>
+                        <td><a href="activity/{{ activity.id }}">{{ activity.name }}</a></td>
+                        <td>
+                        <button type="submit" class="am-btn am-btn-success am-radius" onclick="DeleteIt(this)" id="delete-activity" value="{{ activity.id }}" >删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

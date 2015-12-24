@@ -36,7 +36,7 @@ def getAllStrategy(request):
 def getPostedStrategy(request):
     username = request.session['username']
     allStrategy = Strategy.objects.filter(person=Person.objects.get(username=username))
-    return render_to_response("posted-strategy.html", RequestContext(request, {
+    return render_to_response("profile/posted-strategy.html", RequestContext(request, {
         "active": "posted-strategy",
         "allStrategy": allStrategy
     }))

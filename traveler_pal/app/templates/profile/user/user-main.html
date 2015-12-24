@@ -1,0 +1,27 @@
+<div class="am-u-md-9">
+    <div class="box profile">
+        <div class="box-head">用户管理</div>
+        <div class="box-content">
+            <table class="am-table am-table-bordered am-table-radius am-table-striped">
+                <thead>
+                    <tr>
+                        <th>用户ID</th>
+                        <th>用户昵称</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in allUser.object_list %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>
+                        <button type="submit" class="am-btn am-btn-success am-radius" onclick="DeleteIt(this)" id="delete-user" value="{{ user.id }}" >删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

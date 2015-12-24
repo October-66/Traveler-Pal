@@ -1,0 +1,27 @@
+<div class="am-u-md-9">
+    <div class="box profile">
+        <div class="box-head">攻略管理</div>
+        <div class="box-content">
+            <table class="am-table am-table-bordered am-table-radius am-table-striped">
+                <thead>
+                    <tr>
+                        <th>攻略ID</th>
+                        <th>攻略题目</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for strategy in allStrategy.object_list %}
+                    <tr>
+                        <td>{{ strategy.id }}</td>
+                        <td><a href="strategy/{{ strategy.id }}">{{ strategy.title }}</a></td>
+                        <td>
+                        <button type="submit" class="am-btn am-btn-success am-radius" onclick="DeleteIt(this)" id="delete-strategy" value="{{ strategy.id }}" >删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %}攻略{% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static " css/amazeui.swiper.min.css " %}">
+<link rel="stylesheet" href="{% static " css/amazeui.datetimepicker.min.css " %}"> {% endblock %} {% block content %} {% include "./profile/siderbar.html" %}
+{% include "./profile/strategy/strategy-main.html" %}
+{% endblock %}
+{% block script %}
+{% include "./profile/strategy/strategy-js.html" %}
+{% endblock %}
