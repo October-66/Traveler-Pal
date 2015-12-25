@@ -75,7 +75,7 @@ def getactivity(request):
         if not Person.objects.get(username=request.session['username']).isroot:
             return HttpResponseRedirect("/")
         if request.POST:
-            toDelScry = Scenery.objects.get(pk=request.POST["scenery_id"])
+            toDelScry = Activity.objects.get(pk=request.POST["activity_id"])
             toDelScry.delete()
             data = {"status": 1}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
