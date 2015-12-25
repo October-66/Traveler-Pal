@@ -103,13 +103,15 @@ def getPersonActivities(request):
         username = request.session['username']
         assert username
         reqPerson = Person.objects.get(username=username)
+        isroot = request.session.get('isroot', '')
         activities = [a.name for a in list(reqPerson.activitys.all())]
         content = {
-        "active": "activity",
-        "activities": activities
+            "active": "activity",
+            "activities": activities,
+            "isroot": isroot
     }
     csrfContext = RequestContext(request, content)
-    return render_to_response("joined-activities.html", csrfContext)
+    return render_to_response("profile/joined-activities.html", csrfContext)
 
 
 @login_required
