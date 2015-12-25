@@ -17,7 +17,7 @@ from . import strategy
 
 
 class TestUEditorForm(forms.Form):
-    content = UEditorField(u"", initial="abc")
+    content = UEditorField(u"", initial="")
 
 @login_required
 def getProfile(request):
