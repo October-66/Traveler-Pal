@@ -1,17 +1,17 @@
 <div class="page-nav">
-    <ul class="am-pagination">
+    <ul class="am-xpagination">
         {% if activities.has_previous %}
-            <li class="am-pagination-prev"><a href="/activity?page={{ activies.previous_page_number }}">&laquo;</a></li>
+            <li class="am-pagination-prev"><a href="/u/acmanage?page={{ activities.previous_page_number }}">&laquo;</a></li>
         {% endif %}
         {% for page_number in activities.paginator.page_range %}
             {% ifequal page_number  activities.number %}
-              <li class="am-active"><a href="/activity?page={{ page_number }}">{{ page_number }}</a></li>
+              <li class="am-active"><a href="/u/acmanage?page={{ page_number }}">{{ page_number }}</a></li>
             {% else %}
-                <li><a href="/activity?page={{ page_number }}">{{ page_number }}</a></li>
+                <li><a href="/u/acmanage?page={{ page_number }}">{{ page_number }}</a></li>
             {% endifequal %}
         {% endfor %}
         {% if activities.has_next %}
-        <li class="am-pagination-next "><a href="/activity?page={{ activies.next_page_number }}">&raquo;</a></li>
+        <li class="am-pagination-next "><a href="/u/acmanage?page={{ activities.next_page_number }}">&raquo;</a></li>
         {% endif %}
     </ul>
 </div>

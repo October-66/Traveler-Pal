@@ -28,6 +28,16 @@
     <link rel="stylesheet" href="{% static "css/amazeui.min.css" %}">
     {% block style %}{% endblock %}
     <link rel="stylesheet" href="{% static "css/app.min.css" %}">
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?12b4e8eb4089f58164507a59cdec3ca7";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
 </head>
 <body>
     {% include "./base/base-header.html" %}

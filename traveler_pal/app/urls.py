@@ -57,7 +57,8 @@ urlpatterns = [
 
     url(r'^u/slmanage/$', root.getslider, name="getslider"),
     url(r'^u/slmanage/add/$', root.addslider, name="addslider"),
-    url(r'^u/slmanage/update/$', root.updateslider, name="updateslider"),
+    #url(r'^u/slmanage/update/$', root.updateslider, name="updateslider"),
+    url(r'^u/slmanage/delete/$', root.deleteslider, name="deleteslider"),
     url(r'^u/acmanage/$', root.getactivity, name="getactivity"),
     url(r'^u/scmanage/$', root.getscenery, name="getscenery"),
     url(r'^u/jomanage/$', root.getstrategy, name="getjournal"),

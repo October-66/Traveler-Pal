@@ -6,5 +6,19 @@
       var csrf = $('input[name=csrfmiddlewaretoken').val()
       $(".add-slider_form").append('<input type="hidden" name="csrfmiddlewaretoken" value="' + csrf + '">')
     });
+
+
   })();
+      var DeleteIt = function (event) {
+      var value = event.value;
+
+      $.ajax({
+        type: "POST",
+          url: "/u/slmanage/delete/",
+          data: {id: value},
+          dataType: "json",
+      }).done(function() {
+
+      });
+    }
 </script>

@@ -4,7 +4,7 @@
         <div class="box-content">
             {% for s in slider %}
               <div class="am-g slider-root">
-                <form method="post" action="/u/slmanage/update/" enctype="multipart/form-data">
+                <form method="post" action="/u/slmanage/delete/" enctype="multipart/form-data">
                 {% csrf_token %}
                   <div class="am-u-lg-7"><img src="{{ s.sliderImg.url }}" alt=""></div>
                   <input type="hidden" name="id" value="{{ s.id }}" id="slider-id">
@@ -14,8 +14,7 @@
                           <i class="am-icon-cloud-upload"></i>上传文件</button>
                       <input id="slider-file" type="file" name="sliderImg">
                   </div>
-                  <button class="am-btn am-btn-danger am-radius" type="submit">更新</button>
-                  <button class="am-btn am-btn-danger am-radius" id="slider-del">删除</button>
+                  <button class="am-btn am-btn-danger am-radius" id="slider-del" value="{{ s.id }}" onclick="DeleteIt(this)">删除</button>
                 </form>
               </div>
             {% endfor %}

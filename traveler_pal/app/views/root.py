@@ -62,6 +62,14 @@ def updateslider(request):
         return HttpResponseRedirect('/u/slmanage')
 
 @csrf_exempt
+def deleteslider(request):
+    if isroot(request) and ispost(request):
+        uid = request.POST['id']
+        slider = Slider.objects.get(pk=uid)
+        slider.delete();
+        return HttpResponseRedirect('/u/slmanage/')
+
+@csrf_exempt
 def getactivity(request):
     if request.POST:
         if not Person.objects.get(username=request.session['username']).isroot:
@@ -164,13 +172,13 @@ def getuser(request):
         if not Person.objects.get(username=request.session['username']).isroot:
             return HttpResponseRedirect("/")
         if request.POST:
-            person = Person.objects.get(username=request.POST['username'])
+            person = Person.objects.get(pk=request.POST['user_id'])
             person.delete()
             data = {"status": 1}
             return HttpResponse(json.dumps(data, ensure_ascii=False))
     else:
         limit = 5
-        allUser = User.objects.all()
+        allUser = Person.objects.all()
         paginator = Paginator(allUser, limit)
         page = request.GET.get('page')
         try:
